@@ -378,7 +378,7 @@ class BaseContrailTest(test.BaseTestCase):
     @classmethod
     def resource_setup(cls):
         cls.tenant_name = cls.os_primary.credentials.tenant_name
-        if CONF.auth.allow_tenant_isolation:
+        if CONF.auth.use_dynamic_credentials:
             # Create a contrail project for tests
             post_body = {
                 'parent_type': 'domain',
@@ -389,7 +389,7 @@ class BaseContrailTest(test.BaseTestCase):
 
     @classmethod
     def resource_cleanup(cls):
-        if CONF.auth.allow_tenant_isolation:
+        if CONF.auth.use_dynamic_credentials:
             cls._try_delete_resource(cls.project_client.delete_project,
                                      cls.project_uuid)
 
