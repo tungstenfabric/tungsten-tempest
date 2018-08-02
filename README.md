@@ -1,4 +1,3 @@
-=================================================
 Tempest Integration of Tungsten Fabric (Contrail)
 =================================================
 
@@ -18,41 +17,54 @@ Quickstart
 ----------
 
 To run tungstent-tempest, you must first have `Tempest`_ installed and configured
-properly. Please reference Tempest's `Quickstart`_ guide to do so. Follow all
-the steps outlined therein. You can install all these includin tempest in a virtual
+properly. Please reference Tempest's `Quickstart`_ guide to do so and for all
+exact details. Follow all the steps outlined therein. 
+
+   Here are some sample steps:
+
+   $ git clone https://git.openstack.org/openstack/tempest
+   $ cd tempest
+   $ pip install -r requirements.txt
+   $ pip install -r test-requirements.txt
+   $ pip install tox
+   $ pip install tempest
+
+   Now below command should show you list of avaiable tempest test cases.
+
+   $ ostestr -l
+
+You can install all these including tempest in a virtual
 environment. If virtual environment is not installed, then install it using
 "sud apt-get install python-virtualenv". Afterward, proceed with the steps below.
 
 #. Second, you need to install Patrole. This is done with pip after you check out
    the Patrole repo. Please reference `Patrole'`_'s `Quickstart`_ guide for further
-   details::
+   details.
+
+    Here are some sample steps:
 
     $ git clone https://git.openstack.org/openstack/patrole
-    $ pip install patrole/
+    $ cd patrole
+    $ pip install -e .
 
    This can be done within a venv.
 
-   .. note::
+   Now below command should show you list of avaiable Patrole test cases.
 
-     You may also install Patrole from source code by running::
+   $ ostestr -l | grep patrole
 
-       pip install -e patrole/
-
-#. Then you need to install tungsten-fabric This is done with pip after you chekc out
+#. Then you need to install tungsten-tempest. This is done with pip after you check out
    the tungsten-tempest repo::
 
    $ git clone https://git.openstack.org/tungsten/tungsten-tempest
-   $ source tempestV/bin/activate
-   $ pip install tungstent_tempest/
+   $ pip install -e tungsten_tempest/
 
    This can be done within a venv.
 
-   .. note::
+   Now below command should show you list of avaiable tungsten-tempest test cases.
 
-   You may also install tungsten-fabric from source code by running::
-
-     pip install -e tungsten_tempest/
-
+   $ ostestr -l | grep tungsten
+  
 #. Next you must properly configure tempest, which is relatively
    straightforward. For details on configuring tempest refer to the
    :ref:`tempest-configuration`.
@@ -64,6 +76,25 @@ environment. If virtual environment is not installed, then install it using
 #. Next you must properly configure tungsten-fabric, which is relatively
    straightforward. For details on configuring tungsten-fabirc refer to the
    :ref:`tungsten-configuration`.
+
+    After comfiguring tempmest.conf as per tempest and Patrole requirements, please
+    make below changes too in the patrole section of tempest.conf
+
+    enable_rbac must be true.
+    test_custom_requirements must be true if you want to run tests against a
+    ``custom_requirements_file`` which defines RBAC requirements.
+    custom_requirements_file must be absolute path of file path of the YAML
+    file that defines your RBAC requirements.
+
+    For the details about these flags please refer ``patrole.conf.sample``_ file.
+
+#. Make sure you have contrail endpoints in keystone catalog-list already like
+   sdn-l-config-*. Otherwise configure below two keys under [sdn] section
+   of tempest.conf.
+
+     [sdn]
+     endpoint_type = <public|admin|internal|publicURL|adminURL|internalURL>
+     catalog_type = <Catalog type of the SDN service, default sdn-l-config>
 
 #. Once the configuration is done you're now ready to run tungsten-fabric.
    This can be done using the `tempest_run`_ command. This can be done by running::
