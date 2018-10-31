@@ -24,6 +24,7 @@ from tungsten_tempest_plugin.tests.api.contrail import rbac_base
 from patrole_tempest_plugin import rbac_rule_validation
 
 from tempest import config
+from tempest.lib import decorators
 from tempest.lib.common.utils import data_utils
 from tempest.lib.decorators import idempotent_id
 
@@ -54,8 +55,9 @@ class FqnameIdTest(rbac_base.BaseContrailTest):
                                  cls.network['uuid'])
         super(FqnameIdTest, cls).resource_cleanup()
 
+    @decorators.idempotent_id('c3864ec4-f6c6-43ac-9fe5-e22f7afaf427')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="fqname_to_id")
+                                 rules="fqname_to_id")
     @idempotent_id('1fc1350b-3146-49bc-9af5-a61a98b55541')
     def test_fqname_to_id(self):
         """
@@ -65,8 +67,9 @@ class FqnameIdTest(rbac_base.BaseContrailTest):
             self.fq_client.fqname_to_id(fq_name=self.network['fq_name'],
                                         type=self.type)
 
+    @decorators.idempotent_id('408c13ea-852c-4349-a683-c44fe1ba4192')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="id_to_fqname")
+                                 rules="id_to_fqname")
     @idempotent_id('ecdd77d7-8508-4639-86cd-b97907b363ff')
     def test_id_to_fqname(self):
         """

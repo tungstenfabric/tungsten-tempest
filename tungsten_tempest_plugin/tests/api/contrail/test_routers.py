@@ -24,6 +24,7 @@ from tungsten_tempest_plugin.tests.api.contrail import rbac_base
 from patrole_tempest_plugin import rbac_rule_validation
 
 from tempest import config
+from tempest.lib import decorators
 from tempest.lib.common.utils import data_utils
 from tempest.lib.decorators import idempotent_id
 
@@ -141,8 +142,9 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
                         router['uuid'])
         return router
 
+    @decorators.idempotent_id('7cbbf934-91e4-4243-a0d8-09798b92e1a2')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="list_physical_routers")
+                                 rules="list_physical_routers")
     @idempotent_id('349ac042-b922-4727-9e1b-8f363ee343f3')
     def test_list_physical_routers(self):
         """
@@ -151,8 +153,9 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self.router_client.list_physical_routers()
 
+    @decorators.idempotent_id('7f24af6e-b577-440e-87be-23809260bcc8')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="create_physical_routers")
+                                 rules="create_physical_routers")
     @idempotent_id('d0b7449e-9037-4f9f-8c7e-9f364c95f18a')
     def test_create_physical_routers(self):
         """
@@ -163,8 +166,9 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self._create_physical_router(global_system_config)
 
+    @decorators.idempotent_id('ba07818c-c572-459a-a3c8-2bbc1fbe485e')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="show_physical_router")
+                                 rules="show_physical_router")
     @idempotent_id('6dfc53f4-a884-46d5-b303-22ba59c116f4')
     def test_show_physical_router(self):
         """
@@ -177,8 +181,9 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self.router_client.show_physical_router(physical_router_uuid)
 
+    @decorators.idempotent_id('0dbc0f15-1d61-4aa4-a9bd-4e060335b960')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="update_physical_router")
+                                 rules="update_physical_router")
     @idempotent_id('c270f369-8cd7-4ee3-8ab1-4580c3138a5c')
     def test_update_physical_router(self):
         """
@@ -194,8 +199,9 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
                 physical_router_uuid,
                 display_name=updated_fq_name)
 
+    @decorators.idempotent_id('7e92cc5c-1b2f-48cf-8b4d-499244866dff')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="delete_physical_router")
+                                 rules="delete_physical_router")
     @idempotent_id('eeded742-6a8d-4e88-bfa8-fe32db463c53')
     def test_delete_physical_router(self):
         """
@@ -208,8 +214,9 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self.router_client.delete_physical_router(physical_router_uuid)
 
+    @decorators.idempotent_id('964f0f98-5447-4eb7-b6ca-e1be9c57732e')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="list_bgp_routers")
+                                 rules="list_bgp_routers")
     @idempotent_id('49bfb461-f99e-4585-b051-e20a3c937589')
     def test_list_bgp_routers(self):
         """
@@ -218,8 +225,9 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self.router_client.list_bgp_routers()
 
+    @decorators.idempotent_id('f44e0191-997e-410e-84e6-fc99c1b93598')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="create_bgp_routers")
+                                 rules="create_bgp_routers")
     @idempotent_id('7567974c-040e-4edd-b3a1-c633aa9651cb')
     def test_create_bgp_routers(self):
         """
@@ -230,8 +238,9 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self._create_bgp_router(routing_instance)
 
+    @decorators.idempotent_id('a0eb42de-1a3d-47aa-a0d3-37ebb6614b41')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="show_bgp_router")
+                                 rules="show_bgp_router")
     @idempotent_id('0d3ad424-18c9-4d96-8708-fa1ebd45594b')
     def test_show_bgp_router(self):
         """
@@ -243,8 +252,9 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self.router_client.show_bgp_router(bgp_router_uuid)
 
+    @decorators.idempotent_id('e28f5741-bce5-48d8-9933-d0e38b6a122e')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="update_bgp_router")
+                                 rules="update_bgp_router")
     @idempotent_id('dc50e7c5-7614-4281-8a66-282c52f3c769')
     def test_update_bgp_router(self):
         """
@@ -259,8 +269,9 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
                 bgp_router_uuid,
                 display_name=updated_fq_name)
 
+    @decorators.idempotent_id('862b2de5-2660-4a2a-9732-d6ea3ab88eff')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="delete_bgp_router")
+                                 rules="delete_bgp_router")
     @idempotent_id('f14aee72-cad4-4c3e-8eea-7886a81abb24')
     def test_delete_bgp_router(self):
         """
@@ -272,8 +283,9 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self.router_client.delete_bgp_router(bgp_router_uuid)
 
+    @decorators.idempotent_id('73001d40-3127-4a99-a7d0-eb59f76fd35b')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="list_global_vrouter_configs")
+                                 rules="list_global_vrouter_configs")
     @idempotent_id('4af768d1-3cbe-4aff-bcbc-0e045cac3277')
     def test_list_global_vrouter(self):
         """
@@ -282,8 +294,9 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self.router_client.list_global_vrouter_configs()
 
+    @decorators.idempotent_id('d37d7324-fc8a-43e0-825e-ed979341be3c')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="create_global_vrouter_configs")
+                                 rules="create_global_vrouter_configs")
     @idempotent_id('e13d800f-9304-4a06-9bf1-ad08345a13a8')
     def test_create_global_vrouter(self):
         """
@@ -294,8 +307,9 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self._create_global_vrouter_config(global_system_config)
 
+    @decorators.idempotent_id('620294a4-a597-4881-836a-3cc08eb3c464')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="show_global_vrouter_config")
+                                 rules="show_global_vrouter_config")
     @idempotent_id('3bb6f4e1-fd3f-4338-8392-f7f80974a80e')
     def test_show_global_vrouter_config(self):
         """
@@ -309,8 +323,9 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
             self.router_client.show_global_vrouter_config(
                 global_vrouter_config_uuid)
 
+    @decorators.idempotent_id('92fae487-86ab-492d-86fd-c06963ce5ea6')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="update_global_vrouter_config")
+                                 rules="update_global_vrouter_config")
     @idempotent_id('36fcdd51-c42b-4e67-8c26-73d4cde47507')
     def test_update_global_vrouter(self):
         """
@@ -327,8 +342,9 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
                 global_vrouter_config_uuid,
                 display_name=updated_fq_name)
 
+    @decorators.idempotent_id('945f1ddd-d787-4d93-b156-ec86267a2aca')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="delete_global_vrouter_config")
+                                 rules="delete_global_vrouter_config")
     @idempotent_id('4f3d59e8-3dac-4346-9d13-5ebe5ad8f6cf')
     def test_delete_global_vrouter(self):
         """
@@ -342,8 +358,9 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
             self.router_client.delete_global_vrouter_config(
                 global_vrouter_config_uuid)
 
+    @decorators.idempotent_id('279dca60-f6e4-4dc2-8568-03d186e64086')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="list_logical_routers")
+                                 rules="list_logical_routers")
     @idempotent_id('674bf3de-a9e5-45c2-921b-b89db73a2abe')
     def test_list_logical_routers(self):
         """
@@ -352,8 +369,9 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self.router_client.list_logical_routers()
 
+    @decorators.idempotent_id('e2a3bd03-4573-4676-90f6-9e66dd05dad6')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="create_logical_routers")
+                                 rules="create_logical_routers")
     @idempotent_id('610f051b-8eba-4d3a-ba43-91386bfc0e52')
     def test_create_logical_routers(self):
         """
@@ -362,8 +380,9 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self._create_logical_router()
 
+    @decorators.idempotent_id('1c4274ce-31d7-45c7-94ab-7026d4c456d2')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="show_logical_router")
+                                 rules="show_logical_router")
     @idempotent_id('992841d4-0d5d-4d85-b513-049b33e2a2e2')
     def test_show_logical_router(self):
         """
@@ -373,8 +392,9 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self.router_client.show_logical_router(logical_router_uuid)
 
+    @decorators.idempotent_id('6faeb2a2-e833-4d39-9db1-0e06b0507f0b')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="update_logical_router")
+                                 rules="update_logical_router")
     @idempotent_id('518197bf-5233-4059-9021-5d7ecc74718e')
     def test_update_logical_router(self):
         """
@@ -387,8 +407,9 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
                 logical_router_uuid,
                 display_name=updated_fq_name)
 
+    @decorators.idempotent_id('4ff3591c-f57f-4842-b74a-c0a2b8171c3f')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="delete_logical_router")
+                                 rules="delete_logical_router")
     @idempotent_id('70448b9c-4444-45e0-b307-7bff4dc075b1')
     def test_delete_logical_router(self):
         """
@@ -398,8 +419,9 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self.router_client.delete_logical_router(logical_router_uuid)
 
+    @decorators.idempotent_id('5662ac7f-5a18-476d-a3c9-cc7c784f9dfa')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="list_virtual_routers")
+                                 rules="list_virtual_routers")
     @idempotent_id('604dc476-732e-4890-8665-a497360f5475')
     def test_list_virtual_routers(self):
         """
@@ -408,8 +430,9 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self.router_client.list_virtual_routers()
 
+    @decorators.idempotent_id('6d2b364c-cdb8-4de1-bc15-5f7d0b1533d2')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="create_virtual_routers")
+                                 rules="create_virtual_routers")
     @idempotent_id('114beb14-45c0-4714-a407-d160bb102022')
     def test_create_virtual_routers(self):
         """
@@ -420,8 +443,9 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self._create_virtual_router(global_system_config)
 
+    @decorators.idempotent_id('d9319e7f-8811-43e5-93ce-734ac7fb4f79')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="show_virtual_router")
+                                 rules="show_virtual_router")
     @idempotent_id('258fe4e0-3e39-460f-aafa-e3b53c96e534')
     def test_show_virtual_router(self):
         """
@@ -434,8 +458,9 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self.router_client.show_virtual_router(virtual_router_uuid)
 
+    @decorators.idempotent_id('4baa6195-bacd-4211-ab93-abd6ebbfe5d6')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="update_virtual_router")
+                                 rules="update_virtual_router")
     @idempotent_id('d1c72191-2068-4552-a78f-038cdd4c9c1d')
     def test_update_virtual_router(self):
         """
@@ -451,8 +476,9 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
                 virtual_router_uuid,
                 display_name=updated_fq_name)
 
+    @decorators.idempotent_id('bb7e4a21-1c8a-4a38-997c-612de0a4ee53')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="delete_virtual_router")
+                                 rules="delete_virtual_router")
     @idempotent_id('efbe25d6-8763-42d4-baf6-9f342e710144')
     def test_delete_virtual_router(self):
         """

@@ -24,6 +24,7 @@ from tungsten_tempest_plugin.tests.api.contrail import rbac_base
 from patrole_tempest_plugin import rbac_rule_validation
 
 from tempest import config
+from tempest.lib import decorators
 from tempest.lib.common.utils import data_utils
 from tempest.lib.decorators import idempotent_id
 
@@ -74,8 +75,9 @@ class ContrailPortTupleTest(rbac_base.BaseContrailTest):
                         new_tuple['uuid'])
         return new_tuple
 
+    @decorators.idempotent_id('a799ae22-d6e3-4fec-b1df-f972fe5a003d')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="list_port_tuples")
+                                 rules="list_port_tuples")
     @idempotent_id('3789eef8-0e80-4057-b7b0-926655144beb')
     def test_list_port_tuples(self):
         """
@@ -84,8 +86,9 @@ class ContrailPortTupleTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self.port_tuple_client.list_port_tuples()
 
+    @decorators.idempotent_id('52a4ee6a-346e-4cc0-a33d-345ec3055224')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="show_port_tuple")
+                                 rules="show_port_tuple")
     @idempotent_id('ae5a90ed-5771-4680-be6b-c7626caa3a52')
     def test_show_port_tuple(self):
         """
@@ -95,8 +98,9 @@ class ContrailPortTupleTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self.port_tuple_client.show_port_tuple(new_tuple['uuid'])
 
+    @decorators.idempotent_id('b4f70918-bea8-40e4-9b1b-5bcc5b40e298')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="create_port_tuples")
+                                 rules="create_port_tuples")
     @idempotent_id('0e2283da-fe25-4204-b5b3-fef3c200d0c8')
     def test_create_port_tuples(self):
         """
@@ -105,8 +109,9 @@ class ContrailPortTupleTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self._create_port_tuple()
 
+    @decorators.idempotent_id('1483a357-d83a-48c7-b9ed-6eb45d47e129')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="update_port_tuple")
+                                 rules="update_port_tuple")
     @idempotent_id('b16f19e2-ec8e-4107-961d-561890183dd0')
     def test_update_port_tuple(self):
         """
@@ -118,8 +123,9 @@ class ContrailPortTupleTest(rbac_base.BaseContrailTest):
             self.port_tuple_client.update_port_tuple(
                 new_tuple['uuid'], display_name=update_name)
 
+    @decorators.idempotent_id('96b5a8ed-7057-4630-bb99-5b7a77ecafbc')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="delete_port_tuple")
+                                 rules="delete_port_tuple")
     @idempotent_id('3f28e8b8-f9de-437f-a398-0a11c7fcd652')
     def test_delete_port_tuple(self):
         """

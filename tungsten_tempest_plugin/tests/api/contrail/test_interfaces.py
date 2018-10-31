@@ -24,6 +24,7 @@ from tungsten_tempest_plugin.tests.api.contrail import rbac_base
 from patrole_tempest_plugin import rbac_rule_validation
 
 from tempest import config
+from tempest.lib import decorators
 from tempest.lib.common.utils import data_utils
 from tempest.lib.decorators import idempotent_id
 
@@ -93,8 +94,9 @@ class InterfacesTest(rbac_base.BaseContrailTest):
                         logical_if['uuid'])
         return logical_if
 
+    @decorators.idempotent_id('d18774ca-34aa-4bde-b080-924be0e0ce20')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="list_physical_interfaces")
+                                 rules="list_physical_interfaces")
     @idempotent_id('c496a2b4-51b2-4674-a60e-483a315baccb')
     def test_list_physical_interfaces(self):
         """
@@ -103,8 +105,9 @@ class InterfacesTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self.interface_client.list_physical_interfaces()
 
+    @decorators.idempotent_id('f0f1ce4c-88b0-4508-badd-d01b8568f243')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="create_physical_interfaces")
+                                 rules="create_physical_interfaces")
     @idempotent_id('066f53d8-3d2a-4ad6-983f-243de7c12962')
     def test_create_physical_interfaces(self):
         """
@@ -115,8 +118,9 @@ class InterfacesTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self._create_physical_interface()
 
+    @decorators.idempotent_id('b86ab6be-5fe4-436d-9047-1315945d61cf')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="update_physical_interface")
+                                 rules="update_physical_interface")
     @idempotent_id('91c4fc90-ed0f-42ec-87c6-ff6c2a9ab8de')
     def test_update_physical_interface(self):
         """
@@ -135,8 +139,9 @@ class InterfacesTest(rbac_base.BaseContrailTest):
             self.interface_client.update_physical_interface(
                 uuid, **body)
 
+    @decorators.idempotent_id('18459fe9-0244-4dc8-8b0d-21be7a1229b6')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="delete_physical_interface")
+                                 rules="delete_physical_interface")
     @idempotent_id('5d77ea76-be8c-49cc-8f08-72fbdaf9028f')
     def test_delete_physical_interface(self):
         """
@@ -148,8 +153,9 @@ class InterfacesTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self.interface_client.delete_physical_interface(uuid)
 
+    @decorators.idempotent_id('4785625c-7380-4bea-8a9c-51ee89ee31e3')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="show_physical_interface")
+                                 rules="show_physical_interface")
     @idempotent_id('2c75c7e7-ef34-4e24-9c2f-5a2182db33a6')
     def test_show_physical_interface(self):
         """
@@ -160,8 +166,9 @@ class InterfacesTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self.interface_client.show_physical_interface(uuid)
 
+    @decorators.idempotent_id('fd503921-6048-454d-9b7c-9f91e39181b6')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="list_logical_interfaces")
+                                 rules="list_logical_interfaces")
     @idempotent_id('43ac3727-4a43-42d7-b52f-df75018915b9')
     def test_list_logical_interfaces(self):
         """
@@ -170,8 +177,9 @@ class InterfacesTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self.interface_client.list_logical_interfaces()
 
+    @decorators.idempotent_id('2710832a-7524-4540-9b8c-c8922fd829f9')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="create_logical_interfaces")
+                                 rules="create_logical_interfaces")
     @idempotent_id('503facf2-0752-47e4-a0a4-7a3103133a61')
     def test_create_logical_interfaces(self):
         """
@@ -182,8 +190,9 @@ class InterfacesTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self._create_logical_interface()
 
+    @decorators.idempotent_id('14e04feb-c685-446f-ab18-837326e4b564')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="update_logical_interface")
+                                 rules="update_logical_interface")
     @idempotent_id('63c991f4-6aba-454c-9c49-522dc77b3f5c')
     def test_update_logical_interface(self):
         """
@@ -203,8 +212,9 @@ class InterfacesTest(rbac_base.BaseContrailTest):
             self.interface_client.update_logical_interface(
                 uuid, **body)
 
+    @decorators.idempotent_id('4630b04c-2516-4d66-8572-897eefa699cb')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="delete_logical_interface")
+                                 rules="delete_logical_interface")
     @idempotent_id('a36743d1-3ea1-4cf5-89d8-9c0b885fa625')
     def test_delete_logical_interface(self):
         """
@@ -216,8 +226,9 @@ class InterfacesTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self.interface_client.delete_logical_interface(uuid)
 
+    @decorators.idempotent_id('fe0dc372-3673-472e-a283-eba1b6c0b0b2')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="show_logical_interface")
+                                 rules="show_logical_interface")
     @idempotent_id('f0f7fab7-eeb9-4d29-8415-31a50180fb44')
     def test_show_logical_interface(self):
         """

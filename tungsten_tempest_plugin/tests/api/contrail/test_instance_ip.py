@@ -24,6 +24,7 @@ from tungsten_tempest_plugin.tests.api.contrail import rbac_base
 from patrole_tempest_plugin import rbac_rule_validation
 
 from tempest import config
+from tempest.lib import decorators
 from tempest.lib.common.utils import data_utils
 from tempest.lib.decorators import idempotent_id
 
@@ -105,8 +106,9 @@ class InstanceIPTest(rbac_base.BaseContrailTest):
                         iip['uuid'])
         return iip
 
+    @decorators.idempotent_id('14194425-cc47-4c30-8743-bfa5f2dcde82')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="list_instance_ips")
+                                 rules="list_instance_ips")
     @idempotent_id('31db3b3f-c40b-4f7f-bb8b-0a110f099553')
     def test_list_instance_ips(self):
         """
@@ -116,8 +118,9 @@ class InstanceIPTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self.iip_client.list_instance_ips()
 
+    @decorators.idempotent_id('8b902827-ba95-438e-9787-9a63fe5cb38b')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="create_instance_ips")
+                                 rules="create_instance_ips")
     @idempotent_id('78f5cd4d-345d-4d87-8b8b-4d5d3fec4a12')
     def test_create_instance_ips(self):
         """
@@ -126,8 +129,9 @@ class InstanceIPTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self._create_instance_ip()
 
+    @decorators.idempotent_id('43d12039-e5b2-4214-9036-d6f1d02bfc94')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="show_instance_ip")
+                                 rules="show_instance_ip")
     @idempotent_id('276f3838-d9cb-4432-bbb4-db31c4c1db5c')
     def test_show_instance_ip(self):
         """
@@ -137,8 +141,9 @@ class InstanceIPTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self.iip_client.show_instance_ip(uuid)
 
+    @decorators.idempotent_id('f10caa56-f4a1-4680-bc27-ee549bedf8ba')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="update_instance_ip")
+                                 rules="update_instance_ip")
     @idempotent_id('b85975a5-176f-44b1-a615-b6f0a39a7708')
     def test_update_instance_ip(self):
         """
@@ -150,8 +155,9 @@ class InstanceIPTest(rbac_base.BaseContrailTest):
                 uuid,
                 display_name='rbac-iip-new-name')
 
+    @decorators.idempotent_id('19d96037-2ba0-44cd-8fa8-b3168672db66')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="delete_instance_ip")
+                                 rules="delete_instance_ip")
     @idempotent_id('d9c1d400-1dfb-4adb-8d97-0e8b498226b7')
     def test_delete_instance_ip(self):
         """

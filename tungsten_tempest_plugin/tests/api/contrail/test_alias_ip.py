@@ -22,6 +22,7 @@ from tungsten_tempest_plugin.tests.api.contrail import rbac_base
 from patrole_tempest_plugin import rbac_rule_validation
 
 from tempest import config
+from tempest.lib import decorators
 from tempest.lib.common.utils import data_utils
 from tempest.lib.decorators import idempotent_id
 
@@ -114,8 +115,9 @@ class AliasIPsTest(rbac_base.BaseContrailTest):
                         new_alias_ip['uuid'])
         return new_alias_ip
 
+    @decorators.idempotent_id('ad82cd15-1d18-4ee9-9f4e-8653b27ff68d')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="list_alias_ips")
+                                 rules="list_alias_ips")
     @idempotent_id('899d6824-0755-41ef-adef-03eb1858bcb0')
     def test_list_alias_ips(self):
         """
@@ -124,8 +126,9 @@ class AliasIPsTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self.alias_ip_client.list_alias_ips()
 
+    @decorators.idempotent_id('aae9af3b-ebb8-426e-afde-59a655352dfa')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="create_alias_ips")
+                                 rules="create_alias_ips")
     @idempotent_id('bc9aae29-22a8-4eed-a31f-c0ded300e3a3')
     def test_create_alias_ips(self):
         """
@@ -135,8 +138,9 @@ class AliasIPsTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self._create_alias_ips(new_alias_ip_pool, '2.2.3.1')
 
+    @decorators.idempotent_id('0d7785ab-63d6-4695-b2e1-d43706f166ed')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="show_alias_ip")
+                                 rules="show_alias_ip")
     @idempotent_id('d20318b1-c204-44e7-a44c-66f6a1fbe7a0')
     def test_show_alias_ip(self):
         """
@@ -148,8 +152,9 @@ class AliasIPsTest(rbac_base.BaseContrailTest):
             self.alias_ip_client.show_alias_ip(
                 new_alias_ip['uuid'])
 
+    @decorators.idempotent_id('12577013-4194-439b-b598-f83aedbc4f0f')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="update_alias_ip")
+                                 rules="update_alias_ip")
     @idempotent_id('c237b18f-d899-4b80-8e9b-068244a24612')
     def test_update_alias_ip(self):
         """
@@ -163,8 +168,9 @@ class AliasIPsTest(rbac_base.BaseContrailTest):
                 new_alias_ip['uuid'],
                 display_name=update_name)
 
+    @decorators.idempotent_id('31ed2a1b-48e1-44d0-bf21-304d7fb4a0ac')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="delete_alias_ip")
+                                 rules="delete_alias_ip")
     @idempotent_id('456c641c-9066-4125-8dec-d1529ad8f1ba')
     def test_delete_alias_ip(self):
         """
@@ -176,8 +182,9 @@ class AliasIPsTest(rbac_base.BaseContrailTest):
             self.alias_ip_client.delete_alias_ip(
                 new_alias_ip['uuid'])
 
+    @decorators.idempotent_id('a46c088a-9b3b-4a88-9df6-d0cc41d32bf4')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="list_alias_ip_pools")
+                                 rules="list_alias_ip_pools")
     @idempotent_id('ffe85f35-589a-4b90-a1d3-6aed92a85954')
     def test_list_alias_ip_pools(self):
         """
@@ -186,8 +193,9 @@ class AliasIPsTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self.alias_ip_client.list_alias_ip_pools()
 
+    @decorators.idempotent_id('5ac92620-24af-4948-bc9f-5c43f0e65e9d')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="create_alias_ip_pools")
+                                 rules="create_alias_ip_pools")
     @idempotent_id('83abd2c0-d46a-4337-87d0-31cdb86e4226')
     def test_create_alias_ip_pools(self):
         """
@@ -196,8 +204,9 @@ class AliasIPsTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self._create_alias_ip_pools()
 
+    @decorators.idempotent_id('1e8f4d95-bf80-4383-bce7-e9460214264a')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="show_alias_ip_pool")
+                                 rules="show_alias_ip_pool")
     @idempotent_id('a1cbe111-ccba-4fa4-ba59-7d1ee08a15db')
     def test_show_alias_ip_pool(self):
         """
@@ -208,8 +217,9 @@ class AliasIPsTest(rbac_base.BaseContrailTest):
             self.alias_ip_client.show_alias_ip_pool(
                 new_alias_ip_pool['uuid'])
 
+    @decorators.idempotent_id('ece84364-c139-42f1-b2ab-8adad9fe11a4')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="update_alias_ip_pool")
+                                 rules="update_alias_ip_pool")
     @idempotent_id('7f3448d7-22f1-4808-b3eb-15eeb3f079aa')
     def test_update_alias_ip_pool(self):
         """
@@ -222,8 +232,9 @@ class AliasIPsTest(rbac_base.BaseContrailTest):
                 new_alias_ip_pool['uuid'],
                 display_name=update_name)
 
+    @decorators.idempotent_id('aabbbff0-e8f8-4dc9-9e77-5c3cc390cc14')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="delete_alias_ip_pool")
+                                 rules="delete_alias_ip_pool")
     @idempotent_id('f59ea4fb-d10f-40c8-a8fa-dcd948ca89c8')
     def test_delete_alias_ip_pool(self):
         """

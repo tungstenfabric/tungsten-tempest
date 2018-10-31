@@ -24,6 +24,7 @@ from tungsten_tempest_plugin.tests.api.contrail import rbac_base
 from patrole_tempest_plugin import rbac_rule_validation
 
 from tempest import config
+from tempest.lib import decorators
 from tempest.lib.common.utils import data_utils
 from tempest.lib.decorators import idempotent_id
 
@@ -65,8 +66,9 @@ class ContrailAnalyticsNodeTest(rbac_base.BaseContrailTest):
                         new_node['uuid'])
         return new_node
 
+    @decorators.idempotent_id('6dbda64e-f575-4bb8-8600-b8a510e4ae96')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="list_analytics_nodes")
+                                 rules="list_analytics_nodes")
     @idempotent_id('d3002e37-4b42-446d-b144-1b53f0dadfd3')
     def test_list_analytics_nodes(self):
         """
@@ -75,8 +77,9 @@ class ContrailAnalyticsNodeTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self.analytics_node_client.list_analytics_nodes()
 
+    @decorators.idempotent_id('0852bb86-6a95-476d-a964-79e73b08b839')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="show_analytics_node")
+                                 rules="show_analytics_node")
     @idempotent_id('b51043fd-77ba-4312-b96f-569ed5153338')
     def test_show_analytics_node(self):
         """
@@ -88,8 +91,9 @@ class ContrailAnalyticsNodeTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self.analytics_node_client.show_analytics_node(new_node['uuid'])
 
+    @decorators.idempotent_id('a1a09763-b56b-4caf-b9d5-6d95d416dfc4')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="create_analytics_nodes")
+                                 rules="create_analytics_nodes")
     @idempotent_id('c57482c9-fcb4-4f41-95b0-7f0ffeee3dc3')
     def test_create_analytics_nodes(self):
         """
@@ -100,8 +104,9 @@ class ContrailAnalyticsNodeTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self._create_analytics_node(global_system_config)
 
+    @decorators.idempotent_id('67437d99-c5b1-4d42-8a91-251c4055d4c1')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="update_analytics_node")
+                                 rules="update_analytics_node")
     @idempotent_id('ff50a2df-6283-409e-ab03-c13b63acc8a0')
     def test_update_analytics_node(self):
         """
@@ -115,8 +120,9 @@ class ContrailAnalyticsNodeTest(rbac_base.BaseContrailTest):
             self.analytics_node_client.update_analytics_node(
                 new_node['uuid'], display_name=update_name)
 
+    @decorators.idempotent_id('7d62d6cc-dcd9-49e0-85e6-6115e8228ac0')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="delete_analytics_node")
+                                 rules="delete_analytics_node")
     @idempotent_id('972f997a-c89f-4227-8ae9-5a2335ec0b0a')
     def test_delete_analytics_node(self):
         """

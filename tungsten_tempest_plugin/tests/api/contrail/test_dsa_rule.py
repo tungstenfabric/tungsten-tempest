@@ -24,6 +24,7 @@ from tungsten_tempest_plugin.tests.api.contrail import rbac_base
 from patrole_tempest_plugin import rbac_rule_validation
 
 from tempest import config
+from tempest.lib import decorators
 from tempest.lib.common.utils import data_utils
 from tempest.lib.decorators import idempotent_id
 
@@ -60,8 +61,9 @@ class ContrailDSARuleTest(rbac_base.BaseContrailTest):
                         new_rule['uuid'])
         return new_rule
 
+    @decorators.idempotent_id('e17800a7-1d1c-461d-a616-cdab43bcca5d')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="list_dsa_rules")
+                                 rules="list_dsa_rules")
     @idempotent_id('3227673b-96fc-4d26-ab0b-109347e9e9c2')
     def test_list_dsa_rules(self):
         """
@@ -70,8 +72,9 @@ class ContrailDSARuleTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self.dsa_rule_client.list_dsa_rules()
 
+    @decorators.idempotent_id('9350f6d8-71c5-4989-a58b-98fdfb4d4a73')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="show_dsa_rule")
+                                 rules="show_dsa_rule")
     @idempotent_id('0f90ea4f-c050-4c31-93a7-1e0c58df914e')
     def test_show_dsa_rule(self):
         """
@@ -84,8 +87,9 @@ class ContrailDSARuleTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self.dsa_rule_client.show_dsa_rule(new_rule['uuid'])
 
+    @decorators.idempotent_id('f8bc91ba-a47a-45b0-8cdd-f770fe914974')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="create_dsa_rules")
+                                 rules="create_dsa_rules")
     @idempotent_id('c3774ca3-45d0-4ca8-a6b3-f895441b1d0e')
     def test_create_dsa_rules(self):
         """
@@ -97,8 +101,9 @@ class ContrailDSARuleTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self._create_dsa_rules(discovery_service_assignment)
 
+    @decorators.idempotent_id('c6c60729-d515-4eca-b44e-f80021de0120')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="update_dsa_rule")
+                                 rules="update_dsa_rule")
     @idempotent_id('5cfe7e8e-d91c-4183-8e6c-733e826707be')
     def test_update_dsa_rule(self):
         """
@@ -113,8 +118,9 @@ class ContrailDSARuleTest(rbac_base.BaseContrailTest):
             self.dsa_rule_client.update_dsa_rule(
                 new_rule['uuid'], display_name=update_name)
 
+    @decorators.idempotent_id('d966d142-4f0d-49c1-93f9-d19f2d298d0d')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="delete_dsa_rule")
+                                 rules="delete_dsa_rule")
     @idempotent_id('d3b869db-fa49-48f0-861a-08efd9879b15')
     def test_delete_dsa_rule(self):
         """

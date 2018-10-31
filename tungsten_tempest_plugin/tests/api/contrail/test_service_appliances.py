@@ -22,6 +22,7 @@ from tungsten_tempest_plugin.tests.api.contrail import rbac_base
 from patrole_tempest_plugin import rbac_rule_validation
 
 from tempest import config
+from tempest.lib import decorators
 from tempest.lib.common.utils import data_utils
 from tempest.lib.decorators import idempotent_id
 
@@ -75,8 +76,9 @@ class ServiceAppliancesTest(rbac_base.BaseContrailTest):
                         new_appliance['uuid'])
         return new_appliance
 
+    @decorators.idempotent_id('6376afa3-7917-4396-8aff-d821592b4f2c')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="list_service_appliances")
+                                 rules="list_service_appliances")
     @idempotent_id('6b5fc17c-34e6-4d21-a53e-a0dfe69afd31')
     def test_list_service_appliances(self):
         """
@@ -85,8 +87,9 @@ class ServiceAppliancesTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self.service_appliances_client.list_service_appliances()
 
+    @decorators.idempotent_id('a9f1ccc9-b1fd-4ace-96ae-43c3912f0cfc')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="create_service_appliances")
+                                 rules="create_service_appliances")
     @idempotent_id('0563c0c8-b986-466e-8540-aa8ad7a10367')
     def test_create_service_appliances(self):
         """
@@ -99,8 +102,9 @@ class ServiceAppliancesTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self._create_service_appliances(new_set)
 
+    @decorators.idempotent_id('247d0ed3-3cdc-4878-b637-80b8f65eb3a1')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="show_service_appliance")
+                                 rules="show_service_appliance")
     @idempotent_id('ea30dcfe-8657-4a7d-9cf1-3176d334bf27')
     def test_show_service_appliance(self):
         """
@@ -116,8 +120,9 @@ class ServiceAppliancesTest(rbac_base.BaseContrailTest):
             self.service_appliances_client.show_service_appliance(
                 new_appliance['uuid'])
 
+    @decorators.idempotent_id('142fd7b3-f79c-46a8-b60f-51a3380a9f3b')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="update_service_appliance")
+                                 rules="update_service_appliance")
     @idempotent_id('a54ca33a-8590-4844-96d7-b96882b59e86')
     def test_update_service_appliance(self):
         """
@@ -134,8 +139,9 @@ class ServiceAppliancesTest(rbac_base.BaseContrailTest):
                 new_appliance['uuid'],
                 display_name=update_name)
 
+    @decorators.idempotent_id('2e9d6bb8-e616-445b-b87b-1e7e7f5387b7')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="delete_service_appliance")
+                                 rules="delete_service_appliance")
     @idempotent_id('362deff5-7b72-4929-ba81-972cfcfa1309')
     def test_delete_service_appliance(self):
         """
@@ -150,8 +156,9 @@ class ServiceAppliancesTest(rbac_base.BaseContrailTest):
             self.service_appliances_client.delete_service_appliance(
                 new_appliance['uuid'])
 
+    @decorators.idempotent_id('4fec3bd7-1c7b-46ba-8b29-228a6dc35592')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="list_service_appliance_sets")
+                                 rules="list_service_appliance_sets")
     @idempotent_id('c1e74da9-00b6-4c88-adda-2ce49094e570')
     def test_list_service_appl_sets(self):
         """
@@ -160,8 +167,9 @@ class ServiceAppliancesTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self.service_appliances_client.list_service_appliance_sets()
 
+    @decorators.idempotent_id('c0647738-11fd-4c73-846b-1d54aff2eef8')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="create_service_appliance_sets")
+                                 rules="create_service_appliance_sets")
     @idempotent_id('eb00d6cf-590f-41bf-8ee4-5be625d9cb93')
     def test_create_service_appl_sets(self):
         """
@@ -172,8 +180,9 @@ class ServiceAppliancesTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self._create_service_appliance_sets(global_system_config)
 
+    @decorators.idempotent_id('f27d4f96-9db6-4a97-8dbf-75ba14c08ae3')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="show_service_appliance_set")
+                                 rules="show_service_appliance_set")
     @idempotent_id('dd35dd04-e7d9-46bb-8f36-26835f122572')
     def test_show_service_appl_set(self):
         """
@@ -187,8 +196,9 @@ class ServiceAppliancesTest(rbac_base.BaseContrailTest):
             self.service_appliances_client.show_service_appliance_set(
                 new_set['uuid'])
 
+    @decorators.idempotent_id('64ad1226-bbd5-4322-8534-e3eb98413e6c')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="update_service_appliance_set")
+                                 rules="update_service_appliance_set")
     @idempotent_id('952f063b-bc71-4f62-83b1-719bce5ad4ed')
     def test_update_service_appl_set(self):
         """
@@ -204,8 +214,9 @@ class ServiceAppliancesTest(rbac_base.BaseContrailTest):
                 new_set['uuid'],
                 display_name=update_name)
 
+    @decorators.idempotent_id('6bbd4831-76cf-492e-9908-7405f694889b')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="delete_service_appliance_set")
+                                 rules="delete_service_appliance_set")
     @idempotent_id('7b56ce24-da1d-4565-bd22-c58dc57d7045')
     def test_delete_service_appl_set(self):
         """

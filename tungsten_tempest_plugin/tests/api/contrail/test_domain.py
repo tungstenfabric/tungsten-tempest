@@ -24,6 +24,7 @@ from tungsten_tempest_plugin.tests.api.contrail import rbac_base
 from patrole_tempest_plugin import rbac_rule_validation
 
 from tempest import config
+from tempest.lib import decorators
 from tempest.lib.common.utils import data_utils
 from tempest.lib.decorators import idempotent_id
 
@@ -56,8 +57,9 @@ class DomainContrailTest(rbac_base.BaseContrailTest):
         }
         self.domain_client.update_domain(domain_uuid, **put_body)
 
+    @decorators.idempotent_id('d9db33f3-b326-47d9-972e-9f6ca33d94cb')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="list_domains")
+                                 rules="list_domains")
     @idempotent_id('fa02e27b-f661-4186-a522-69e8fcb6abf9')
     def test_list_domains(self):
         """
@@ -66,8 +68,9 @@ class DomainContrailTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self.domain_client.list_domains()
 
+    @decorators.idempotent_id('32a12708-7209-4d8a-8096-96867acff917')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="create_domains")
+                                 rules="create_domains")
     @idempotent_id('3f18be91-c37b-4e17-bf5e-b704d993f738')
     def test_create_domains(self):
         """
@@ -76,8 +79,9 @@ class DomainContrailTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self._create_domains()
 
+    @decorators.idempotent_id('8eb9d91b-21b0-443c-af70-88dda1c21c03')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="show_domain")
+                                 rules="show_domain")
     @idempotent_id('e79f8581-ba9f-420a-aa26-f1cb51cf4bbf')
     def test_show_domain(self):
         """
@@ -87,8 +91,9 @@ class DomainContrailTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self.domain_client.show_domain(domain_uuid)
 
+    @decorators.idempotent_id('7f0f1fac-2685-4405-9c83-6dee210dfab0')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="update_domain")
+                                 rules="update_domain")
     @idempotent_id('fdf72539-20b5-4bdb-b22b-70c86fbb52a4')
     def test_update_domain(self):
         """
@@ -98,8 +103,9 @@ class DomainContrailTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self._update_domain(domain_uuid)
 
+    @decorators.idempotent_id('2439c2fa-5102-4e63-9c4d-834743643fd6')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="delete_domain")
+                                 rules="delete_domain")
     @idempotent_id('abaad2b0-6bde-40b8-b257-20ca805c1dca')
     def test_delete_domain(self):
         """

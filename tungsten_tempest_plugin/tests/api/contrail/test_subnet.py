@@ -24,6 +24,7 @@ from tungsten_tempest_plugin.tests.api.contrail import rbac_base
 from patrole_tempest_plugin import rbac_rule_validation
 
 from tempest import config
+from tempest.lib import decorators
 from tempest.lib.common.utils import data_utils
 from tempest.lib.decorators import idempotent_id
 
@@ -55,8 +56,9 @@ class SubnetContrailTest(rbac_base.BaseContrailTest):
         }
         self.subnet_client.update_subnet(subnet_uuid, **put_body)
 
+    @decorators.idempotent_id('8f33c6bf-dbe5-4d05-9509-2b90b3041c88')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="list_subnets")
+                                 rules="list_subnets")
     @idempotent_id('ddd1d9ae-cf2f-4a74-98ba-b0f481f27977')
     def test_list_subnets(self):
         """
@@ -65,8 +67,9 @@ class SubnetContrailTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self.subnet_client.list_subnets()
 
+    @decorators.idempotent_id('c6e33c0b-96c5-4140-a18b-93d53f3f5f96')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="create_subnets")
+                                 rules="create_subnets")
     @idempotent_id('ee0cb904-d162-44a4-b7b0-a7451f667ed5')
     def test_create_subnets(self):
         """
@@ -75,8 +78,9 @@ class SubnetContrailTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self._create_subnet()
 
+    @decorators.idempotent_id('7535dc07-e9a8-4d41-afb3-da3ff0c5a99d')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="show_subnet")
+                                 rules="show_subnet")
     @idempotent_id('994618f2-5b40-460c-a6a8-6479bc15bf80')
     def test_show_subnet(self):
         """
@@ -86,8 +90,9 @@ class SubnetContrailTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self.subnet_client.show_subnet(subnet_uuid)
 
+    @decorators.idempotent_id('08f6c060-fce1-410c-818b-7bb34a4c0ffb')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="update_subnet")
+                                 rules="update_subnet")
     @idempotent_id('565e44c9-eb9b-4ae6-9ebb-db422a9751ee')
     def test_update_subnet(self):
         """
@@ -97,8 +102,9 @@ class SubnetContrailTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self._update_subnet(subnet_uuid)
 
+    @decorators.idempotent_id('03d994c2-dddb-4597-b931-9cb04a145622')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="delete_subnet")
+                                 rules="delete_subnet")
     @idempotent_id('a733b913-7a88-45d9-ac0a-d858fa3dc662')
     def test_delete_subnet(self):
         """

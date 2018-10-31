@@ -25,6 +25,7 @@ from patrole_tempest_plugin import rbac_rule_validation
 
 from tempest import config
 
+from tempest.lib import decorators
 from tempest.lib.common.utils import data_utils
 from tempest.lib.decorators import idempotent_id
 
@@ -88,8 +89,9 @@ class AlarmContrailTest(rbac_base.BaseContrailTest):
         }
         self.alarm_client.update_alarm(alarm_uuid, **put_body)
 
+    @decorators.idempotent_id('fdfc89f9-e919-4a81-966e-0aadaff4ce1c')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="list_alarms")
+                                 rules="list_alarms")
     @idempotent_id('dc7d19dd-dd5e-4ec8-bf0c-c6d9d83a60a8')
     def test_list_alarms(self):
         """
@@ -98,8 +100,9 @@ class AlarmContrailTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self.alarm_client.list_alarms()
 
+    @decorators.idempotent_id('0e844c89-c7a3-4667-b996-e176d5ea460e')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="create_alarms")
+                                 rules="create_alarms")
     @idempotent_id('7fe55d0c-e54a-4bb7-95a6-9c53f9e9c4bf')
     def test_create_alarms(self):
         """
@@ -110,8 +113,9 @@ class AlarmContrailTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self._create_alarm(global_system_config)
 
+    @decorators.idempotent_id('e787e656-44ad-4aa6-8644-4ab9a2f40b83')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="show_alarm")
+                                 rules="show_alarm")
     @idempotent_id('ab0ccbe4-7bfe-4176-890a-d438ee04290d')
     def test_show_alarm(self):
         """
@@ -123,8 +127,9 @@ class AlarmContrailTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self.alarm_client.show_alarm(alarm_uuid)
 
+    @decorators.idempotent_id('c3160759-4a68-4272-90e7-a69aa0e711f6')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="update_alarm")
+                                 rules="update_alarm")
     @idempotent_id('ab331cca-ee53-4106-9b30-7319bfb1bea7')
     def test_update_alarm(self):
         """
@@ -136,8 +141,9 @@ class AlarmContrailTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self._update_alarm(alarm_uuid)
 
+    @decorators.idempotent_id('11f2d137-4ad3-4c99-b0f9-9bde637722a2')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="delete_alarm")
+                                 rules="delete_alarm")
     @idempotent_id('84fadb14-77c0-4f21-b5b2-1da7a2fd27e6')
     def test_delete_alarm(self):
         """

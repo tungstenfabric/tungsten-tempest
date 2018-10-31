@@ -24,6 +24,7 @@ from tungsten_tempest_plugin.tests.api.contrail import rbac_base
 from patrole_tempest_plugin import rbac_rule_validation
 
 from tempest import config
+from tempest.lib import decorators
 from tempest.lib.common.utils import data_utils
 from tempest.lib.decorators import idempotent_id
 
@@ -85,8 +86,9 @@ class ContrailForwardingClassTest(rbac_base.BaseContrailTest):
                         new_fclass['uuid'])
         return new_fclass
 
+    @decorators.idempotent_id('88d84616-ce8d-46df-915f-90b560f88a4a')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="list_forwarding_classs")
+                                 rules="list_forwarding_classs")
     @idempotent_id('807a66fd-d4a4-472c-a13d-7ba590509e6e')
     def test_list_forwarding_classs(self):
         """
@@ -95,8 +97,9 @@ class ContrailForwardingClassTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self.forwarding_class_client.list_forwarding_classs()
 
+    @decorators.idempotent_id('73b015a3-e57b-4c48-9f05-8c2453f06092')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="show_forwarding_class")
+                                 rules="show_forwarding_class")
     @idempotent_id('8ef21f71-72a4-4de9-af93-6e759aa463c0')
     def test_show_forwarding_class(self):
         """
@@ -113,8 +116,9 @@ class ContrailForwardingClassTest(rbac_base.BaseContrailTest):
             self.forwarding_class_client.show_forwarding_class(
                 new_fclass['uuid'])
 
+    @decorators.idempotent_id('8b1b3121-1f98-463c-8d39-7b750ef64254')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="create_forwarding_classs")
+                                 rules="create_forwarding_classs")
     @idempotent_id('d098859c-ad36-4385-8fb0-c00934a99b6f')
     def test_create_forwarding_classs(self):
         """
@@ -129,8 +133,9 @@ class ContrailForwardingClassTest(rbac_base.BaseContrailTest):
             self._create_forwarding_class(global_system_config,
                                           global_qos_config)
 
+    @decorators.idempotent_id('9c6d7400-d5dd-42b2-8e85-b056fd9f7596')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="update_forwarding_class")
+                                 rules="update_forwarding_class")
     @idempotent_id('589dc03d-a25d-48be-9d9c-d3f92ff2cfc6')
     def test_update_forwarding_class(self):
         """
@@ -148,8 +153,9 @@ class ContrailForwardingClassTest(rbac_base.BaseContrailTest):
             self.forwarding_class_client.update_forwarding_class(
                 new_fclass['uuid'], display_name=update_name)
 
+    @decorators.idempotent_id('c5349bc1-4d7a-44e4-8248-754a38865b19')
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="delete_forwarding_class")
+                                 rules="delete_forwarding_class")
     @idempotent_id('a0348ffc-68c5-4d94-ba03-d08483503ced')
     def test_delete_forwarding_class(self):
         """
