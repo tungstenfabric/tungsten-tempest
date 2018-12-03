@@ -60,7 +60,7 @@ class ConfigNodeTest(rbac_base.BaseContrailTest):
         return config_node
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="list_config_nodes")
+                                 rules="list_config_nodes")
     @idempotent_id('b560e060-e4f0-45b0-93e2-55f0cb201e06')
     def test_list_config_nodes(self):
         """
@@ -70,7 +70,7 @@ class ConfigNodeTest(rbac_base.BaseContrailTest):
             self.config_client.list_config_nodes()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="create_config_nodes")
+                                 rules="create_config_nodes")
     @idempotent_id('a8d20d0d-dc5a-4cae-87c5-7f6914c3701e')
     def test_create_config_nodes(self):
         """
@@ -80,7 +80,7 @@ class ConfigNodeTest(rbac_base.BaseContrailTest):
             self._create_config_node()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="delete_config_node")
+                                 rules="delete_config_node")
     @idempotent_id('16573a85-57ab-418c-bb23-5dd936e7be90')
     def test_delete_config_node(self):
         """
@@ -93,7 +93,7 @@ class ConfigNodeTest(rbac_base.BaseContrailTest):
                 config_node_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="show_config_node")
+                                 rules="show_config_node")
     @idempotent_id('a5b17108-4fa3-4d09-b861-e2857aab8f80')
     def test_show_config_node(self):
         """
@@ -105,7 +105,7 @@ class ConfigNodeTest(rbac_base.BaseContrailTest):
             self.config_client.show_config_node(config_node_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="update_config_node")
+                                 rules="update_config_node")
     @idempotent_id('8f70d2c0-594b-4a94-ab15-88bd8a2e62e5')
     def test_update_config_node(self):
         """
@@ -138,7 +138,7 @@ class ConfigRootTest(rbac_base.BaseContrailTest):
         return config_root
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="create_config_roots")
+                                 rules="create_config_roots")
     @idempotent_id('291b28ea-d0d8-47cd-ac76-1f980047cb76')
     def test_create_config_roots(self):
         """
@@ -148,7 +148,7 @@ class ConfigRootTest(rbac_base.BaseContrailTest):
             self._create_config_root()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="delete_config_root")
+                                 rules="delete_config_root")
     @idempotent_id('bd04c0fb-3deb-4904-ad2c-1a10933c30dd')
     def test_delete_config_root(self):
         """
@@ -161,7 +161,7 @@ class ConfigRootTest(rbac_base.BaseContrailTest):
                 config_root_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="show_config_root")
+                                 rules="show_config_root")
     @idempotent_id('fba2c419-9a83-4d88-9a26-84770544bb3f')
     def test_show_config_root(self):
         """
@@ -173,7 +173,7 @@ class ConfigRootTest(rbac_base.BaseContrailTest):
             self.config_client.show_config_root(config_root_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="update_config_root")
+                                 rules="update_config_root")
     @idempotent_id('bfcc074f-5e1c-4b45-8a2a-857239f8acb0')
     def test_update_config_root(self):
         """
@@ -187,7 +187,7 @@ class ConfigRootTest(rbac_base.BaseContrailTest):
                 config_root_uuid, display_name=updated_name)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="list_config_roots")
+                                 rules="list_config_roots")
     @idempotent_id('316e7425-8fb0-41b4-9080-a76697abbafa')
     def test_list_config_roots(self):
         """
@@ -219,7 +219,7 @@ class GlobalSystemConfigTest(rbac_base.BaseContrailTest):
         return new_config
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="list_global_system_configs")
+                                 rules="list_global_system_configs")
     @idempotent_id('d1d189a7-14c1-49c5-b180-cd42ed2ca123')
     def test_list_global_system_configs(self):
         """
@@ -229,7 +229,7 @@ class GlobalSystemConfigTest(rbac_base.BaseContrailTest):
             self.config_client.list_global_system_configs()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="create_global_system_configs")
+                                 rules="create_global_system_configs")
     @idempotent_id('e0ba6a20-3e28-47ac-bf95-9a848fcee49a')
     def test_create_global_sys_configs(self):
         """
@@ -239,7 +239,7 @@ class GlobalSystemConfigTest(rbac_base.BaseContrailTest):
             self._create_global_system_config()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="show_global_system_config")
+                                 rules="show_global_system_config")
     @idempotent_id('4b9f9131-cb34-4b7d-9d06-c6aca85cce3a')
     def test_show_global_system_config(self):
         """
@@ -251,7 +251,7 @@ class GlobalSystemConfigTest(rbac_base.BaseContrailTest):
                 new_config['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="update_global_system_config")
+                                 rules="update_global_system_config")
     @idempotent_id('4f90dc83-da59-45a4-8ab6-b387bd6c2df4')
     def test_update_global_sys_config(self):
         """
@@ -265,7 +265,7 @@ class GlobalSystemConfigTest(rbac_base.BaseContrailTest):
                 display_name=update_name)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="delete_global_system_config")
+                                 rules="delete_global_system_config")
     @idempotent_id('fce1653c-e657-4a1e-8ced-7e02d297d6c9')
     def test_delete_global_sys_config(self):
         """

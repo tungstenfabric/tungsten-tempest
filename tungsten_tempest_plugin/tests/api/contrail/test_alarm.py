@@ -24,7 +24,6 @@ from tungsten_tempest_plugin.tests.api.contrail import rbac_base
 from patrole_tempest_plugin import rbac_rule_validation
 
 from tempest import config
-
 from tempest.lib.common.utils import data_utils
 from tempest.lib.decorators import idempotent_id
 
@@ -89,7 +88,7 @@ class AlarmContrailTest(rbac_base.BaseContrailTest):
         self.alarm_client.update_alarm(alarm_uuid, **put_body)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="list_alarms")
+                                 rules="list_alarms")
     @idempotent_id('dc7d19dd-dd5e-4ec8-bf0c-c6d9d83a60a8')
     def test_list_alarms(self):
         """
@@ -99,7 +98,7 @@ class AlarmContrailTest(rbac_base.BaseContrailTest):
             self.alarm_client.list_alarms()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="create_alarms")
+                                 rules="create_alarms")
     @idempotent_id('7fe55d0c-e54a-4bb7-95a6-9c53f9e9c4bf')
     def test_create_alarms(self):
         """
@@ -111,7 +110,7 @@ class AlarmContrailTest(rbac_base.BaseContrailTest):
             self._create_alarm(global_system_config)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="show_alarm")
+                                 rules="show_alarm")
     @idempotent_id('ab0ccbe4-7bfe-4176-890a-d438ee04290d')
     def test_show_alarm(self):
         """
@@ -124,7 +123,7 @@ class AlarmContrailTest(rbac_base.BaseContrailTest):
             self.alarm_client.show_alarm(alarm_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="update_alarm")
+                                 rules="update_alarm")
     @idempotent_id('ab331cca-ee53-4106-9b30-7319bfb1bea7')
     def test_update_alarm(self):
         """
@@ -137,7 +136,7 @@ class AlarmContrailTest(rbac_base.BaseContrailTest):
             self._update_alarm(alarm_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="delete_alarm")
+                                 rules="delete_alarm")
     @idempotent_id('84fadb14-77c0-4f21-b5b2-1da7a2fd27e6')
     def test_delete_alarm(self):
         """

@@ -57,7 +57,7 @@ class DomainContrailTest(rbac_base.BaseContrailTest):
         self.domain_client.update_domain(domain_uuid, **put_body)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="list_domains")
+                                 rules="list_domains")
     @idempotent_id('fa02e27b-f661-4186-a522-69e8fcb6abf9')
     def test_list_domains(self):
         """
@@ -67,7 +67,7 @@ class DomainContrailTest(rbac_base.BaseContrailTest):
             self.domain_client.list_domains()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="create_domains")
+                                 rules="create_domains")
     @idempotent_id('3f18be91-c37b-4e17-bf5e-b704d993f738')
     def test_create_domains(self):
         """
@@ -77,7 +77,7 @@ class DomainContrailTest(rbac_base.BaseContrailTest):
             self._create_domains()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="show_domain")
+                                 rules="show_domain")
     @idempotent_id('e79f8581-ba9f-420a-aa26-f1cb51cf4bbf')
     def test_show_domain(self):
         """
@@ -88,7 +88,7 @@ class DomainContrailTest(rbac_base.BaseContrailTest):
             self.domain_client.show_domain(domain_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="update_domain")
+                                 rules="update_domain")
     @idempotent_id('fdf72539-20b5-4bdb-b22b-70c86fbb52a4')
     def test_update_domain(self):
         """
@@ -99,7 +99,7 @@ class DomainContrailTest(rbac_base.BaseContrailTest):
             self._update_domain(domain_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="delete_domain")
+                                 rules="delete_domain")
     @idempotent_id('abaad2b0-6bde-40b8-b257-20ca805c1dca')
     def test_delete_domain(self):
         """

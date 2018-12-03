@@ -114,7 +114,7 @@ class FloatingIpPoolTest(BaseFloatingIpTest):
         return fip_pool
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="create_floating_ip_pools")
+                                 rules="create_floating_ip_pools")
     @idempotent_id('a83ca5e8-be4b-4161-869c-f981a724cf82')
     def test_create_floating_ip_pools(self):
         """
@@ -124,7 +124,7 @@ class FloatingIpPoolTest(BaseFloatingIpTest):
             self._create_floating_ip_pool()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="list_floating_ip_pools")
+                                 rules="list_floating_ip_pools")
     @idempotent_id('9d20e78d-0463-4a0e-b30c-40770bee35bc')
     def test_list_floating_ip_pools(self):
         """
@@ -135,7 +135,7 @@ class FloatingIpPoolTest(BaseFloatingIpTest):
             self.fip_client.list_floating_ip_pools()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="show_floating_ip_pool")
+                                 rules="show_floating_ip_pool")
     @idempotent_id('1ec3124c-c15c-4ee6-b2de-2feed9599e38')
     def test_show_floating_ip_pool(self):
         """
@@ -146,7 +146,7 @@ class FloatingIpPoolTest(BaseFloatingIpTest):
             self.fip_client.show_floating_ip_pool(uuid)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="update_floating_ip_pool")
+                                 rules="update_floating_ip_pool")
     @idempotent_id('6563f2e7-ae6b-483b-8c07-0111efc86817')
     def test_update_floating_ip_pool(self):
         """
@@ -159,7 +159,7 @@ class FloatingIpPoolTest(BaseFloatingIpTest):
                 display_name='rbac-fip-pool-new-name')
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="delete_floating_ip_pool")
+                                 rules="delete_floating_ip_pool")
     @idempotent_id('c4b449ae-2f12-49cf-9dec-2b21c143aff6')
     def test_delete_floating_ip_pool(self):
         """
@@ -210,7 +210,7 @@ class FloatingIpTest(BaseFloatingIpTest):
         return fip
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="create_floating_ips")
+                                 rules="create_floating_ips")
     @idempotent_id('ff05f70f-9db9-43cb-a5ce-38cbbef2c430')
     def test_create_floating_ips(self):
         """
@@ -220,7 +220,7 @@ class FloatingIpTest(BaseFloatingIpTest):
             self._create_floating_ip()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="list_floating_ips")
+                                 rules="list_floating_ips")
     @idempotent_id('e56046f9-32f9-41ce-9c1b-b982997ac347')
     def test_list_floating_ips(self):
         """
@@ -231,7 +231,7 @@ class FloatingIpTest(BaseFloatingIpTest):
             self.fip_client.list_floating_ips()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="show_floating_ip")
+                                 rules="show_floating_ip")
     @idempotent_id('293f2c26-4101-4a2f-86d4-feb2878bd511')
     def test_show_floating_ip(self):
         """
@@ -242,7 +242,7 @@ class FloatingIpTest(BaseFloatingIpTest):
             self.fip_client.show_floating_ip(uuid)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="update_floating_ip")
+                                 rules="update_floating_ip")
     @idempotent_id('a09283c9-73d3-42f7-876d-f33040686d6d')
     def test_update_floating_ip(self):
         """
@@ -255,7 +255,7 @@ class FloatingIpTest(BaseFloatingIpTest):
                 display_name='rbac-fip-new-name')
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="delete_floating_ip")
+                                 rules="delete_floating_ip")
     @idempotent_id('a26f162f-da56-4153-aed6-bffccba92bc7')
     def test_delete_floating_ip(self):
         """

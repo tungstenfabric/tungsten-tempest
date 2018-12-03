@@ -72,7 +72,7 @@ class ContrailDatabaseTest(rbac_base.BaseContrailTest):
         return db_node
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="list_database_nodes")
+                                 rules="list_database_nodes")
     @idempotent_id('5ae6f965-6161-443f-b19e-dfa7b364c533')
     def test_list_database_nodes(self):
         """
@@ -85,7 +85,7 @@ class ContrailDatabaseTest(rbac_base.BaseContrailTest):
             self.db_client.list_database_nodes()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="show_database_node")
+                                 rules="show_database_node")
     @idempotent_id('4a07d9a8-7b99-43bd-b628-06c023993aab')
     def test_show_database_node(self):
         """
@@ -99,7 +99,7 @@ class ContrailDatabaseTest(rbac_base.BaseContrailTest):
             self.db_client.show_database_node(db_node_id)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="create_database_nodes")
+                                 rules="create_database_nodes")
     @idempotent_id('b9aa9c6b-9381-44f0-94fb-e4523bf2a87e')
     def test_create_database_nodes(self):
         """
@@ -111,7 +111,7 @@ class ContrailDatabaseTest(rbac_base.BaseContrailTest):
             self._create_database_node(global_system_config)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="update_database_node")
+                                 rules="update_database_node")
     @idempotent_id('6e59f393-0e55-4327-871e-7f0ad53f2e17')
     def test_update_database_node(self):
         """
@@ -128,7 +128,7 @@ class ContrailDatabaseTest(rbac_base.BaseContrailTest):
                 display_name=display_name)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="delete_database_node")
+                                 rules="delete_database_node")
     @idempotent_id('0cbc5a52-d7e7-4a1c-a85d-6bf44012d99b')
     def test_delete_database_node(self):
         """

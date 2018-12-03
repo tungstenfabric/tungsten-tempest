@@ -55,7 +55,7 @@ class ContrailSecurityGroupTest(rbac_base.BaseContrailTest):
         return sec_grp
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="list_security_groups")
+                                 rules="list_security_groups")
     @idempotent_id('a13cc1d5-f562-4b68-b732-980deb3cddf4')
     def test_list_security_groups(self):
         """
@@ -66,7 +66,7 @@ class ContrailSecurityGroupTest(rbac_base.BaseContrailTest):
             self.security_group_client.list_security_groups()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="show_security_group")
+                                 rules="show_security_group")
     @idempotent_id('c7ca1781-08ae-4fa2-bd6d-1f369950c4c4')
     def test_show_security_group(self):
         """
@@ -78,7 +78,7 @@ class ContrailSecurityGroupTest(rbac_base.BaseContrailTest):
             self.security_group_client.show_security_group(grp_id)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="delete_security_group")
+                                 rules="delete_security_group")
     @idempotent_id('e682d7b4-deb8-4b5c-9c9b-1e1ada827b40')
     def test_delete_security_group(self):
         """
@@ -90,7 +90,7 @@ class ContrailSecurityGroupTest(rbac_base.BaseContrailTest):
             self._delete_security_group(grp_id)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="create_security_groups")
+                                 rules="create_security_groups")
     @idempotent_id('63a2ff14-7869-40a2-962a-d65752de5651')
     def test_create_security_groups(self):
         """
@@ -100,7 +100,7 @@ class ContrailSecurityGroupTest(rbac_base.BaseContrailTest):
             self._create_security_groups()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="update_security_group")
+                                 rules="update_security_group")
     @idempotent_id('cf9aafe2-fffb-4028-8fd7-4d6634e144e7')
     def test_update_security_group(self):
         """

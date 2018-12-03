@@ -55,7 +55,7 @@ class FqnameIdTest(rbac_base.BaseContrailTest):
         super(FqnameIdTest, cls).resource_cleanup()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="fqname_to_id")
+                                 rules="fqname_to_id")
     @idempotent_id('1fc1350b-3146-49bc-9af5-a61a98b55541')
     def test_fqname_to_id(self):
         """
@@ -66,7 +66,7 @@ class FqnameIdTest(rbac_base.BaseContrailTest):
                                         type=self.type)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="id_to_fqname")
+                                 rules="id_to_fqname")
     @idempotent_id('ecdd77d7-8508-4639-86cd-b97907b363ff')
     def test_id_to_fqname(self):
         """
