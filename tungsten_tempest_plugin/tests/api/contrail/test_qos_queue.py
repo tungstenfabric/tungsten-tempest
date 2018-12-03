@@ -51,7 +51,7 @@ class QosQueueContrailTest(rbac_base.BaseContrailTest):
         return qos_queue
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="list_qos_queues")
+                                 rules="list_qos_queues")
     @idempotent_id('3d3a4397-2afe-4bbd-be59-56a1bcc2e49d')
     def test_list_qos_queues(self):
         """
@@ -62,7 +62,7 @@ class QosQueueContrailTest(rbac_base.BaseContrailTest):
             self.qos_client.list_qos_queues()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="create_qos_queues")
+                                 rules="create_qos_queues")
     @idempotent_id('d89c45f4-c83c-47b3-8720-7feffab4519c')
     def test_create_qos_queues(self):
         """
@@ -72,7 +72,7 @@ class QosQueueContrailTest(rbac_base.BaseContrailTest):
             self._create_qos_queues()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="show_qos_queue")
+                                 rules="show_qos_queue")
     @idempotent_id('d2773d5c-9858-4938-8a77-62cafd5034da')
     def test_show_qos_queue(self):
         """
@@ -83,7 +83,7 @@ class QosQueueContrailTest(rbac_base.BaseContrailTest):
             self.qos_client.show_qos_queue(qos_queue['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="delete_qos_queue")
+                                 rules="delete_qos_queue")
     @idempotent_id('64c828d0-6594-472b-a504-40915067c7bd')
     def test_delete_qos_queue(self):
         """
@@ -94,7 +94,7 @@ class QosQueueContrailTest(rbac_base.BaseContrailTest):
             self.qos_client.delete_qos_queue(qos_queue['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="update_qos_queue")
+                                 rules="update_qos_queue")
     @idempotent_id('0733ab1a-f5aa-4e70-a011-174aa203dc33')
     def test_update_qos_queue(self):
         """

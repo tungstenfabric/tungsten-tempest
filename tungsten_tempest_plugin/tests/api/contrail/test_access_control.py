@@ -78,7 +78,7 @@ class AccessControlTest(rbac_base.BaseContrailTest):
         return new_ctrl_list
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="list_api_access_lists")
+                                 rules="list_api_access_lists")
     @idempotent_id('2bfde8fd-36fe-4e69-ba59-6f2db8941e7d')
     def test_list_api_access_lists(self):
         """
@@ -88,7 +88,7 @@ class AccessControlTest(rbac_base.BaseContrailTest):
             self.access_control_client.list_api_access_lists()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="create_api_access_lists")
+                                 rules="create_api_access_lists")
     @idempotent_id('b2b5f50c-07d8-4d79-b9a4-78187ad97353')
     def test_create_api_access_lists(self):
         """
@@ -98,7 +98,7 @@ class AccessControlTest(rbac_base.BaseContrailTest):
             self._create_api_access_lists()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="show_api_access_list")
+                                 rules="show_api_access_list")
     @idempotent_id('b82e8e6b-83b5-424d-9652-ef6a34067f4f')
     def test_show_api_access_list(self):
         """
@@ -110,7 +110,7 @@ class AccessControlTest(rbac_base.BaseContrailTest):
                 new_api_list['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="update_api_access_list")
+                                 rules="update_api_access_list")
     @idempotent_id('edc88825-1e2e-47ff-b7b4-f68d6310fbad')
     def test_update_api_access_list(self):
         """
@@ -124,7 +124,7 @@ class AccessControlTest(rbac_base.BaseContrailTest):
                 display_name=update_name)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="delete_api_access_list")
+                                 rules="delete_api_access_list")
     @idempotent_id('f27d9044-95f2-4733-81ed-df9340dbd421')
     def test_delete_api_access_list(self):
         """
@@ -136,7 +136,7 @@ class AccessControlTest(rbac_base.BaseContrailTest):
                 new_api_list['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="list_access_control_lists")
+                                 rules="list_access_control_lists")
     @idempotent_id('c56a1338-a9d1-4286-8aeb-3a0d60d93037')
     def test_list_access_control_lists(self):
         """
@@ -146,7 +146,7 @@ class AccessControlTest(rbac_base.BaseContrailTest):
             self.access_control_client.list_access_control_lists()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="create_access_control_lists")
+                                 rules="create_access_control_lists")
     @idempotent_id('9f225d2b-5376-42f5-97aa-cf63be47fa19')
     def test_create_access_control(self):
         """
@@ -158,7 +158,7 @@ class AccessControlTest(rbac_base.BaseContrailTest):
             self._create_access_control_lists(sec_group['name'])
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="show_access_control_list")
+                                 rules="show_access_control_list")
     @idempotent_id('f0ed882b-f3de-48b7-884a-637ee0b7d6b6')
     def test_show_access_control_list(self):
         """
@@ -173,7 +173,7 @@ class AccessControlTest(rbac_base.BaseContrailTest):
                 new_ctrl_list['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="update_access_control_list")
+                                 rules="update_access_control_list")
     @idempotent_id('9a4b3133-dd07-4a1a-b282-f7770c372fb8')
     def test_update_access_control_list(self):
         """
@@ -189,7 +189,7 @@ class AccessControlTest(rbac_base.BaseContrailTest):
                 display_name=update_name)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="delete_access_control_list")
+                                 rules="delete_access_control_list")
     @idempotent_id('36a8ace1-71ca-4c7c-8667-d8387d6f964a')
     def test_delete_access_control_list(self):
         """

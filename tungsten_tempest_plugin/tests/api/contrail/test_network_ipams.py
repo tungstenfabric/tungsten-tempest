@@ -46,7 +46,7 @@ class NetworkIpamsTest(rbac_base.BaseContrailTest):
         return new_ipam
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="list_network_ipams")
+                                 rules="list_network_ipams")
     @idempotent_id('9ee2c4d8-3209-4ef8-86e1-0ecea2d4c5f2')
     def test_list_network_ipams(self):
         """
@@ -56,7 +56,7 @@ class NetworkIpamsTest(rbac_base.BaseContrailTest):
             self.network_ipams_client.list_network_ipams()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="create_network_ipams")
+                                 rules="create_network_ipams")
     @idempotent_id('ef2415ea-0810-413a-85a0-4508c9d7af91')
     def test_create_network_ipams(self):
         """
@@ -66,7 +66,7 @@ class NetworkIpamsTest(rbac_base.BaseContrailTest):
             self._create_network_ipams()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="show_network_ipam")
+                                 rules="show_network_ipam")
     @idempotent_id('527b19e5-068a-44e3-b175-b504eafeec6e')
     def test_show_network_ipam(self):
         """
@@ -77,7 +77,7 @@ class NetworkIpamsTest(rbac_base.BaseContrailTest):
             self.network_ipams_client.show_network_ipam(new_ipam['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="delete_network_ipam")
+                                 rules="delete_network_ipam")
     @idempotent_id('118c1620-efb6-4cc6-8eb5-71bf8631d365')
     def test_delete_network_ipam(self):
         """
@@ -88,7 +88,7 @@ class NetworkIpamsTest(rbac_base.BaseContrailTest):
             self.network_ipams_client.delete_network_ipam(new_ipam['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="update_network_ipam")
+                                 rules="update_network_ipam")
     @idempotent_id('44cbe2d9-583d-4215-964a-1c321f5e8d92')
     def test_update_network_ipam(self):
         """

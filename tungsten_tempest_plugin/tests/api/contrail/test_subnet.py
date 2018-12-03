@@ -56,7 +56,7 @@ class SubnetContrailTest(rbac_base.BaseContrailTest):
         self.subnet_client.update_subnet(subnet_uuid, **put_body)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="list_subnets")
+                                 rules="list_subnets")
     @idempotent_id('ddd1d9ae-cf2f-4a74-98ba-b0f481f27977')
     def test_list_subnets(self):
         """
@@ -66,7 +66,7 @@ class SubnetContrailTest(rbac_base.BaseContrailTest):
             self.subnet_client.list_subnets()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="create_subnets")
+                                 rules="create_subnets")
     @idempotent_id('ee0cb904-d162-44a4-b7b0-a7451f667ed5')
     def test_create_subnets(self):
         """
@@ -76,7 +76,7 @@ class SubnetContrailTest(rbac_base.BaseContrailTest):
             self._create_subnet()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="show_subnet")
+                                 rules="show_subnet")
     @idempotent_id('994618f2-5b40-460c-a6a8-6479bc15bf80')
     def test_show_subnet(self):
         """
@@ -87,7 +87,7 @@ class SubnetContrailTest(rbac_base.BaseContrailTest):
             self.subnet_client.show_subnet(subnet_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="update_subnet")
+                                 rules="update_subnet")
     @idempotent_id('565e44c9-eb9b-4ae6-9ebb-db422a9751ee')
     def test_update_subnet(self):
         """
@@ -98,7 +98,7 @@ class SubnetContrailTest(rbac_base.BaseContrailTest):
             self._update_subnet(subnet_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="delete_subnet")
+                                 rules="delete_subnet")
     @idempotent_id('a733b913-7a88-45d9-ac0a-d858fa3dc662')
     def test_delete_subnet(self):
         """

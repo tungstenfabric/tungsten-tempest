@@ -46,7 +46,7 @@ class BGPAsAServicesTest(rbac_base.BaseContrailTest):
         return new_bgp
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="list_bgp_as_a_services")
+                                 rules="list_bgp_as_a_services")
     @idempotent_id('d3153cd0-379e-4e62-9780-ef237e567fc5')
     def test_list_bgp_as_a_services(self):
         """
@@ -56,7 +56,7 @@ class BGPAsAServicesTest(rbac_base.BaseContrailTest):
             self.bgp_as_a_service_client.list_bgp_as_a_services()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="create_bgp_as_a_services")
+                                 rules="create_bgp_as_a_services")
     @idempotent_id('a039f0c4-b53a-492b-a5c5-fbdf046afcf4')
     def test_create_bgp_as_a_services(self):
         """
@@ -66,7 +66,7 @@ class BGPAsAServicesTest(rbac_base.BaseContrailTest):
             self._create_bgp_as_a_services()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="show_bgp_as_a_service")
+                                 rules="show_bgp_as_a_service")
     @idempotent_id('c2fae8b4-929c-4d2f-914d-76a7414a56dc')
     def test_show_bgp_as_a_service(self):
         """
@@ -78,7 +78,7 @@ class BGPAsAServicesTest(rbac_base.BaseContrailTest):
                 new_bgp['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="delete_bgp_as_a_service")
+                                 rules="delete_bgp_as_a_service")
     @idempotent_id('78c8389a-7bb5-4027-bae1-923af3d6e77c')
     def test_delete_bgp_as_a_service(self):
         """
@@ -90,7 +90,7 @@ class BGPAsAServicesTest(rbac_base.BaseContrailTest):
                 new_bgp['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="update_bgp_as_a_service")
+                                 rules="update_bgp_as_a_service")
     @idempotent_id('38ba2ecb-71e2-4a2f-be43-e82491dffa05')
     def test_update_bgp_as_a_service(self):
         """

@@ -104,7 +104,7 @@ class VMContrailTest(rbac_base.BaseContrailTest):
         super(VMContrailTest, cls).resource_cleanup()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="list_virtual_machine_interfaces")
+                                 rules="list_virtual_machine_interfaces")
     @idempotent_id('e27d1fae-7324-4ef3-87b1-e7f519b1e2a7')
     def test_list_vm_interfaces(self):
         """
@@ -115,7 +115,7 @@ class VMContrailTest(rbac_base.BaseContrailTest):
             self.vm_client.list_virtual_machine_interfaces()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="create_virtual_machine_interfaces")
+                                 rules="create_virtual_machine_interfaces")
     @idempotent_id('d8a3a524-d61b-4bcb-8146-c5d4f308df8e')
     def test_add_vm_interfaces(self):
         """
@@ -125,7 +125,7 @@ class VMContrailTest(rbac_base.BaseContrailTest):
             self._create_virual_machine_interface()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="show_virtual_machine_interface")
+                                 rules="show_virtual_machine_interface")
     @idempotent_id('3f17125a-9060-4c4a-a23f-0fe2aba2ccef')
     def test_show_vm_interface(self):
         """
@@ -136,7 +136,7 @@ class VMContrailTest(rbac_base.BaseContrailTest):
             self.vm_client.show_virtual_machine_interface(test['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="delete_virtual_machine_interface")
+                                 rules="delete_virtual_machine_interface")
     @idempotent_id('ce7f9471-ba1b-40d2-94f1-bdd0c610e22f')
     def test_delete_vm_interface(self):
         """
@@ -147,7 +147,7 @@ class VMContrailTest(rbac_base.BaseContrailTest):
             self.vm_client.delete_vm_interface(body['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="update_virtual_machine_interface")
+                                 rules="update_virtual_machine_interface")
     @idempotent_id('7ca3046a-6245-4c15-914b-5a8ecdbeee11')
     def test_update_vm_interface(self):
         """

@@ -53,7 +53,7 @@ class QosConfigContrailTest(rbac_base.BaseContrailTest):
         return qos_config
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="list_qos_configs")
+                                 rules="list_qos_configs")
     @idempotent_id('6bc44b34-14d4-4e0e-b45d-fe3df047879f')
     def test_list_qos_configs(self):
         """
@@ -64,7 +64,7 @@ class QosConfigContrailTest(rbac_base.BaseContrailTest):
             self.qos_client.list_qos_configs()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="create_qos_configs")
+                                 rules="create_qos_configs")
     @idempotent_id('031b4a27-22cd-4d93-938d-ba6d0f3163ba')
     def test_create_qos_configs(self):
         """
@@ -74,7 +74,7 @@ class QosConfigContrailTest(rbac_base.BaseContrailTest):
             self._create_qos_configs()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="show_qos_config")
+                                 rules="show_qos_config")
     @idempotent_id('a9d82b49-3492-4667-b252-ef30b0ee6eb3')
     def test_show_qos_config(self):
         """
@@ -85,7 +85,7 @@ class QosConfigContrailTest(rbac_base.BaseContrailTest):
             self.qos_client.show_qos_config(qos_config['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="delete_qos_config")
+                                 rules="delete_qos_config")
     @idempotent_id('d324a5e6-cc86-4444-91a2-74592283a7ec')
     def test_delete_qos_config(self):
         """
@@ -96,7 +96,7 @@ class QosConfigContrailTest(rbac_base.BaseContrailTest):
             self.qos_client.delete_qos_config(qos_config['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="update_qos_config")
+                                 rules="update_qos_config")
     @idempotent_id('7f1901a5-0cf0-40bd-98a5-f8a930b11cfe')
     def test_update_qos_config(self):
         """

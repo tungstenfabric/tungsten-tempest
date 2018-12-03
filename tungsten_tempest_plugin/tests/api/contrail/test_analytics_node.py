@@ -66,7 +66,7 @@ class ContrailAnalyticsNodeTest(rbac_base.BaseContrailTest):
         return new_node
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="list_analytics_nodes")
+                                 rules="list_analytics_nodes")
     @idempotent_id('d3002e37-4b42-446d-b144-1b53f0dadfd3')
     def test_list_analytics_nodes(self):
         """
@@ -76,7 +76,7 @@ class ContrailAnalyticsNodeTest(rbac_base.BaseContrailTest):
             self.analytics_node_client.list_analytics_nodes()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="show_analytics_node")
+                                 rules="show_analytics_node")
     @idempotent_id('b51043fd-77ba-4312-b96f-569ed5153338')
     def test_show_analytics_node(self):
         """
@@ -89,7 +89,7 @@ class ContrailAnalyticsNodeTest(rbac_base.BaseContrailTest):
             self.analytics_node_client.show_analytics_node(new_node['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="create_analytics_nodes")
+                                 rules="create_analytics_nodes")
     @idempotent_id('c57482c9-fcb4-4f41-95b0-7f0ffeee3dc3')
     def test_create_analytics_nodes(self):
         """
@@ -101,7 +101,7 @@ class ContrailAnalyticsNodeTest(rbac_base.BaseContrailTest):
             self._create_analytics_node(global_system_config)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="update_analytics_node")
+                                 rules="update_analytics_node")
     @idempotent_id('ff50a2df-6283-409e-ab03-c13b63acc8a0')
     def test_update_analytics_node(self):
         """
@@ -116,7 +116,7 @@ class ContrailAnalyticsNodeTest(rbac_base.BaseContrailTest):
                 new_node['uuid'], display_name=update_name)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rule="delete_analytics_node")
+                                 rules="delete_analytics_node")
     @idempotent_id('972f997a-c89f-4227-8ae9-5a2335ec0b0a')
     def test_delete_analytics_node(self):
         """
