@@ -52,7 +52,7 @@ class VirtualIPTest(rbac_base.BaseContrailTest):
         self.virtual_ip_client.update_virtual_ip(virtual_ip_uuid, **put_body)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="list_virtual_ips")
+                                 rules=["list_virtual_ips"])
     @decorators.idempotent_id('92303eee-bd96-48bc-a02c-39950bd19a21')
     def test_list_virtual_ips(self):
         """test method for list virtual ip objects"""
@@ -60,7 +60,7 @@ class VirtualIPTest(rbac_base.BaseContrailTest):
             self.virtual_ip_client.list_virtual_ips()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="create_virtual_ips")
+                                 rules=["create_virtual_ips"])
     @decorators.idempotent_id('e0070888-995d-46ab-91fc-db1412eba2f7')
     def test_create_virtual_ips(self):
         """test method for create virtual ip objects"""
@@ -68,7 +68,7 @@ class VirtualIPTest(rbac_base.BaseContrailTest):
             self._create_virtual_ip()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="show_virtual_ip")
+                                 rules=["show_virtual_ip"])
     @decorators.idempotent_id('2a4b3abd-c6f7-4d82-aa31-02e53d2a8fb9')
     def test_show_virtual_ip(self):
         """test method for show virtual ip objects"""
@@ -77,7 +77,7 @@ class VirtualIPTest(rbac_base.BaseContrailTest):
             self.virtual_ip_client.show_virtual_ip(virtual_ip_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="update_virtual_ip")
+                                 rules=["update_virtual_ip"])
     @decorators.idempotent_id('0e975c92-62dc-4e6e-82cc-8cf37da3c5b2')
     def test_update_virtual_ip(self):
         """test method for update virtual ip objects"""
@@ -86,7 +86,7 @@ class VirtualIPTest(rbac_base.BaseContrailTest):
             self._update_virtual_ip(virtual_ip_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="delete_virtual_ip")
+                                 rules=["delete_virtual_ip"])
     @decorators.idempotent_id('fd0b2635-36bd-4345-97b7-9c0a57372eba')
     def test_delete_virtual_ip(self):
         """test method for delete virtual ip objects"""

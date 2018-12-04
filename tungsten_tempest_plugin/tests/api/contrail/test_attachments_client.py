@@ -57,7 +57,7 @@ class AttachmentsClientTest(rbac_base.BaseContrailTest):
         return new_customer
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="list_provider_attachments")
+                                 rules=["list_provider_attachments"])
     @decorators.idempotent_id('961dbf54-ae4f-42e8-9d27-69fa7df39013')
     def test_list_provider_attachments(self):
         """test method for list provider attachment objects"""
@@ -65,7 +65,7 @@ class AttachmentsClientTest(rbac_base.BaseContrailTest):
             self.attachments_client.list_provider_attachments()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="create_provider_attachments")
+                                 rules=["create_provider_attachments"])
     @decorators.idempotent_id('73ad032e-3e81-4dcc-be55-1987484207cd')
     def test_create_providerattach(self):
         """test method for create provider attachment objects"""
@@ -73,7 +73,7 @@ class AttachmentsClientTest(rbac_base.BaseContrailTest):
             self._create_provider_attachments()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="show_provider_attachment")
+                                 rules=["show_provider_attachment"])
     @decorators.idempotent_id('7b5278bc-dd79-495a-9f74-448c04f52bd2')
     def test_show_provider_attachment(self):
         """test method for delete provider attachment objects"""
@@ -83,7 +83,7 @@ class AttachmentsClientTest(rbac_base.BaseContrailTest):
                 new_provider['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="update_provider_attachment")
+                                 rules=["update_provider_attachment"])
     @decorators.idempotent_id('3516ff99-eddf-4932-afa4-433a43a0e5ac')
     def test_update_provider_attachment(self):
         """test method for update provider attachment objects"""
@@ -95,7 +95,7 @@ class AttachmentsClientTest(rbac_base.BaseContrailTest):
                 display_name=update_name)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="delete_provider_attachment")
+                                 rules=["delete_provider_attachment"])
     @decorators.idempotent_id('234d5505-2abf-418b-b43b-ea6f5a724fd3')
     def test_delete_provider_attachment(self):
         """test method for delete provider attachment objects"""
@@ -105,7 +105,7 @@ class AttachmentsClientTest(rbac_base.BaseContrailTest):
                 new_provider['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="list_customer_attachments")
+                                 rules=["list_customer_attachments"])
     @decorators.idempotent_id('3eca8fd8-ec3c-4a0e-8f62-b15d28796b7f')
     def test_list_customer_attachments(self):
         """test method for list customer attachment objects"""
@@ -113,7 +113,7 @@ class AttachmentsClientTest(rbac_base.BaseContrailTest):
             self.attachments_client.list_customer_attachments()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="create_customer_attachments")
+                                 rules=["create_customer_attachments"])
     @decorators.idempotent_id('53f93053-554c-4202-b763-0230d9a0553a')
     def test_create_customerattachments(self):
         """test method for create customer attachment objects"""
@@ -121,7 +121,7 @@ class AttachmentsClientTest(rbac_base.BaseContrailTest):
             self._create_customer_attachments()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="show_customer_attachment")
+                                 rules=["show_customer_attachment"])
     @decorators.idempotent_id('c6671540-695c-4cba-bcee-4a5d1cddd412')
     def test_show_customer_attachment(self):
         """test method for show customer attachment objects"""
@@ -131,7 +131,7 @@ class AttachmentsClientTest(rbac_base.BaseContrailTest):
                 new_customer['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="update_customer_attachment")
+                                 rules=["update_customer_attachment"])
     @decorators.idempotent_id('50419cca-dd03-4d02-9c06-88446647fcba')
     def test_update_customer_attachment(self):
         """test method for update customer attachment objects"""
@@ -143,7 +143,7 @@ class AttachmentsClientTest(rbac_base.BaseContrailTest):
                 display_name=update_name)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="delete_customer_attachment")
+                                 rules=["delete_customer_attachment"])
     @decorators.idempotent_id('5385c275-8e86-4739-9cb6-d1e0ed522807')
     def test_delete_customer_attachment(self):
         """test method for delete customer attachment objects"""

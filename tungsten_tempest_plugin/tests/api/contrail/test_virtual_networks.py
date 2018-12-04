@@ -66,7 +66,7 @@ class NetworksTest(rbac_base.BaseContrailTest):
         return network
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="list_virtual_networks")
+                                 rules=["list_virtual_networks"])
     @decorators.idempotent_id('375ebc8d-dc52-4d9c-877b-85aba35b1539')
     def test_list_virtual_networks(self):
         """test method for list vm network objects"""
@@ -74,7 +74,7 @@ class NetworksTest(rbac_base.BaseContrailTest):
             self.vn_client.list_virtual_networks()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="create_virtual_networks")
+                                 rules=["create_virtual_networks"])
     @decorators.idempotent_id('375ebc8d-dc52-4d9c-877b-96aba35b2530')
     def test_create_virtual_networks(self):
         """test method for create vm network objects"""
@@ -82,7 +82,7 @@ class NetworksTest(rbac_base.BaseContrailTest):
             self._create_virtual_network()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="update_virtual_network")
+                                 rules=["update_virtual_network"])
     @decorators.idempotent_id('375ebc8d-dc52-4d9c-566b-150a025c1237')
     def test_update_virtual_network(self):
         """test method for update vm network objects"""
@@ -93,7 +93,7 @@ class NetworksTest(rbac_base.BaseContrailTest):
                 uuid, router_external=False)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="delete_virtual_network")
+                                 rules=["delete_virtual_network"])
     @decorators.idempotent_id('375ebc8d-dc52-4d9c-877b-17bcb53c3641')
     def test_delete_virtual_network(self):
         """test method for delete vm network objects"""
@@ -102,7 +102,7 @@ class NetworksTest(rbac_base.BaseContrailTest):
             self.vn_client.delete_virtual_network(uuid)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="show_virtual_network")
+                                 rules=["show_virtual_network"])
     @decorators.idempotent_id('375ebc8d-dc52-4d9c-877b-27c1a1242a81')
     def test_show_virtual_network(self):
         """test method for show vm network objects"""

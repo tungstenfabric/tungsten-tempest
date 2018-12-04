@@ -54,7 +54,7 @@ class NetworkPolicyTest(rbac_base.BaseContrailTest):
                                                          **put_body)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="list_network_policys")
+                                 rules=["list_network_policys"])
     @decorators.idempotent_id('fa2a28f3-a8bb-4908-95b9-1e11cf58b16f')
     def test_list_policys(self):
         """test method for list n/w policy objects"""
@@ -62,7 +62,7 @@ class NetworkPolicyTest(rbac_base.BaseContrailTest):
             self.network_policy_client.list_network_policys()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="create_network_policys")
+                                 rules=["create_network_policys"])
     @decorators.idempotent_id('a30be228-afba-40c9-8678-ae020db68d79')
     def test_create_network_policys(self):
         """test method for create n/w policy objects"""
@@ -70,7 +70,7 @@ class NetworkPolicyTest(rbac_base.BaseContrailTest):
             self._create_policy()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="show_network_policy")
+                                 rules=["show_network_policy"])
     @decorators.idempotent_id('6cefe92e-8936-49a6-bce0-12da3396e7ab')
     def test_show_network_policy(self):
         """test method for show n/w policy objects"""
@@ -79,7 +79,7 @@ class NetworkPolicyTest(rbac_base.BaseContrailTest):
             self.network_policy_client.show_network_policy(policy_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="update_network_policy")
+                                 rules=["update_network_policy"])
     @decorators.idempotent_id('1d470505-3ad4-4870-87d7-3f0b0f9fc635')
     def test_update_network_policy(self):
         """test method for update n/w policy objects"""
@@ -88,7 +88,7 @@ class NetworkPolicyTest(rbac_base.BaseContrailTest):
             self._update_policy(policy_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="delete_network_policy")
+                                 rules=["delete_network_policy"])
     @decorators.idempotent_id('aae9018f-e7a2-4a75-a68e-afd6c380640e')
     def test_delete_network_policy(self):
         """test method for delete n/w policy objects"""

@@ -137,7 +137,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
         return router
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="list_physical_routers")
+                                 rules=["list_physical_routers"])
     @decorators.idempotent_id('349ac042-b922-4727-9e1b-8f363ee343f3')
     def test_list_physical_routers(self):
         """test method for list physical router objects"""
@@ -145,7 +145,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
             self.router_client.list_physical_routers()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="create_physical_routers")
+                                 rules=["create_physical_routers"])
     @decorators.idempotent_id('d0b7449e-9037-4f9f-8c7e-9f364c95f18a')
     def test_create_physical_routers(self):
         """test method for create physical router objects"""
@@ -155,7 +155,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
             self._create_physical_router(global_system_config)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="show_physical_router")
+                                 rules=["show_physical_router"])
     @decorators.idempotent_id('6dfc53f4-a884-46d5-b303-22ba59c116f4')
     def test_show_physical_router(self):
         """test method for show physical router objects"""
@@ -167,7 +167,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
             self.router_client.show_physical_router(physical_router_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="update_physical_router")
+                                 rules=["update_physical_router"])
     @decorators.idempotent_id('c270f369-8cd7-4ee3-8ab1-4580c3138a5c')
     def test_update_physical_router(self):
         """test method for update physical router objects"""
@@ -182,7 +182,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
                 display_name=updated_fq_name)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="delete_physical_router")
+                                 rules=["delete_physical_router"])
     @decorators.idempotent_id('eeded742-6a8d-4e88-bfa8-fe32db463c53')
     def test_delete_physical_router(self):
         """test method for delete physical router objects"""
@@ -194,7 +194,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
             self.router_client.delete_physical_router(physical_router_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="list_bgp_routers")
+                                 rules=["list_bgp_routers"])
     @decorators.idempotent_id('49bfb461-f99e-4585-b051-e20a3c937589')
     def test_list_bgp_routers(self):
         """test method for list bgp router objects"""
@@ -202,7 +202,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
             self.router_client.list_bgp_routers()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="create_bgp_routers")
+                                 rules=["create_bgp_routers"])
     @decorators.idempotent_id('7567974c-040e-4edd-b3a1-c633aa9651cb')
     def test_create_bgp_routers(self):
         """test method for create bgp router objects"""
@@ -212,7 +212,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
             self._create_bgp_router(routing_instance)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="show_bgp_router")
+                                 rules=["show_bgp_router"])
     @decorators.idempotent_id('0d3ad424-18c9-4d96-8708-fa1ebd45594b')
     def test_show_bgp_router(self):
         """test method for show bgp router objects"""
@@ -223,7 +223,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
             self.router_client.show_bgp_router(bgp_router_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="update_bgp_router")
+                                 rules=["update_bgp_router"])
     @decorators.idempotent_id('dc50e7c5-7614-4281-8a66-282c52f3c769')
     def test_update_bgp_router(self):
         """test method for update bgp router objects"""
@@ -237,7 +237,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
                 display_name=updated_fq_name)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="delete_bgp_router")
+                                 rules=["delete_bgp_router"])
     @decorators.idempotent_id('f14aee72-cad4-4c3e-8eea-7886a81abb24')
     def test_delete_bgp_router(self):
         """test method for delete bgp router objects"""
@@ -248,7 +248,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
             self.router_client.delete_bgp_router(bgp_router_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="list_global_vrouter_configs")
+                                 rules=["list_global_vrouter_configs"])
     @decorators.idempotent_id('4af768d1-3cbe-4aff-bcbc-0e045cac3277')
     def test_list_global_vrouter(self):
         """test method for list global vrouter config objects"""
@@ -256,7 +256,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
             self.router_client.list_global_vrouter_configs()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="create_global_vrouter_configs")
+                                 rules=["create_global_vrouter_configs"])
     @decorators.idempotent_id('e13d800f-9304-4a06-9bf1-ad08345a13a8')
     def test_create_global_vrouter(self):
         """test method for create global vrouter config objects"""
@@ -266,7 +266,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
             self._create_global_vrouter_config(global_system_config)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="show_global_vrouter_config")
+                                 rules=["show_global_vrouter_config"])
     @decorators.idempotent_id('3bb6f4e1-fd3f-4338-8392-f7f80974a80e')
     def test_show_global_vrouter_config(self):
         """test method for show global vrouter config objects"""
@@ -279,7 +279,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
                 global_vrouter_config_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="update_global_vrouter_config")
+                                 rules=["update_global_vrouter_config"])
     @decorators.idempotent_id('36fcdd51-c42b-4e67-8c26-73d4cde47507')
     def test_update_global_vrouter(self):
         """test method for update global vrouter config objects"""
@@ -295,7 +295,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
                 display_name=updated_fq_name)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="delete_global_vrouter_config")
+                                 rules=["delete_global_vrouter_config"])
     @decorators.idempotent_id('4f3d59e8-3dac-4346-9d13-5ebe5ad8f6cf')
     def test_delete_global_vrouter(self):
         """test method for delete global vrouter config objects"""
@@ -308,7 +308,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
                 global_vrouter_config_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="list_logical_routers")
+                                 rules=["list_logical_routers"])
     @decorators.idempotent_id('674bf3de-a9e5-45c2-921b-b89db73a2abe')
     def test_list_logical_routers(self):
         """test method for list logical router objects"""
@@ -316,7 +316,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
             self.router_client.list_logical_routers()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="create_logical_routers")
+                                 rules=["create_logical_routers"])
     @decorators.idempotent_id('610f051b-8eba-4d3a-ba43-91386bfc0e52')
     def test_create_logical_routers(self):
         """test method for create logical router objects"""
@@ -324,7 +324,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
             self._create_logical_router()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="show_logical_router")
+                                 rules=["show_logical_router"])
     @decorators.idempotent_id('992841d4-0d5d-4d85-b513-049b33e2a2e2')
     def test_show_logical_router(self):
         """test method for show logical router objects"""
@@ -333,7 +333,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
             self.router_client.show_logical_router(logical_router_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="update_logical_router")
+                                 rules=["update_logical_router"])
     @decorators.idempotent_id('518197bf-5233-4059-9021-5d7ecc74718e')
     def test_update_logical_router(self):
         """test method for update logical router objects"""
@@ -345,7 +345,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
                 display_name=updated_fq_name)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="delete_logical_router")
+                                 rules=["delete_logical_router"])
     @decorators.idempotent_id('70448b9c-4444-45e0-b307-7bff4dc075b1')
     def test_delete_logical_router(self):
         """test method for delete logical router objects"""
@@ -354,7 +354,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
             self.router_client.delete_logical_router(logical_router_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="list_virtual_routers")
+                                 rules=["list_virtual_routers"])
     @decorators.idempotent_id('604dc476-732e-4890-8665-a497360f5475')
     def test_list_virtual_routers(self):
         """test method for list virtual router objects"""
@@ -362,7 +362,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
             self.router_client.list_virtual_routers()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="create_virtual_routers")
+                                 rules=["create_virtual_routers"])
     @decorators.idempotent_id('114beb14-45c0-4714-a407-d160bb102022')
     def test_create_virtual_routers(self):
         """test method for create virtual router objects"""
@@ -372,7 +372,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
             self._create_virtual_router(global_system_config)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="show_virtual_router")
+                                 rules=["show_virtual_router"])
     @decorators.idempotent_id('258fe4e0-3e39-460f-aafa-e3b53c96e534')
     def test_show_virtual_router(self):
         """test method for show virtual router objects"""
@@ -384,7 +384,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
             self.router_client.show_virtual_router(virtual_router_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="update_virtual_router")
+                                 rules=["update_virtual_router"])
     @decorators.idempotent_id('d1c72191-2068-4552-a78f-038cdd4c9c1d')
     def test_update_virtual_router(self):
         """test method for update virtual router objects"""
@@ -399,7 +399,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
                 display_name=updated_fq_name)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="delete_virtual_router")
+                                 rules=["delete_virtual_router"])
     @decorators.idempotent_id('efbe25d6-8763-42d4-baf6-9f342e710144')
     def test_delete_virtual_router(self):
         """test method for delete virtual router objects"""

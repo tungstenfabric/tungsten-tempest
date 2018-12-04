@@ -70,7 +70,7 @@ class ContrailPortTupleTest(rbac_base.BaseContrailTest):
         return new_tuple
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="list_port_tuples")
+                                 rules=["list_port_tuples"])
     @decorators.idempotent_id('3789eef8-0e80-4057-b7b0-926655144beb')
     def test_list_port_tuples(self):
         """test method for list port tuple objects"""
@@ -78,7 +78,7 @@ class ContrailPortTupleTest(rbac_base.BaseContrailTest):
             self.port_tuple_client.list_port_tuples()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="show_port_tuple")
+                                 rules=["show_port_tuple"])
     @decorators.idempotent_id('ae5a90ed-5771-4680-be6b-c7626caa3a52')
     def test_show_port_tuple(self):
         """test method for show port tuple objects"""
@@ -87,7 +87,7 @@ class ContrailPortTupleTest(rbac_base.BaseContrailTest):
             self.port_tuple_client.show_port_tuple(new_tuple['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="create_port_tuples")
+                                 rules=["create_port_tuples"])
     @decorators.idempotent_id('0e2283da-fe25-4204-b5b3-fef3c200d0c8')
     def test_create_port_tuples(self):
         """test method for create port tuple objects"""
@@ -95,7 +95,7 @@ class ContrailPortTupleTest(rbac_base.BaseContrailTest):
             self._create_port_tuple()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="update_port_tuple")
+                                 rules=["update_port_tuple"])
     @decorators.idempotent_id('b16f19e2-ec8e-4107-961d-561890183dd0')
     def test_update_port_tuple(self):
         """test method for update port tuple objects"""
@@ -106,7 +106,7 @@ class ContrailPortTupleTest(rbac_base.BaseContrailTest):
                 new_tuple['uuid'], display_name=update_name)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="delete_port_tuple")
+                                 rules=["delete_port_tuple"])
     @decorators.idempotent_id('3f28e8b8-f9de-437f-a398-0a11c7fcd652')
     def test_delete_port_tuple(self):
         """test method for delete port tuple objects"""

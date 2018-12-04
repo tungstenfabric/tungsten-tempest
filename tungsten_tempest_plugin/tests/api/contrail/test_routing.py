@@ -58,7 +58,7 @@ class RoutingTest(rbac_base.BaseContrailTest):
         return new_instance
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="list_routing_instances")
+                                 rules=["list_routing_instances"])
     @decorators.idempotent_id('054c56ba-76b2-4161-a702-40301d8de085')
     def test_list_routing_instances(self):
         """test method for list routing instance objects"""
@@ -66,7 +66,7 @@ class RoutingTest(rbac_base.BaseContrailTest):
             self.routing_client.list_routing_instances()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="create_routing_instances")
+                                 rules=["create_routing_instances"])
     @decorators.idempotent_id('3d44a46b-5436-43a8-b2f7-8581f0f04dbc')
     def test_create_routing_instances(self):
         """test method for create routing instance objects"""
@@ -74,7 +74,7 @@ class RoutingTest(rbac_base.BaseContrailTest):
             self._create_routing_instances()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="show_routing_instance")
+                                 rules=["show_routing_instance"])
     @decorators.idempotent_id('161abb37-6037-422b-b453-108a5d10caca')
     def test_show_routing_instance(self):
         """test method for show routing instance objects"""
@@ -83,7 +83,7 @@ class RoutingTest(rbac_base.BaseContrailTest):
             self.routing_client.show_routing_instance(new_instance['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="delete_routing_instance")
+                                 rules=["delete_routing_instance"])
     @decorators.idempotent_id('1d3af01e-01bf-4347-a9bc-633732339e0e')
     def test_delete_routing_instance(self):
         """test method for delete routing instance objects"""
@@ -92,7 +92,7 @@ class RoutingTest(rbac_base.BaseContrailTest):
             self.routing_client.delete_routing_instance(new_instance['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="update_routing_instance")
+                                 rules=["update_routing_instance"])
     @decorators.idempotent_id('ebcfd442-2a26-4954-968b-e17e414ed0d1')
     def test_update_routing_instance(self):
         """test method for update routing instance objects"""

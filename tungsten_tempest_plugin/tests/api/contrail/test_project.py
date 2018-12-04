@@ -53,7 +53,7 @@ class ProjectContrailTest(rbac_base.BaseContrailTest):
         self.project_client.update_project(project_uuid, **put_body)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="list_projects")
+                                 rules=["list_projects"])
     @decorators.idempotent_id('7db819fd-ceee-4a6b-9ad7-2e837c055bdd')
     def test_list_projects(self):
         """test method for list project objects"""
@@ -61,7 +61,7 @@ class ProjectContrailTest(rbac_base.BaseContrailTest):
             self.project_client.list_projects()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="create_projects")
+                                 rules=["create_projects"])
     @decorators.idempotent_id('38b9b7a8-1568-417d-b0a3-e7adee88e4b9')
     def test_create_projects(self):
         """test method for create project objects"""
@@ -69,7 +69,7 @@ class ProjectContrailTest(rbac_base.BaseContrailTest):
             self._create_project()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="show_project")
+                                 rules=["show_project"])
     @decorators.idempotent_id('c47e57c4-34b0-46c2-a678-83b1fe9afd25')
     def test_show_project(self):
         """test method for show project objects"""
@@ -78,7 +78,7 @@ class ProjectContrailTest(rbac_base.BaseContrailTest):
             self.project_client.show_project(project_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="update_project")
+                                 rules=["update_project"])
     @decorators.idempotent_id('3d4bd416-16cc-437c-9e95-f9ceda424f8b')
     def test_update_project(self):
         """test method for update project objects"""
@@ -87,7 +87,7 @@ class ProjectContrailTest(rbac_base.BaseContrailTest):
             self._update_project(project_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="delete_project")
+                                 rules=["delete_project"])
     @decorators.idempotent_id('787ebe8b-b88d-4488-b157-f70554bdd783')
     def test_delete_project(self):
         """test method for delete project objects"""

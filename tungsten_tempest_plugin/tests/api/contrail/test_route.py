@@ -50,7 +50,7 @@ class ContrailRouteTableTest(rbac_base.BaseContrailTest):
         return route_table
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="list_route_tables")
+                                 rules=["list_route_tables"])
     @decorators.idempotent_id('ca5a5d42-6e49-40e4-a5ac-de07b397b775')
     def test_list_route_tables(self):
         """test method for list route table objects"""
@@ -59,7 +59,7 @@ class ContrailRouteTableTest(rbac_base.BaseContrailTest):
             self.route_client.list_route_tables()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="show_route_table")
+                                 rules=["show_route_table"])
     @decorators.idempotent_id('084a2759-991a-4ae2-bde4-8f9915966f6e')
     def test_show_route_table(self):
         """test method for show route table objects"""
@@ -68,7 +68,7 @@ class ContrailRouteTableTest(rbac_base.BaseContrailTest):
             self.route_client.show_route_table(route_table['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="create_route_tables")
+                                 rules=["create_route_tables"])
     @decorators.idempotent_id('3fab8105-c0be-4c9e-be5f-d2dce4deb921')
     def test_create_route_tables(self):
         """test method for create route table objects"""
@@ -76,7 +76,7 @@ class ContrailRouteTableTest(rbac_base.BaseContrailTest):
             self._create_route_tables()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="update_route_table")
+                                 rules=["update_route_table"])
     @decorators.idempotent_id('2acee7ad-843e-40b0-b8f8-a6d90a51c6c8')
     def test_update_route_table(self):
         """test method for update route table objects"""
@@ -88,7 +88,7 @@ class ContrailRouteTableTest(rbac_base.BaseContrailTest):
                 display_name=display_name)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="delete_route_table")
+                                 rules=["delete_route_table"])
     @decorators.idempotent_id('20a5086c-ec9a-43e0-ae2c-4161c0f4b280')
     def test_delete_route_table(self):
         """test method for delete route table objects"""
@@ -118,7 +118,7 @@ class ContrailInterfaceRouteTableTest(rbac_base.BaseContrailTest):
         return interface_route_table
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="list_interface_route_tables")
+                                 rules=["list_interface_route_tables"])
     @decorators.idempotent_id('b1f8f0a6-6074-4615-a439-19869a48bc49')
     def test_list_interface_route(self):
         """test method for list route interface table objects"""
@@ -127,7 +127,7 @@ class ContrailInterfaceRouteTableTest(rbac_base.BaseContrailTest):
             self.route_client.list_interface_route_tables()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="show_interface_route_table")
+                                 rules=["show_interface_route_table"])
     @decorators.idempotent_id('94703a28-5e33-4003-b95b-6a3cc5752fd4')
     def test_show_interface_route(self):
         """test method for show route interface table objects"""
@@ -137,7 +137,7 @@ class ContrailInterfaceRouteTableTest(rbac_base.BaseContrailTest):
                 interface_rte_table['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="create_interface_route_tables")
+                                 rules=["create_interface_route_tables"])
     @decorators.idempotent_id('b89ef437-4759-4c04-948b-d2ff9675ab07')
     def test_create_interface_route(self):
         """test method for create route interface table objects"""
@@ -145,7 +145,7 @@ class ContrailInterfaceRouteTableTest(rbac_base.BaseContrailTest):
             self._create_interface_route_tables()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="update_interface_route_table")
+                                 rules=["update_interface_route_table"])
     @decorators.idempotent_id('e9346d4f-7a07-41bc-8e88-e8ae9fa309ea')
     def test_update_interface_route(self):
         """test method for update route interface table objects"""
@@ -157,7 +157,7 @@ class ContrailInterfaceRouteTableTest(rbac_base.BaseContrailTest):
                 display_name=display_name)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="delete_interface_route_table")
+                                 rules=["delete_interface_route_table"])
     @decorators.idempotent_id('b00444a5-cb4c-45bc-b393-503e9e333e98')
     def test_delete_interface_route(self):
         """test method for delete route interface table objects"""
@@ -188,7 +188,7 @@ class ContrailRouteTargetsTest(rbac_base.BaseContrailTest):
         return route_target
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="list_route_targets")
+                                 rules=["list_route_targets"])
     @decorators.idempotent_id('757efd07-8027-4a16-887a-1e42f16b4140')
     def test_list_route_targets(self):
         """test method for list route target objects"""
@@ -197,7 +197,7 @@ class ContrailRouteTargetsTest(rbac_base.BaseContrailTest):
             self.route_client.list_route_targets()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="show_route_target")
+                                 rules=["show_route_target"])
     @decorators.idempotent_id('76c60d98-dd5e-453a-bf0e-7854f78a1a5e')
     def test_show_route_target(self):
         """test method for show route target objects"""
@@ -206,7 +206,7 @@ class ContrailRouteTargetsTest(rbac_base.BaseContrailTest):
             self.route_client.show_route_target(target['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="create_route_targets")
+                                 rules=["create_route_targets"])
     @decorators.idempotent_id('fcdb4ebc-b92d-49f2-88e9-68c93aec94be')
     def test_create_route_targets(self):
         """test method for create route target objects"""
@@ -214,7 +214,7 @@ class ContrailRouteTargetsTest(rbac_base.BaseContrailTest):
             self._create_route_targets()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="update_route_target")
+                                 rules=["update_route_target"])
     @decorators.idempotent_id('dd830a77-4bfe-4a8c-b4e9-08b6ef2af3be')
     def test_update_route_target(self):
         """test method for update route target objects"""
@@ -226,7 +226,7 @@ class ContrailRouteTargetsTest(rbac_base.BaseContrailTest):
                 display_name=display_name)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="delete_route_target")
+                                 rules=["delete_route_target"])
     @decorators.idempotent_id('dfaa58f9-ec29-4d51-a475-870fac08908d')
     def test_delete_route_target(self):
         """test method for delete route target objects"""
@@ -255,7 +255,7 @@ class ContrailRouteAggregateTest(rbac_base.BaseContrailTest):
         return route_aggr
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="list_route_aggregates")
+                                 rules=["list_route_aggregates"])
     @decorators.idempotent_id('15f2c30c-4404-4228-94a0-86c5ec5cf62e')
     def test_list_route_aggregates(self):
         """test method for list route aggregate objects"""
@@ -264,7 +264,7 @@ class ContrailRouteAggregateTest(rbac_base.BaseContrailTest):
             self.route_client.list_route_aggregates()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="show_route_aggregate")
+                                 rules=["show_route_aggregate"])
     @decorators.idempotent_id('c8edee30-81c4-44e2-8485-055bed853384')
     def test_show_route_aggregate(self):
         """test method for show route aggregate objects"""
@@ -274,7 +274,7 @@ class ContrailRouteAggregateTest(rbac_base.BaseContrailTest):
                 route_aggr['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="create_route_aggregates")
+                                 rules=["create_route_aggregates"])
     @decorators.idempotent_id('7553a54f-e41c-4555-b745-a858c5a70690')
     def test_create_route_aggregates(self):
         """test method for create route aggregate objects"""
@@ -282,7 +282,7 @@ class ContrailRouteAggregateTest(rbac_base.BaseContrailTest):
             self._create_route_aggregates()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="update_route_aggregate")
+                                 rules=["update_route_aggregate"])
     @decorators.idempotent_id('de1e6102-0bc6-4f9b-a354-48eb051ab5e4')
     def test_update_route_aggregate(self):
         """test method for update route aggregate objects"""
@@ -294,7 +294,7 @@ class ContrailRouteAggregateTest(rbac_base.BaseContrailTest):
                 display_name=display_name)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="delete_route_aggregate")
+                                 rules=["delete_route_aggregate"])
     @decorators.idempotent_id('e16dbdc6-d7cf-43c7-af9d-bd76cc220200')
     def test_delete_route_aggregate(self):
         """test method for delete route aggregate objects"""

@@ -54,7 +54,7 @@ class RoutingPolicyTest(rbac_base.BaseContrailTest):
                                                          **put_body)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="list_routing_policys")
+                                 rules=["list_routing_policys"])
     @decorators.idempotent_id('fe25a306-bc4f-42b3-91ca-38df01e35345')
     def test_list_routing_policys(self):
         """test method for list routing policy objects"""
@@ -62,7 +62,7 @@ class RoutingPolicyTest(rbac_base.BaseContrailTest):
             self.routing_policy_client.list_routing_policys()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="create_routing_policys")
+                                 rules=["create_routing_policys"])
     @decorators.idempotent_id('f8ca5e30-8bb3-410f-8618-8fdca70bda06')
     def test_create_routing_policys(self):
         """test method for create routing policy objects"""
@@ -70,7 +70,7 @@ class RoutingPolicyTest(rbac_base.BaseContrailTest):
             self._create_routing_policy()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="show_routing_policy")
+                                 rules=["show_routing_policy"])
     @decorators.idempotent_id('3421e84e-3e2a-452a-9a26-b2caf00b1cbc')
     def test_show_routing_policy(self):
         """test method for show routing policy objects"""
@@ -79,7 +79,7 @@ class RoutingPolicyTest(rbac_base.BaseContrailTest):
             self.routing_policy_client.show_routing_policy(policy_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="update_routing_policy")
+                                 rules=["update_routing_policy"])
     @decorators.idempotent_id('9fc1f44f-c8e2-4f5a-8239-e9b783f55d94')
     def test_update_routing_policy(self):
         """test method for update routing policy objects"""
@@ -88,7 +88,7 @@ class RoutingPolicyTest(rbac_base.BaseContrailTest):
             self._update_routing_policy(policy_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="delete_routing_policy")
+                                 rules=["delete_routing_policy"])
     @decorators.idempotent_id('24f1cd7a-2917-4b81-a0a3-a40ed2d40c7d')
     def test_delete_routing_policy(self):
         """test method for delete routing policy objects"""

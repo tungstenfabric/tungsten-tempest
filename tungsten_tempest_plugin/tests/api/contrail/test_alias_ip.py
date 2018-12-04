@@ -112,7 +112,7 @@ class AliasIPsTest(rbac_base.BaseContrailTest):
         return new_alias_ip
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="list_alias_ips")
+                                 rules=["list_alias_ips"])
     @decorators.idempotent_id('899d6824-0755-41ef-adef-03eb1858bcb0')
     def test_list_alias_ips(self):
         """test method for list alias IP"""
@@ -120,7 +120,7 @@ class AliasIPsTest(rbac_base.BaseContrailTest):
             self.alias_ip_client.list_alias_ips()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="create_alias_ips")
+                                 rules=["create_alias_ips"])
     @decorators.idempotent_id('bc9aae29-22a8-4eed-a31f-c0ded300e3a3')
     def test_create_alias_ips(self):
         """test method for create alias IP"""
@@ -129,7 +129,7 @@ class AliasIPsTest(rbac_base.BaseContrailTest):
             self._create_alias_ips(new_alias_ip_pool, '2.2.3.1')
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="show_alias_ip")
+                                 rules=["show_alias_ip"])
     @decorators.idempotent_id('d20318b1-c204-44e7-a44c-66f6a1fbe7a0')
     def test_show_alias_ip(self):
         """test method for show alias IP"""
@@ -140,7 +140,7 @@ class AliasIPsTest(rbac_base.BaseContrailTest):
                 new_alias_ip['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="update_alias_ip")
+                                 rules=["update_alias_ip"])
     @decorators.idempotent_id('c237b18f-d899-4b80-8e9b-068244a24612')
     def test_update_alias_ip(self):
         """test method for update alias IP"""
@@ -153,7 +153,7 @@ class AliasIPsTest(rbac_base.BaseContrailTest):
                 display_name=update_name)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="delete_alias_ip")
+                                 rules=["delete_alias_ip"])
     @decorators.idempotent_id('456c641c-9066-4125-8dec-d1529ad8f1ba')
     def test_delete_alias_ip(self):
         """test method for delete alias IP"""
@@ -164,7 +164,7 @@ class AliasIPsTest(rbac_base.BaseContrailTest):
                 new_alias_ip['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="list_alias_ip_pools")
+                                 rules=["list_alias_ip_pools"])
     @decorators.idempotent_id('ffe85f35-589a-4b90-a1d3-6aed92a85954')
     def test_list_alias_ip_pools(self):
         """est method for list alias IP pools"""
@@ -172,7 +172,7 @@ class AliasIPsTest(rbac_base.BaseContrailTest):
             self.alias_ip_client.list_alias_ip_pools()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="create_alias_ip_pools")
+                                 rules=["create_alias_ip_pools"])
     @decorators.idempotent_id('83abd2c0-d46a-4337-87d0-31cdb86e4226')
     def test_create_alias_ip_pools(self):
         """test method for create alias IP pool"""
@@ -180,7 +180,7 @@ class AliasIPsTest(rbac_base.BaseContrailTest):
             self._create_alias_ip_pools()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="show_alias_ip_pool")
+                                 rules=["show_alias_ip_pool"])
     @decorators.idempotent_id('a1cbe111-ccba-4fa4-ba59-7d1ee08a15db')
     def test_show_alias_ip_pool(self):
         """test method for show alias IP pool"""
@@ -190,7 +190,7 @@ class AliasIPsTest(rbac_base.BaseContrailTest):
                 new_alias_ip_pool['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="update_alias_ip_pool")
+                                 rules=["update_alias_ip_pool"])
     @decorators.idempotent_id('7f3448d7-22f1-4808-b3eb-15eeb3f079aa')
     def test_update_alias_ip_pool(self):
         """test method for update alias IP pool"""
@@ -202,7 +202,7 @@ class AliasIPsTest(rbac_base.BaseContrailTest):
                 display_name=update_name)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="delete_alias_ip_pool")
+                                 rules=["delete_alias_ip_pool"])
     @decorators.idempotent_id('f59ea4fb-d10f-40c8-a8fa-dcd948ca89c8')
     def test_delete_alias_ip_pool(self):
         """test method for delete alias IP pool"""

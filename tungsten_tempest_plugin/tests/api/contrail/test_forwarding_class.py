@@ -81,7 +81,7 @@ class ContrailForwardingClassTest(rbac_base.BaseContrailTest):
         return new_fclass
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="list_forwarding_classs")
+                                 rules=["list_forwarding_classs"])
     @decorators.idempotent_id('807a66fd-d4a4-472c-a13d-7ba590509e6e')
     def test_list_forwarding_classs(self):
         """test method for list forwarding classes objects"""
@@ -89,7 +89,7 @@ class ContrailForwardingClassTest(rbac_base.BaseContrailTest):
             self.forwarding_class_client.list_forwarding_classs()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="show_forwarding_class")
+                                 rules=["show_forwarding_class"])
     @decorators.idempotent_id('8ef21f71-72a4-4de9-af93-6e759aa463c0')
     def test_show_forwarding_class(self):
         """test method for show forwarding classes objects"""
@@ -105,7 +105,7 @@ class ContrailForwardingClassTest(rbac_base.BaseContrailTest):
                 new_fclass['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="create_forwarding_classs")
+                                 rules=["create_forwarding_classs"])
     @decorators.idempotent_id('d098859c-ad36-4385-8fb0-c00934a99b6f')
     def test_create_forwarding_classs(self):
         """test method for create forwarding classes objects"""
@@ -119,7 +119,7 @@ class ContrailForwardingClassTest(rbac_base.BaseContrailTest):
                                           global_qos_config)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="update_forwarding_class")
+                                 rules=["update_forwarding_class"])
     @decorators.idempotent_id('589dc03d-a25d-48be-9d9c-d3f92ff2cfc6')
     def test_update_forwarding_class(self):
         """test method for update forwarding classes objects"""
@@ -136,7 +136,7 @@ class ContrailForwardingClassTest(rbac_base.BaseContrailTest):
                 new_fclass['uuid'], display_name=update_name)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="delete_forwarding_class")
+                                 rules=["delete_forwarding_class"])
     @decorators.idempotent_id('a0348ffc-68c5-4d94-ba03-d08483503ced')
     def test_delete_forwarding_class(self):
         """test method for delete forwarding classes objects"""

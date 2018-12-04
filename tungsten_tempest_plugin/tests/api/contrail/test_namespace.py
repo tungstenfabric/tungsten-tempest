@@ -52,7 +52,7 @@ class NamespaceContrailTest(rbac_base.BaseContrailTest):
         self.namespace_client.update_namespace(namespace_uuid, **put_body)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="list_namespaces")
+                                 rules=["list_namespaces"])
     @decorators.idempotent_id('e436390d-d669-4047-9838-421ea93e94be')
     def test_list_namespaces(self):
         """test method for list namespace objects"""
@@ -60,7 +60,7 @@ class NamespaceContrailTest(rbac_base.BaseContrailTest):
             self.namespace_client.list_namespaces()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="create_namespaces")
+                                 rules=["create_namespaces"])
     @decorators.idempotent_id('503ae445-7e67-4db6-989a-af0b7f9a7e95')
     def test_create_namespaces(self):
         """test method for create namespace objects"""
@@ -68,7 +68,7 @@ class NamespaceContrailTest(rbac_base.BaseContrailTest):
             self._create_namespace()
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="show_namespace")
+                                 rules=["show_namespace"])
     @decorators.idempotent_id('f916971a-7c07-4386-b887-8b78d8a1e528')
     def test_show_namespace(self):
         """test method for show namespace objects"""
@@ -77,7 +77,7 @@ class NamespaceContrailTest(rbac_base.BaseContrailTest):
             self.namespace_client.show_namespace(namespace_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="update_namespace")
+                                 rules=["update_namespace"])
     @decorators.idempotent_id('3649f65a-922a-4b8a-9b8b-520c333e192e')
     def test_update_namespace(self):
         """test method for update namespace objects"""
@@ -86,7 +86,7 @@ class NamespaceContrailTest(rbac_base.BaseContrailTest):
             self._update_namespace(namespace_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules="delete_namespace")
+                                 rules=["delete_namespace"])
     @decorators.idempotent_id('80e736bf-fc7d-4274-8173-a50c883776a9')
     def test_delete_namespace(self):
         """test method for delete namespace objects"""
