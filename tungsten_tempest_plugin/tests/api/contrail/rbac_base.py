@@ -98,7 +98,7 @@ CONF = config.CONF
 LOG = logging.getLogger(__name__)
 
 
-class BaseContrailTest(test.BaseTestCase):
+class BaseContrailTest(rbac_utils.RbacUtilsMixin, test.BaseTestCase):
     """Base class for Contrail tests."""
     credentials = ['primary', 'admin']
 
@@ -115,17 +115,13 @@ class BaseContrailTest(test.BaseTestCase):
                 "%s skipped because tempest roles is not admin" % cls.__name__)
 
     @classmethod
-    def setup_credentials(cls):
-        super(BaseContrailTest, cls).setup_credentials()
-
-    @classmethod
     def setup_clients(cls):
         super(BaseContrailTest, cls).setup_clients()
         cls.auth_provider = cls.os_primary.auth_provider
         cls.admin_client = cls.os_admin.networks_client
         dscv = CONF.identity.disable_ssl_certificate_validation
         ca_certs = CONF.identity.ca_certificates_file
-        cls.rbac_utils = rbac_utils.RbacUtils(cls)
+        cls.setup_rbac_utils()
         cls.access_control_client = AccessControlClient(
             cls.auth_provider,
             CONF.sdn.catalog_type,
@@ -375,22 +371,6 @@ class BaseContrailTest(test.BaseTestCase):
     @classmethod
     def resource_setup(cls):
         cls.tenant_name = cls.os_primary.credentials.tenant_name
-        if CONF.auth.use_dynamic_credentials:
-            # Create a contrail project for tests
-            post_body = {
-                'parent_type': 'domain',
-                'fq_name': ['default-domain', cls.tenant_name]
-            }
-            resp_body = cls.project_client.create_projects(**post_body)
-            cls.project_uuid = resp_body['project']['uuid']
-
-    @classmethod
-    def resource_cleanup(cls):
-        if CONF.auth.use_dynamic_credentials:
-            cls._try_delete_resource(cls.project_client.delete_project,
-                                     cls.project_uuid)
-
-        super(BaseContrailTest, cls).resource_cleanup()
 
     @classmethod
     def _try_delete_resource(cls, delete_callable, *args, **kwargs):
