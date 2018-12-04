@@ -18,24 +18,19 @@ Tempest test-case to test analytics node objects using RBAC roles
 """
 
 from oslo_log import log as logging
-
-from tungsten_tempest_plugin.tests.api.contrail import rbac_base
-
 from patrole_tempest_plugin import rbac_rule_validation
-
 from tempest import config
 from tempest.lib.common.utils import data_utils
-from tempest.lib.decorators import idempotent_id
+from tempest.lib import decorators
+
+from tungsten_tempest_plugin.tests.api.contrail import rbac_base
 
 CONF = config.CONF
 LOG = logging.getLogger(__name__)
 
 
 class ContrailAnalyticsNodeTest(rbac_base.BaseContrailTest):
-
-    """
-    Test class to test analytics node objects using RBAC roles
-    """
+    """Test class to test analytics node objects using RBAC roles"""
 
     def _create_global_system_config(self):
         config_name = data_utils.rand_name('test-config')
@@ -67,21 +62,17 @@ class ContrailAnalyticsNodeTest(rbac_base.BaseContrailTest):
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="list_analytics_nodes")
-    @idempotent_id('d3002e37-4b42-446d-b144-1b53f0dadfd3')
+    @decorators.idempotent_id('d3002e37-4b42-446d-b144-1b53f0dadfd3')
     def test_list_analytics_nodes(self):
-        """
-        test method for list analytics nodes
-        """
+        """test method for list analytics nodes"""
         with self.rbac_utils.override_role(self):
             self.analytics_node_client.list_analytics_nodes()
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="show_analytics_node")
-    @idempotent_id('b51043fd-77ba-4312-b96f-569ed5153338')
+    @decorators.idempotent_id('b51043fd-77ba-4312-b96f-569ed5153338')
     def test_show_analytics_node(self):
-        """
-        test method for show analytics nodes
-        """
+        """test method for show analytics nodes"""
         # create global system config
         global_system_config = self._create_global_system_config()['name']
         new_node = self._create_analytics_node(global_system_config)
@@ -90,11 +81,9 @@ class ContrailAnalyticsNodeTest(rbac_base.BaseContrailTest):
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="create_analytics_nodes")
-    @idempotent_id('c57482c9-fcb4-4f41-95b0-7f0ffeee3dc3')
+    @decorators.idempotent_id('c57482c9-fcb4-4f41-95b0-7f0ffeee3dc3')
     def test_create_analytics_nodes(self):
-        """
-        test method for create analytics nodes
-        """
+        """test method for create analytics nodes"""
         # create global system config
         global_system_config = self._create_global_system_config()['name']
         with self.rbac_utils.override_role(self):
@@ -102,11 +91,9 @@ class ContrailAnalyticsNodeTest(rbac_base.BaseContrailTest):
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="update_analytics_node")
-    @idempotent_id('ff50a2df-6283-409e-ab03-c13b63acc8a0')
+    @decorators.idempotent_id('ff50a2df-6283-409e-ab03-c13b63acc8a0')
     def test_update_analytics_node(self):
-        """
-        test method for update analytics nodes
-        """
+        """test method for update analytics nodes"""
         # create global system config
         global_system_config = self._create_global_system_config()['name']
         new_node = self._create_analytics_node(global_system_config)
@@ -117,11 +104,9 @@ class ContrailAnalyticsNodeTest(rbac_base.BaseContrailTest):
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="delete_analytics_node")
-    @idempotent_id('972f997a-c89f-4227-8ae9-5a2335ec0b0a')
+    @decorators.idempotent_id('972f997a-c89f-4227-8ae9-5a2335ec0b0a')
     def test_delete_analytics_node(self):
-        """
-        test method for delete analytics nodes
-        """
+        """test method for delete analytics nodes"""
         # create global system config
         global_system_config = self._create_global_system_config()['name']
         new_node = self._create_analytics_node(global_system_config)

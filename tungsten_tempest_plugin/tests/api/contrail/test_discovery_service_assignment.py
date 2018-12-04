@@ -17,21 +17,19 @@
 Tempest test-case to test discovery service assignment objects using RBAC roles
 """
 
-from tungsten_tempest_plugin.tests.api.contrail import rbac_base
-
 from patrole_tempest_plugin import rbac_rule_validation
-
 from tempest import config
 from tempest.lib.common.utils import data_utils
-from tempest.lib.decorators import idempotent_id
+from tempest.lib import decorators
+
+from tungsten_tempest_plugin.tests.api.contrail import rbac_base
 
 CONF = config.CONF
 
 
 class DiscoveryServiceAssignmentTest(rbac_base.BaseContrailTest):
+    """Test class to test discovery service assignment objects using RBAC roles
 
-    """
-    Test class to test discovery service assignment objects using RBAC roles
     """
 
     def _create_discovery_service_assignments(self):
@@ -46,42 +44,34 @@ class DiscoveryServiceAssignmentTest(rbac_base.BaseContrailTest):
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="list_discovery_service_assignments")
-    @idempotent_id('9ac1e4ca-8983-403f-b644-7758935f2f36')
+    @decorators.idempotent_id('9ac1e4ca-8983-403f-b644-7758935f2f36')
     def test_list_discovery_service(self):
-        """
-        test method for list discovery service assignment objects
-        """
+        """test method for list discovery service assignment objects"""
         with self.rbac_utils.override_role(self):
             self.dsa_client.list_ds_assignments()
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="create_discovery_service_assignments")
-    @idempotent_id('40ad1208-a039-4809-8516-41b4dfcbd00c')
+    @decorators.idempotent_id('40ad1208-a039-4809-8516-41b4dfcbd00c')
     def test_create_discovery_service(self):
-        """
-        test method for create discovery service assignment objects
-        """
+        """test method for create discovery service assignment objects"""
         with self.rbac_utils.override_role(self):
             self._create_discovery_service_assignments()
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="show_discovery_service_assignment")
-    @idempotent_id('63660fe9-22b8-456c-a757-a7da1abfbce8')
+    @decorators.idempotent_id('63660fe9-22b8-456c-a757-a7da1abfbce8')
     def test_show_discovery_service(self):
-        """
-        test method for show discovery service assignment objects
-        """
+        """test method for show discovery service assignment objects"""
         new_dsa = self._create_discovery_service_assignments()
         with self.rbac_utils.override_role(self):
             self.dsa_client.show_ds_assignment(new_dsa['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="update_discovery_service_assignment")
-    @idempotent_id('71ce1404-965b-4670-abb7-5b6fea3b24b7')
+    @decorators.idempotent_id('71ce1404-965b-4670-abb7-5b6fea3b24b7')
     def test_update_discovery_service(self):
-        """
-        test method for update discovery service assignment objects
-        """
+        """test method for update discovery service assignment objects"""
         new_dsa = self._create_discovery_service_assignments()
         update_name = data_utils.rand_name('test')
         with self.rbac_utils.override_role(self):
@@ -92,11 +82,9 @@ class DiscoveryServiceAssignmentTest(rbac_base.BaseContrailTest):
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="delete_discovery_service_assignment")
-    @idempotent_id('e7ff845d-2140-4eb0-9720-26370459723b')
+    @decorators.idempotent_id('e7ff845d-2140-4eb0-9720-26370459723b')
     def test_delete_discovery_service(self):
-        """
-        test method for delete discovery service assignment objects
-        """
+        """test method for delete discovery service assignment objects"""
         new_dsa = self._create_discovery_service_assignments()
         with self.rbac_utils.override_role(self):
             self.dsa_client.delete_ds_assignment(

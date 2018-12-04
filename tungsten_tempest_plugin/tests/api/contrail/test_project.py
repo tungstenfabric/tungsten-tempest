@@ -18,24 +18,19 @@ Tempest test-case to test project objects using RBAC roles
 """
 
 from oslo_log import log as logging
-
-from tungsten_tempest_plugin.tests.api.contrail import rbac_base
-
 from patrole_tempest_plugin import rbac_rule_validation
-
 from tempest import config
 from tempest.lib.common.utils import data_utils
-from tempest.lib.decorators import idempotent_id
+from tempest.lib import decorators
+
+from tungsten_tempest_plugin.tests.api.contrail import rbac_base
 
 CONF = config.CONF
 LOG = logging.getLogger(__name__)
 
 
 class ProjectContrailTest(rbac_base.BaseContrailTest):
-
-    """
-    Test class to test project objects using RBAC roles
-    """
+    """Test class to test project objects using RBAC roles"""
 
     def _create_project(self):
         fq_name = data_utils.rand_name('project')
@@ -59,53 +54,43 @@ class ProjectContrailTest(rbac_base.BaseContrailTest):
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="list_projects")
-    @idempotent_id('7db819fd-ceee-4a6b-9ad7-2e837c055bdd')
+    @decorators.idempotent_id('7db819fd-ceee-4a6b-9ad7-2e837c055bdd')
     def test_list_projects(self):
-        """
-        test method for list project objects
-        """
+        """test method for list project objects"""
         with self.rbac_utils.override_role(self):
             self.project_client.list_projects()
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="create_projects")
-    @idempotent_id('38b9b7a8-1568-417d-b0a3-e7adee88e4b9')
+    @decorators.idempotent_id('38b9b7a8-1568-417d-b0a3-e7adee88e4b9')
     def test_create_projects(self):
-        """
-        test method for create project objects
-        """
+        """test method for create project objects"""
         with self.rbac_utils.override_role(self):
             self._create_project()
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="show_project")
-    @idempotent_id('c47e57c4-34b0-46c2-a678-83b1fe9afd25')
+    @decorators.idempotent_id('c47e57c4-34b0-46c2-a678-83b1fe9afd25')
     def test_show_project(self):
-        """
-        test method for show project objects
-        """
+        """test method for show project objects"""
         project_uuid = self._create_project()
         with self.rbac_utils.override_role(self):
             self.project_client.show_project(project_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="update_project")
-    @idempotent_id('3d4bd416-16cc-437c-9e95-f9ceda424f8b')
+    @decorators.idempotent_id('3d4bd416-16cc-437c-9e95-f9ceda424f8b')
     def test_update_project(self):
-        """
-        test method for update project objects
-        """
+        """test method for update project objects"""
         project_uuid = self._create_project()
         with self.rbac_utils.override_role(self):
             self._update_project(project_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="delete_project")
-    @idempotent_id('787ebe8b-b88d-4488-b157-f70554bdd783')
+    @decorators.idempotent_id('787ebe8b-b88d-4488-b157-f70554bdd783')
     def test_delete_project(self):
-        """
-        test method for delete project objects
-        """
+        """test method for delete project objects"""
         project_uuid = self._create_project()
         with self.rbac_utils.override_role(self):
             self.project_client.delete_project(project_uuid)

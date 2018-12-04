@@ -18,24 +18,19 @@ Tempest test-case to test database objects using RBAC roles
 """
 
 from oslo_log import log as logging
-
-from tungsten_tempest_plugin.tests.api.contrail import rbac_base
-
 from patrole_tempest_plugin import rbac_rule_validation
-
 from tempest import config
 from tempest.lib.common.utils import data_utils
-from tempest.lib.decorators import idempotent_id
+from tempest.lib import decorators
+
+from tungsten_tempest_plugin.tests.api.contrail import rbac_base
 
 CONF = config.CONF
 LOG = logging.getLogger(__name__)
 
 
 class ContrailDatabaseTest(rbac_base.BaseContrailTest):
-
-    """
-    Test class to test database objects using RBAC roles
-    """
+    """Test class to test database objects using RBAC roles"""
 
     def _create_global_system_config(self):
         config_name = data_utils.rand_name('test-config')
@@ -73,11 +68,9 @@ class ContrailDatabaseTest(rbac_base.BaseContrailTest):
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="list_database_nodes")
-    @idempotent_id('5ae6f965-6161-443f-b19e-dfa7b364c533')
+    @decorators.idempotent_id('5ae6f965-6161-443f-b19e-dfa7b364c533')
     def test_list_database_nodes(self):
-        """
-        test method for list database objects
-        """
+        """test method for list database objects"""
         # Create global system config
         global_system_config = self._create_global_system_config()['name']
         self._create_database_node(global_system_config)
@@ -86,11 +79,9 @@ class ContrailDatabaseTest(rbac_base.BaseContrailTest):
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="show_database_node")
-    @idempotent_id('4a07d9a8-7b99-43bd-b628-06c023993aab')
+    @decorators.idempotent_id('4a07d9a8-7b99-43bd-b628-06c023993aab')
     def test_show_database_node(self):
-        """
-        test method for show database objects
-        """
+        """test method for show database objects"""
         # Create global system config
         global_system_config = self._create_global_system_config()['name']
         db_node = self._create_database_node(global_system_config)
@@ -100,11 +91,9 @@ class ContrailDatabaseTest(rbac_base.BaseContrailTest):
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="create_database_nodes")
-    @idempotent_id('b9aa9c6b-9381-44f0-94fb-e4523bf2a87e')
+    @decorators.idempotent_id('b9aa9c6b-9381-44f0-94fb-e4523bf2a87e')
     def test_create_database_nodes(self):
-        """
-        test method for update database objects
-        """
+        """test method for update database objects"""
         # Create global system config
         global_system_config = self._create_global_system_config()['name']
         with self.rbac_utils.override_role(self):
@@ -112,11 +101,9 @@ class ContrailDatabaseTest(rbac_base.BaseContrailTest):
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="update_database_node")
-    @idempotent_id('6e59f393-0e55-4327-871e-7f0ad53f2e17')
+    @decorators.idempotent_id('6e59f393-0e55-4327-871e-7f0ad53f2e17')
     def test_update_database_node(self):
-        """
-        test method for update database objects
-        """
+        """test method for update database objects"""
         # Create global system config
         global_system_config = self._create_global_system_config()['name']
         db_node = self._create_database_node(global_system_config)
@@ -129,11 +116,9 @@ class ContrailDatabaseTest(rbac_base.BaseContrailTest):
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="delete_database_node")
-    @idempotent_id('0cbc5a52-d7e7-4a1c-a85d-6bf44012d99b')
+    @decorators.idempotent_id('0cbc5a52-d7e7-4a1c-a85d-6bf44012d99b')
     def test_delete_database_node(self):
-        """
-        test method for delete database objects
-        """
+        """test method for delete database objects"""
         # Create global system config
         global_system_config = self._create_global_system_config()['name']
         db_node = self._create_database_node(global_system_config)

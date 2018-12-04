@@ -17,22 +17,18 @@
 Tempest test-case to test service appliance using RBAC roles
 """
 
-from tungsten_tempest_plugin.tests.api.contrail import rbac_base
-
 from patrole_tempest_plugin import rbac_rule_validation
-
 from tempest import config
 from tempest.lib.common.utils import data_utils
-from tempest.lib.decorators import idempotent_id
+from tempest.lib import decorators
+
+from tungsten_tempest_plugin.tests.api.contrail import rbac_base
 
 CONF = config.CONF
 
 
 class ServiceAppliancesTest(rbac_base.BaseContrailTest):
-
-    """
-    Test class to test service appliances objects using RBAC roles
-    """
+    """Test class to test service appliances objects using RBAC roles"""
 
     def _create_global_system_config(self):
         config_name = data_utils.rand_name('test-config')
@@ -77,21 +73,17 @@ class ServiceAppliancesTest(rbac_base.BaseContrailTest):
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="list_service_appliances")
-    @idempotent_id('6b5fc17c-34e6-4d21-a53e-a0dfe69afd31')
+    @decorators.idempotent_id('6b5fc17c-34e6-4d21-a53e-a0dfe69afd31')
     def test_list_service_appliances(self):
-        """
-        test method for list service appliance objects
-        """
+        """test method for list service appliance objects"""
         with self.rbac_utils.override_role(self):
             self.service_appliances_client.list_service_appliances()
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="create_service_appliances")
-    @idempotent_id('0563c0c8-b986-466e-8540-aa8ad7a10367')
+    @decorators.idempotent_id('0563c0c8-b986-466e-8540-aa8ad7a10367')
     def test_create_service_appliances(self):
-        """
-        test method for create service appliance objects
-        """
+        """test method for create service appliance objects"""
         # Create global system config
         global_system_config = self._create_global_system_config()['name']
         new_set = \
@@ -101,11 +93,9 @@ class ServiceAppliancesTest(rbac_base.BaseContrailTest):
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="show_service_appliance")
-    @idempotent_id('ea30dcfe-8657-4a7d-9cf1-3176d334bf27')
+    @decorators.idempotent_id('ea30dcfe-8657-4a7d-9cf1-3176d334bf27')
     def test_show_service_appliance(self):
-        """
-        test method for show service appliance objects
-        """
+        """test method for show service appliance objects"""
         # Create global system config
         global_system_config = \
             self._create_global_system_config()['name']
@@ -118,11 +108,9 @@ class ServiceAppliancesTest(rbac_base.BaseContrailTest):
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="update_service_appliance")
-    @idempotent_id('a54ca33a-8590-4844-96d7-b96882b59e86')
+    @decorators.idempotent_id('a54ca33a-8590-4844-96d7-b96882b59e86')
     def test_update_service_appliance(self):
-        """
-        test method for update service appliance objects
-        """
+        """test method for update service appliance objects"""
         # Create global system config
         global_system_config = self._create_global_system_config()['name']
         new_set = \
@@ -136,11 +124,9 @@ class ServiceAppliancesTest(rbac_base.BaseContrailTest):
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="delete_service_appliance")
-    @idempotent_id('362deff5-7b72-4929-ba81-972cfcfa1309')
+    @decorators.idempotent_id('362deff5-7b72-4929-ba81-972cfcfa1309')
     def test_delete_service_appliance(self):
-        """
-        test method for delete service appliance objects
-        """
+        """test method for delete service appliance objects"""
         # Create global system config
         global_system_config = self._create_global_system_config()['name']
         new_set = \
@@ -152,21 +138,17 @@ class ServiceAppliancesTest(rbac_base.BaseContrailTest):
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="list_service_appliance_sets")
-    @idempotent_id('c1e74da9-00b6-4c88-adda-2ce49094e570')
+    @decorators.idempotent_id('c1e74da9-00b6-4c88-adda-2ce49094e570')
     def test_list_service_appl_sets(self):
-        """
-        test method for list service appliance sets objects
-        """
+        """test method for list service appliance sets objects"""
         with self.rbac_utils.override_role(self):
             self.service_appliances_client.list_service_appliance_sets()
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="create_service_appliance_sets")
-    @idempotent_id('eb00d6cf-590f-41bf-8ee4-5be625d9cb93')
+    @decorators.idempotent_id('eb00d6cf-590f-41bf-8ee4-5be625d9cb93')
     def test_create_service_appl_sets(self):
-        """
-        test method for create service appliance sets objects
-        """
+        """test method for create service appliance sets objects"""
         # Create global system config
         global_system_config = self._create_global_system_config()['name']
         with self.rbac_utils.override_role(self):
@@ -174,11 +156,9 @@ class ServiceAppliancesTest(rbac_base.BaseContrailTest):
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="show_service_appliance_set")
-    @idempotent_id('dd35dd04-e7d9-46bb-8f36-26835f122572')
+    @decorators.idempotent_id('dd35dd04-e7d9-46bb-8f36-26835f122572')
     def test_show_service_appl_set(self):
-        """
-        test method for show service appliance sets objects
-        """
+        """test method for show service appliance sets objects"""
         # Create global system config
         global_system_config = self._create_global_system_config()['name']
         new_set = self._create_service_appliance_sets(
@@ -189,11 +169,9 @@ class ServiceAppliancesTest(rbac_base.BaseContrailTest):
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="update_service_appliance_set")
-    @idempotent_id('952f063b-bc71-4f62-83b1-719bce5ad4ed')
+    @decorators.idempotent_id('952f063b-bc71-4f62-83b1-719bce5ad4ed')
     def test_update_service_appl_set(self):
-        """
-        test method for update service appliance sets objects
-        """
+        """test method for update service appliance sets objects"""
         # Create global system config
         global_system_config = self._create_global_system_config()['name']
         new_set = self._create_service_appliance_sets(
@@ -206,11 +184,9 @@ class ServiceAppliancesTest(rbac_base.BaseContrailTest):
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="delete_service_appliance_set")
-    @idempotent_id('7b56ce24-da1d-4565-bd22-c58dc57d7045')
+    @decorators.idempotent_id('7b56ce24-da1d-4565-bd22-c58dc57d7045')
     def test_delete_service_appl_set(self):
-        """
-        test method for delete service appliance sets objects
-        """
+        """test method for delete service appliance sets objects"""
         # Create global system config
         global_system_config = self._create_global_system_config()['name']
         new_set = self._create_service_appliance_sets(

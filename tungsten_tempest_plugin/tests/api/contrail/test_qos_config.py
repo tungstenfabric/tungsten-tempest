@@ -18,24 +18,19 @@ Tempest test-case to test QoS config objects using RBAC roles
 """
 
 from oslo_log import log as logging
-
-from tungsten_tempest_plugin.tests.api.contrail import rbac_base
-
 from patrole_tempest_plugin import rbac_rule_validation
-
 from tempest import config
 from tempest.lib.common.utils import data_utils
-from tempest.lib.decorators import idempotent_id
+from tempest.lib import decorators
+
+from tungsten_tempest_plugin.tests.api.contrail import rbac_base
 
 LOG = logging.getLogger(__name__)
 CONF = config.CONF
 
 
 class QosConfigContrailTest(rbac_base.BaseContrailTest):
-
-    """
-    Test class to test QoS config objects using RBAC roles
-    """
+    """Test class to test QoS config objects using RBAC roles"""
 
     def _delete_qos_config(self, qos_config_id):
         self.qos_client.delete_qos_config(qos_config_id)
@@ -54,54 +49,44 @@ class QosConfigContrailTest(rbac_base.BaseContrailTest):
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="list_qos_configs")
-    @idempotent_id('6bc44b34-14d4-4e0e-b45d-fe3df047879f')
+    @decorators.idempotent_id('6bc44b34-14d4-4e0e-b45d-fe3df047879f')
     def test_list_qos_configs(self):
-        """
-        test method for list QoS config objects
-        """
+        """test method for list QoS config objects"""
         self._create_qos_configs()
         with self.rbac_utils.override_role(self):
             self.qos_client.list_qos_configs()
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="create_qos_configs")
-    @idempotent_id('031b4a27-22cd-4d93-938d-ba6d0f3163ba')
+    @decorators.idempotent_id('031b4a27-22cd-4d93-938d-ba6d0f3163ba')
     def test_create_qos_configs(self):
-        """
-        test method for create QoS config objects
-        """
+        """test method for create QoS config objects"""
         with self.rbac_utils.override_role(self):
             self._create_qos_configs()
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="show_qos_config")
-    @idempotent_id('a9d82b49-3492-4667-b252-ef30b0ee6eb3')
+    @decorators.idempotent_id('a9d82b49-3492-4667-b252-ef30b0ee6eb3')
     def test_show_qos_config(self):
-        """
-        test method for show QoS config objects
-        """
+        """test method for show QoS config objects"""
         qos_config = self._create_qos_configs()
         with self.rbac_utils.override_role(self):
             self.qos_client.show_qos_config(qos_config['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="delete_qos_config")
-    @idempotent_id('d324a5e6-cc86-4444-91a2-74592283a7ec')
+    @decorators.idempotent_id('d324a5e6-cc86-4444-91a2-74592283a7ec')
     def test_delete_qos_config(self):
-        """
-        test method for delete QoS config objects
-        """
+        """test method for delete QoS config objects"""
         qos_config = self._create_qos_configs()
         with self.rbac_utils.override_role(self):
             self.qos_client.delete_qos_config(qos_config['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="update_qos_config")
-    @idempotent_id('7f1901a5-0cf0-40bd-98a5-f8a930b11cfe')
+    @decorators.idempotent_id('7f1901a5-0cf0-40bd-98a5-f8a930b11cfe')
     def test_update_qos_config(self):
-        """
-        test method for update QoS config objects
-        """
+        """test method for update QoS config objects"""
         qos_config = self._create_qos_configs()
         display_name = data_utils.rand_name('qos_config')
         with self.rbac_utils.override_role(self):

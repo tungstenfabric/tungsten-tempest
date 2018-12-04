@@ -18,24 +18,19 @@ Tempest test-case to test subnet objects using RBAC roles
 """
 
 from oslo_log import log as logging
-
-from tungsten_tempest_plugin.tests.api.contrail import rbac_base
-
 from patrole_tempest_plugin import rbac_rule_validation
-
 from tempest import config
 from tempest.lib.common.utils import data_utils
-from tempest.lib.decorators import idempotent_id
+from tempest.lib import decorators
+
+from tungsten_tempest_plugin.tests.api.contrail import rbac_base
 
 CONF = config.CONF
 LOG = logging.getLogger(__name__)
 
 
 class SubnetContrailTest(rbac_base.BaseContrailTest):
-
-    """
-    Test class to test subnet objects using RBAC roles
-    """
+    """Test class to test subnet objects using RBAC roles"""
 
     def _create_subnet(self):
         post_body = {
@@ -57,53 +52,43 @@ class SubnetContrailTest(rbac_base.BaseContrailTest):
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="list_subnets")
-    @idempotent_id('ddd1d9ae-cf2f-4a74-98ba-b0f481f27977')
+    @decorators.idempotent_id('ddd1d9ae-cf2f-4a74-98ba-b0f481f27977')
     def test_list_subnets(self):
-        """
-        test method for list subnet objects
-        """
+        """test method for list subnet objects"""
         with self.rbac_utils.override_role(self):
             self.subnet_client.list_subnets()
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="create_subnets")
-    @idempotent_id('ee0cb904-d162-44a4-b7b0-a7451f667ed5')
+    @decorators.idempotent_id('ee0cb904-d162-44a4-b7b0-a7451f667ed5')
     def test_create_subnets(self):
-        """
-        test method for create subnet objects
-        """
+        """test method for create subnet objects"""
         with self.rbac_utils.override_role(self):
             self._create_subnet()
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="show_subnet")
-    @idempotent_id('994618f2-5b40-460c-a6a8-6479bc15bf80')
+    @decorators.idempotent_id('994618f2-5b40-460c-a6a8-6479bc15bf80')
     def test_show_subnet(self):
-        """
-        test method for show subnet objects
-        """
+        """test method for show subnet objects"""
         subnet_uuid = self._create_subnet()
         with self.rbac_utils.override_role(self):
             self.subnet_client.show_subnet(subnet_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="update_subnet")
-    @idempotent_id('565e44c9-eb9b-4ae6-9ebb-db422a9751ee')
+    @decorators.idempotent_id('565e44c9-eb9b-4ae6-9ebb-db422a9751ee')
     def test_update_subnet(self):
-        """
-        test method for update subnet objects
-        """
+        """test method for update subnet objects"""
         subnet_uuid = self._create_subnet()
         with self.rbac_utils.override_role(self):
             self._update_subnet(subnet_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="delete_subnet")
-    @idempotent_id('a733b913-7a88-45d9-ac0a-d858fa3dc662')
+    @decorators.idempotent_id('a733b913-7a88-45d9-ac0a-d858fa3dc662')
     def test_delete_subnet(self):
-        """
-        test method for delete subnet objects
-        """
+        """test method for delete subnet objects"""
         subnet_uuid = self._create_subnet()
         with self.rbac_utils.override_role(self):
             self.subnet_client.delete_subnet(subnet_uuid)

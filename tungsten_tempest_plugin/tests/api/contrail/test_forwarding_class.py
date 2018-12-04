@@ -18,24 +18,19 @@ Tempest test-case to test forwarding class objects using RBAC roles
 """
 
 from oslo_log import log as logging
-
-from tungsten_tempest_plugin.tests.api.contrail import rbac_base
-
 from patrole_tempest_plugin import rbac_rule_validation
-
 from tempest import config
 from tempest.lib.common.utils import data_utils
-from tempest.lib.decorators import idempotent_id
+from tempest.lib import decorators
+
+from tungsten_tempest_plugin.tests.api.contrail import rbac_base
 
 CONF = config.CONF
 LOG = logging.getLogger(__name__)
 
 
 class ContrailForwardingClassTest(rbac_base.BaseContrailTest):
-
-    """
-    Test class to test Forwarding class objects using RBAC roles
-    """
+    """Test class to test Forwarding class objects using RBAC roles"""
 
     def _create_global_system_config(self):
         config_name = data_utils.rand_name('test-config')
@@ -87,21 +82,17 @@ class ContrailForwardingClassTest(rbac_base.BaseContrailTest):
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="list_forwarding_classs")
-    @idempotent_id('807a66fd-d4a4-472c-a13d-7ba590509e6e')
+    @decorators.idempotent_id('807a66fd-d4a4-472c-a13d-7ba590509e6e')
     def test_list_forwarding_classs(self):
-        """
-        test method for list forwarding classes objects
-        """
+        """test method for list forwarding classes objects"""
         with self.rbac_utils.override_role(self):
             self.forwarding_class_client.list_forwarding_classs()
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="show_forwarding_class")
-    @idempotent_id('8ef21f71-72a4-4de9-af93-6e759aa463c0')
+    @decorators.idempotent_id('8ef21f71-72a4-4de9-af93-6e759aa463c0')
     def test_show_forwarding_class(self):
-        """
-        test method for show forwarding classes objects
-        """
+        """test method for show forwarding classes objects"""
         # Create global system config
         global_system_config = self._create_global_system_config()['name']
         # Create a global qos config
@@ -115,11 +106,9 @@ class ContrailForwardingClassTest(rbac_base.BaseContrailTest):
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="create_forwarding_classs")
-    @idempotent_id('d098859c-ad36-4385-8fb0-c00934a99b6f')
+    @decorators.idempotent_id('d098859c-ad36-4385-8fb0-c00934a99b6f')
     def test_create_forwarding_classs(self):
-        """
-        test method for create forwarding classes objects
-        """
+        """test method for create forwarding classes objects"""
         # Create global system config
         global_system_config = self._create_global_system_config()['name']
         # Create a global qos config
@@ -131,11 +120,9 @@ class ContrailForwardingClassTest(rbac_base.BaseContrailTest):
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="update_forwarding_class")
-    @idempotent_id('589dc03d-a25d-48be-9d9c-d3f92ff2cfc6')
+    @decorators.idempotent_id('589dc03d-a25d-48be-9d9c-d3f92ff2cfc6')
     def test_update_forwarding_class(self):
-        """
-        test method for update forwarding classes objects
-        """
+        """test method for update forwarding classes objects"""
         # Create global system config
         global_system_config = self._create_global_system_config()['name']
         # Create a global qos config
@@ -150,11 +137,9 @@ class ContrailForwardingClassTest(rbac_base.BaseContrailTest):
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="delete_forwarding_class")
-    @idempotent_id('a0348ffc-68c5-4d94-ba03-d08483503ced')
+    @decorators.idempotent_id('a0348ffc-68c5-4d94-ba03-d08483503ced')
     def test_delete_forwarding_class(self):
-        """
-        test method for delete forwarding classes objects
-        """
+        """test method for delete forwarding classes objects"""
         # Create global system config
         global_system_config = self._create_global_system_config()['name']
         # Create a global qos config

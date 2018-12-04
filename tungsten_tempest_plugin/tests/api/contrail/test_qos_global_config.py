@@ -18,24 +18,19 @@ Tempest test-case to test QoS config objects using RBAC roles
 """
 
 from oslo_log import log as logging
-
-from tungsten_tempest_plugin.tests.api.contrail import rbac_base
-
 from patrole_tempest_plugin import rbac_rule_validation
-
 from tempest import config
 from tempest.lib.common.utils import data_utils
-from tempest.lib.decorators import idempotent_id
+from tempest.lib import decorators
+
+from tungsten_tempest_plugin.tests.api.contrail import rbac_base
 
 LOG = logging.getLogger(__name__)
 CONF = config.CONF
 
 
 class QosContrailTest(rbac_base.BaseContrailTest):
-
-    """
-    Test class to test QoS Config objects using RBAC roles
-    """
+    """Test class to test QoS Config objects using RBAC roles"""
 
     @classmethod
     def resource_setup(cls):
@@ -74,11 +69,9 @@ class QosContrailTest(rbac_base.BaseContrailTest):
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="list_global_qos_configs")
-    @idempotent_id('74e5a7b7-f538-4be3-90a5-6862b07fb118')
+    @decorators.idempotent_id('74e5a7b7-f538-4be3-90a5-6862b07fb118')
     def test_list_global_qos_configs(self):
-        """
-        test method for list global QoS objects
-        """
+        """test method for list global QoS objects"""
         # Create global system config
         global_system_config = self._create_global_system_config()['name']
         self._create_qos_global_configs(global_system_config)
@@ -87,11 +80,9 @@ class QosContrailTest(rbac_base.BaseContrailTest):
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="create_global_qos_configs")
-    @idempotent_id('d7da1ca0-7bf7-4d1b-982c-820cd37fe9fa')
+    @decorators.idempotent_id('d7da1ca0-7bf7-4d1b-982c-820cd37fe9fa')
     def test_create_global_qos_configs(self):
-        """
-        test method for create global QoS objects
-        """
+        """test method for create global QoS objects"""
         # Create global system config
         global_system_config = self._create_global_system_config()['name']
         with self.rbac_utils.override_role(self):
@@ -99,11 +90,9 @@ class QosContrailTest(rbac_base.BaseContrailTest):
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="show_global_qos_config")
-    @idempotent_id('e3bd44e0-19a9-46e7-83d3-268dcc537ad9')
+    @decorators.idempotent_id('e3bd44e0-19a9-46e7-83d3-268dcc537ad9')
     def test_show_global_qos_config(self):
-        """
-        test method for show global QoS objects
-        """
+        """test method for show global QoS objects"""
         # Create global system config
         global_system_config = self._create_global_system_config()['name']
         test = self._create_qos_global_configs(global_system_config)
@@ -112,11 +101,9 @@ class QosContrailTest(rbac_base.BaseContrailTest):
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="update_global_qos_config")
-    @idempotent_id('f834c4d7-bc81-4c59-bada-c4d752219a6e')
+    @decorators.idempotent_id('f834c4d7-bc81-4c59-bada-c4d752219a6e')
     def test_update_global_qos_config(self):
-        """
-        test method for update global QoS objects
-        """
+        """test method for update global QoS objects"""
         # Create global system config
         global_system_config = self._create_global_system_config()['name']
         qos = self._create_qos_global_configs(global_system_config)
@@ -128,11 +115,9 @@ class QosContrailTest(rbac_base.BaseContrailTest):
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="delete_global_qos_config")
-    @idempotent_id('78b9a3da-4eb1-4f4b-8a23-a8a2e733b515')
+    @decorators.idempotent_id('78b9a3da-4eb1-4f4b-8a23-a8a2e733b515')
     def test_delete_global_qos_config(self):
-        """
-        test method for delete global QoS objects
-        """
+        """test method for delete global QoS objects"""
         # Create global system config
         global_system_config = self._create_global_system_config()['name']
         qos_global_config = self._create_qos_global_configs(

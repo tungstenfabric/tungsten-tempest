@@ -18,24 +18,19 @@ Tempest test-case to test virtual machines objects using RBAC roles
 """
 
 from oslo_log import log as logging
-
-from tungsten_tempest_plugin.tests.api.contrail import rbac_base
-
 from patrole_tempest_plugin import rbac_rule_validation
-
 from tempest import config
 from tempest.lib.common.utils import data_utils
-from tempest.lib.decorators import idempotent_id
+from tempest.lib import decorators
+
+from tungsten_tempest_plugin.tests.api.contrail import rbac_base
 
 LOG = logging.getLogger(__name__)
 CONF = config.CONF
 
 
 class VMContrailTest(rbac_base.BaseContrailTest):
-
-    """
-    Test class to test vm objects using RBAC roles
-    """
+    """Test class to test vm objects using RBAC roles"""
 
     @classmethod
     def resource_setup(cls):
@@ -65,10 +60,10 @@ class VMContrailTest(rbac_base.BaseContrailTest):
                              'uuid': cls.ipam['uuid'],
                              'attr': {
                                  'ipam_subnets': [{'subnet': subnet_ip_prefix}]
-                                 }
                              }
-                         ]
-                    }
+                         }
+                     ]
+                     }
         body = cls.vn_client.create_virtual_networks(**post_body)
         cls.network = body['virtual-network']
 
@@ -105,54 +100,44 @@ class VMContrailTest(rbac_base.BaseContrailTest):
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="list_virtual_machine_interfaces")
-    @idempotent_id('e27d1fae-7324-4ef3-87b1-e7f519b1e2a7')
+    @decorators.idempotent_id('e27d1fae-7324-4ef3-87b1-e7f519b1e2a7')
     def test_list_vm_interfaces(self):
-        """
-        test method for list vm interfaces objects
-        """
+        """test method for list vm interfaces objects"""
         self._create_virual_machine_interface()
         with self.rbac_utils.override_role(self):
             self.vm_client.list_virtual_machine_interfaces()
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="create_virtual_machine_interfaces")
-    @idempotent_id('d8a3a524-d61b-4bcb-8146-c5d4f308df8e')
+    @decorators.idempotent_id('d8a3a524-d61b-4bcb-8146-c5d4f308df8e')
     def test_add_vm_interfaces(self):
-        """
-        test method for add vm interfaces objects
-        """
+        """test method for add vm interfaces objects"""
         with self.rbac_utils.override_role(self):
             self._create_virual_machine_interface()
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="show_virtual_machine_interface")
-    @idempotent_id('3f17125a-9060-4c4a-a23f-0fe2aba2ccef')
+    @decorators.idempotent_id('3f17125a-9060-4c4a-a23f-0fe2aba2ccef')
     def test_show_vm_interface(self):
-        """
-        test method for show vm interfaces objects
-        """
+        """test method for show vm interfaces objects"""
         test = self._create_virual_machine_interface()
         with self.rbac_utils.override_role(self):
             self.vm_client.show_virtual_machine_interface(test['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="delete_virtual_machine_interface")
-    @idempotent_id('ce7f9471-ba1b-40d2-94f1-bdd0c610e22f')
+    @decorators.idempotent_id('ce7f9471-ba1b-40d2-94f1-bdd0c610e22f')
     def test_delete_vm_interface(self):
-        """
-        test method for delete vm interfaces objects
-        """
+        """test method for delete vm interfaces objects"""
         body = self._create_virual_machine_interface()
         with self.rbac_utils.override_role(self):
             self.vm_client.delete_vm_interface(body['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="update_virtual_machine_interface")
-    @idempotent_id('7ca3046a-6245-4c15-914b-5a8ecdbeee11')
+    @decorators.idempotent_id('7ca3046a-6245-4c15-914b-5a8ecdbeee11')
     def test_update_vm_interface(self):
-        """
-        test method for update vm interfaces objects
-        """
+        """test method for update vm interfaces objects"""
         virtual_machine = self._create_virual_machine_interface()
         display_name = data_utils.rand_name('new-vitual-machine-inf-name')
         with self.rbac_utils.override_role(self):

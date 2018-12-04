@@ -18,24 +18,19 @@ Tempest test-case to test port tuple objects using RBAC roles
 """
 
 from oslo_log import log as logging
-
-from tungsten_tempest_plugin.tests.api.contrail import rbac_base
-
 from patrole_tempest_plugin import rbac_rule_validation
-
 from tempest import config
 from tempest.lib.common.utils import data_utils
-from tempest.lib.decorators import idempotent_id
+from tempest.lib import decorators
+
+from tungsten_tempest_plugin.tests.api.contrail import rbac_base
 
 CONF = config.CONF
 LOG = logging.getLogger(__name__)
 
 
 class ContrailPortTupleTest(rbac_base.BaseContrailTest):
-
-    """
-    Test class to test port tuple objects using RBAC roles
-    """
+    """Test class to test port tuple objects using RBAC roles"""
 
     @classmethod
     def resource_setup(cls):
@@ -76,42 +71,34 @@ class ContrailPortTupleTest(rbac_base.BaseContrailTest):
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="list_port_tuples")
-    @idempotent_id('3789eef8-0e80-4057-b7b0-926655144beb')
+    @decorators.idempotent_id('3789eef8-0e80-4057-b7b0-926655144beb')
     def test_list_port_tuples(self):
-        """
-        test method for list port tuple objects
-        """
+        """test method for list port tuple objects"""
         with self.rbac_utils.override_role(self):
             self.port_tuple_client.list_port_tuples()
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="show_port_tuple")
-    @idempotent_id('ae5a90ed-5771-4680-be6b-c7626caa3a52')
+    @decorators.idempotent_id('ae5a90ed-5771-4680-be6b-c7626caa3a52')
     def test_show_port_tuple(self):
-        """
-        test method for show port tuple objects
-        """
+        """test method for show port tuple objects"""
         new_tuple = self._create_port_tuple()
         with self.rbac_utils.override_role(self):
             self.port_tuple_client.show_port_tuple(new_tuple['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="create_port_tuples")
-    @idempotent_id('0e2283da-fe25-4204-b5b3-fef3c200d0c8')
+    @decorators.idempotent_id('0e2283da-fe25-4204-b5b3-fef3c200d0c8')
     def test_create_port_tuples(self):
-        """
-        test method for create port tuple objects
-        """
+        """test method for create port tuple objects"""
         with self.rbac_utils.override_role(self):
             self._create_port_tuple()
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="update_port_tuple")
-    @idempotent_id('b16f19e2-ec8e-4107-961d-561890183dd0')
+    @decorators.idempotent_id('b16f19e2-ec8e-4107-961d-561890183dd0')
     def test_update_port_tuple(self):
-        """
-        test method for update port tuple objects
-        """
+        """test method for update port tuple objects"""
         new_tuple = self._create_port_tuple()
         update_name = data_utils.rand_name('updated_tuple')
         with self.rbac_utils.override_role(self):
@@ -120,11 +107,9 @@ class ContrailPortTupleTest(rbac_base.BaseContrailTest):
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="delete_port_tuple")
-    @idempotent_id('3f28e8b8-f9de-437f-a398-0a11c7fcd652')
+    @decorators.idempotent_id('3f28e8b8-f9de-437f-a398-0a11c7fcd652')
     def test_delete_port_tuple(self):
-        """
-        test method for delete port tuple objects
-        """
+        """test method for delete port tuple objects"""
         new_tuple = self._create_port_tuple()
         with self.rbac_utils.override_role(self):
             self.port_tuple_client.delete_port_tuple(new_tuple['uuid'])

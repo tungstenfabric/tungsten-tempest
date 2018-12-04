@@ -18,24 +18,19 @@ Tempest test-case to test Alarms object using RBAC roles
 """
 
 from oslo_log import log as logging
-
-from tungsten_tempest_plugin.tests.api.contrail import rbac_base
-
 from patrole_tempest_plugin import rbac_rule_validation
-
 from tempest import config
 from tempest.lib.common.utils import data_utils
-from tempest.lib.decorators import idempotent_id
+from tempest.lib import decorators
+
+from tungsten_tempest_plugin.tests.api.contrail import rbac_base
 
 CONF = config.CONF
 LOG = logging.getLogger(__name__)
 
 
 class AlarmContrailTest(rbac_base.BaseContrailTest):
-
-    """
-    Test class to test Alarm objects using RBAC roles
-    """
+    """Test class to test Alarm objects using RBAC roles"""
 
     def _create_global_system_config(self):
         config_name = data_utils.rand_name('test-config')
@@ -89,21 +84,17 @@ class AlarmContrailTest(rbac_base.BaseContrailTest):
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="list_alarms")
-    @idempotent_id('dc7d19dd-dd5e-4ec8-bf0c-c6d9d83a60a8')
+    @decorators.idempotent_id('dc7d19dd-dd5e-4ec8-bf0c-c6d9d83a60a8')
     def test_list_alarms(self):
-        """
-        test method for list alarms
-        """
+        """test method for list alarms"""
         with self.rbac_utils.override_role(self):
             self.alarm_client.list_alarms()
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="create_alarms")
-    @idempotent_id('7fe55d0c-e54a-4bb7-95a6-9c53f9e9c4bf')
+    @decorators.idempotent_id('7fe55d0c-e54a-4bb7-95a6-9c53f9e9c4bf')
     def test_create_alarms(self):
-        """
-        test method for create alarms
-        """
+        """test method for create alarms"""
         # Create global system config
         global_system_config = self._create_global_system_config()['name']
         with self.rbac_utils.override_role(self):
@@ -111,11 +102,9 @@ class AlarmContrailTest(rbac_base.BaseContrailTest):
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="show_alarm")
-    @idempotent_id('ab0ccbe4-7bfe-4176-890a-d438ee04290d')
+    @decorators.idempotent_id('ab0ccbe4-7bfe-4176-890a-d438ee04290d')
     def test_show_alarm(self):
-        """
-        test method for show alarms
-        """
+        """test method for show alarms"""
         # Create global system config
         global_system_config = self._create_global_system_config()['name']
         alarm_uuid = self._create_alarm(global_system_config)
@@ -124,11 +113,9 @@ class AlarmContrailTest(rbac_base.BaseContrailTest):
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="update_alarm")
-    @idempotent_id('ab331cca-ee53-4106-9b30-7319bfb1bea7')
+    @decorators.idempotent_id('ab331cca-ee53-4106-9b30-7319bfb1bea7')
     def test_update_alarm(self):
-        """
-        test method for update alarms
-        """
+        """test method for update alarms"""
         # Create global system config
         global_system_config = self._create_global_system_config()['name']
         alarm_uuid = self._create_alarm(global_system_config)
@@ -137,11 +124,9 @@ class AlarmContrailTest(rbac_base.BaseContrailTest):
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="delete_alarm")
-    @idempotent_id('84fadb14-77c0-4f21-b5b2-1da7a2fd27e6')
+    @decorators.idempotent_id('84fadb14-77c0-4f21-b5b2-1da7a2fd27e6')
     def test_delete_alarm(self):
-        """
-        test method for delete alarms
-        """
+        """test method for delete alarms"""
         # Create global system config
         global_system_config = self._create_global_system_config()['name']
         alarm_uuid = self._create_alarm(global_system_config)

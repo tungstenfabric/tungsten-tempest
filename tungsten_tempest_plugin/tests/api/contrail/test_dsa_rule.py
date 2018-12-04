@@ -18,24 +18,19 @@ Tempest test-case to test dsa rules objects using RBAC roles
 """
 
 from oslo_log import log as logging
-
-from tungsten_tempest_plugin.tests.api.contrail import rbac_base
-
 from patrole_tempest_plugin import rbac_rule_validation
-
 from tempest import config
 from tempest.lib.common.utils import data_utils
-from tempest.lib.decorators import idempotent_id
+from tempest.lib import decorators
+
+from tungsten_tempest_plugin.tests.api.contrail import rbac_base
 
 CONF = config.CONF
 LOG = logging.getLogger(__name__)
 
 
 class ContrailDSARuleTest(rbac_base.BaseContrailTest):
-
-    """
-    Test class to test DSA rule objects using RBAC roles
-    """
+    """Test class to test DSA rule objects using RBAC roles"""
 
     def _create_discovery_service_assignments(self):
         dsa_name = [data_utils.rand_name('test-dsa')]
@@ -62,21 +57,17 @@ class ContrailDSARuleTest(rbac_base.BaseContrailTest):
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="list_dsa_rules")
-    @idempotent_id('3227673b-96fc-4d26-ab0b-109347e9e9c2')
+    @decorators.idempotent_id('3227673b-96fc-4d26-ab0b-109347e9e9c2')
     def test_list_dsa_rules(self):
-        """
-        test method for list dsa rules objects
-        """
+        """test method for list dsa rules objects"""
         with self.rbac_utils.override_role(self):
             self.dsa_rule_client.list_dsa_rules()
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="show_dsa_rule")
-    @idempotent_id('0f90ea4f-c050-4c31-93a7-1e0c58df914e')
+    @decorators.idempotent_id('0f90ea4f-c050-4c31-93a7-1e0c58df914e')
     def test_show_dsa_rule(self):
-        """
-        test method for show dsa rules objects
-        """
+        """test method for show dsa rules objects"""
         # create discover service assignment
         discovery_service_assignment = \
             self._create_discovery_service_assignments()['name']
@@ -86,11 +77,9 @@ class ContrailDSARuleTest(rbac_base.BaseContrailTest):
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="create_dsa_rules")
-    @idempotent_id('c3774ca3-45d0-4ca8-a6b3-f895441b1d0e')
+    @decorators.idempotent_id('c3774ca3-45d0-4ca8-a6b3-f895441b1d0e')
     def test_create_dsa_rules(self):
-        """
-        test method for create dsa rules objects
-        """
+        """test method for create dsa rules objects"""
         # create discover service assignment
         discovery_service_assignment = \
             self._create_discovery_service_assignments()['name']
@@ -99,11 +88,9 @@ class ContrailDSARuleTest(rbac_base.BaseContrailTest):
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="update_dsa_rule")
-    @idempotent_id('5cfe7e8e-d91c-4183-8e6c-733e826707be')
+    @decorators.idempotent_id('5cfe7e8e-d91c-4183-8e6c-733e826707be')
     def test_update_dsa_rule(self):
-        """
-        test method for update dsa rules objects
-        """
+        """test method for update dsa rules objects"""
         # create discover service assignment
         discovery_service_assignment = \
             self._create_discovery_service_assignments()['name']
@@ -115,11 +102,9 @@ class ContrailDSARuleTest(rbac_base.BaseContrailTest):
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="delete_dsa_rule")
-    @idempotent_id('d3b869db-fa49-48f0-861a-08efd9879b15')
+    @decorators.idempotent_id('d3b869db-fa49-48f0-861a-08efd9879b15')
     def test_delete_dsa_rule(self):
-        """
-        test method for delete dsa rules objects
-        """
+        """test method for delete dsa rules objects"""
         # create discover service assignment
         discovery_service_assignment = \
             self._create_discovery_service_assignments()['name']

@@ -18,24 +18,19 @@ Tempest test-case to test domain objects using RBAC roles
 """
 
 from oslo_log import log as logging
-
-from tungsten_tempest_plugin.tests.api.contrail import rbac_base
-
 from patrole_tempest_plugin import rbac_rule_validation
-
 from tempest import config
 from tempest.lib.common.utils import data_utils
-from tempest.lib.decorators import idempotent_id
+from tempest.lib import decorators
+
+from tungsten_tempest_plugin.tests.api.contrail import rbac_base
 
 CONF = config.CONF
 LOG = logging.getLogger(__name__)
 
 
 class DomainContrailTest(rbac_base.BaseContrailTest):
-
-    """
-    Test class to test domain objects using RBAC roles
-    """
+    """Test class to test domain objects using RBAC roles"""
 
     def _create_domains(self):
         fq_name = data_utils.rand_name('domain')
@@ -58,53 +53,43 @@ class DomainContrailTest(rbac_base.BaseContrailTest):
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="list_domains")
-    @idempotent_id('fa02e27b-f661-4186-a522-69e8fcb6abf9')
+    @decorators.idempotent_id('fa02e27b-f661-4186-a522-69e8fcb6abf9')
     def test_list_domains(self):
-        """
-        test method for list domain objects
-        """
+        """test method for list domain objects"""
         with self.rbac_utils.override_role(self):
             self.domain_client.list_domains()
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="create_domains")
-    @idempotent_id('3f18be91-c37b-4e17-bf5e-b704d993f738')
+    @decorators.idempotent_id('3f18be91-c37b-4e17-bf5e-b704d993f738')
     def test_create_domains(self):
-        """
-        test method for create domain objects
-        """
+        """test method for create domain objects"""
         with self.rbac_utils.override_role(self):
             self._create_domains()
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="show_domain")
-    @idempotent_id('e79f8581-ba9f-420a-aa26-f1cb51cf4bbf')
+    @decorators.idempotent_id('e79f8581-ba9f-420a-aa26-f1cb51cf4bbf')
     def test_show_domain(self):
-        """
-        test method for show domain objects
-        """
+        """test method for show domain objects"""
         domain_uuid = self._create_domains()
         with self.rbac_utils.override_role(self):
             self.domain_client.show_domain(domain_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="update_domain")
-    @idempotent_id('fdf72539-20b5-4bdb-b22b-70c86fbb52a4')
+    @decorators.idempotent_id('fdf72539-20b5-4bdb-b22b-70c86fbb52a4')
     def test_update_domain(self):
-        """
-        test method for update domain objects
-        """
+        """test method for update domain objects"""
         domain_uuid = self._create_domains()
         with self.rbac_utils.override_role(self):
             self._update_domain(domain_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="delete_domain")
-    @idempotent_id('abaad2b0-6bde-40b8-b257-20ca805c1dca')
+    @decorators.idempotent_id('abaad2b0-6bde-40b8-b257-20ca805c1dca')
     def test_delete_domain(self):
-        """
-        test method for delete domain objects
-        """
+        """test method for delete domain objects"""
         domain_uuid = self._create_domains()
         with self.rbac_utils.override_role(self):
             self.domain_client.delete_domain(domain_uuid)

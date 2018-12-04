@@ -17,24 +17,19 @@
 Tempest test-case to test service group objects using RBAC roles
 """
 from oslo_log import log as logging
-
-from tungsten_tempest_plugin.tests.api.contrail import rbac_base
-
 from patrole_tempest_plugin import rbac_rule_validation
-
 from tempest import config
 from tempest.lib.common.utils import data_utils
-from tempest.lib.decorators import idempotent_id
+from tempest.lib import decorators
+
+from tungsten_tempest_plugin.tests.api.contrail import rbac_base
 
 CONF = config.CONF
 LOG = logging.getLogger(__name__)
 
 
 class ContrailSecurityGroupTest(rbac_base.BaseContrailTest):
-
-    """
-    Test class to test security group objects using RBAC roles
-    """
+    """Test class to test security group objects using RBAC roles"""
 
     def _delete_security_group(self, sec_grp_id):
         return self.security_group_client.delete_security_group(sec_grp_id)
@@ -56,22 +51,18 @@ class ContrailSecurityGroupTest(rbac_base.BaseContrailTest):
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="list_security_groups")
-    @idempotent_id('a13cc1d5-f562-4b68-b732-980deb3cddf4')
+    @decorators.idempotent_id('a13cc1d5-f562-4b68-b732-980deb3cddf4')
     def test_list_security_groups(self):
-        """
-        test method for list security group objects
-        """
+        """test method for list security group objects"""
         self._create_security_groups()
         with self.rbac_utils.override_role(self):
             self.security_group_client.list_security_groups()
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="show_security_group")
-    @idempotent_id('c7ca1781-08ae-4fa2-bd6d-1f369950c4c4')
+    @decorators.idempotent_id('c7ca1781-08ae-4fa2-bd6d-1f369950c4c4')
     def test_show_security_group(self):
-        """
-        test method for show security group objects
-        """
+        """test method for show security group objects"""
         grp = self._create_security_groups()
         grp_id = grp['uuid']
         with self.rbac_utils.override_role(self):
@@ -79,11 +70,9 @@ class ContrailSecurityGroupTest(rbac_base.BaseContrailTest):
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="delete_security_group")
-    @idempotent_id('e682d7b4-deb8-4b5c-9c9b-1e1ada827b40')
+    @decorators.idempotent_id('e682d7b4-deb8-4b5c-9c9b-1e1ada827b40')
     def test_delete_security_group(self):
-        """
-        test method for delete security group objects
-        """
+        """test method for delete security group objects"""
         grp = self._create_security_groups()
         grp_id = grp['uuid']
         with self.rbac_utils.override_role(self):
@@ -91,21 +80,17 @@ class ContrailSecurityGroupTest(rbac_base.BaseContrailTest):
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="create_security_groups")
-    @idempotent_id('63a2ff14-7869-40a2-962a-d65752de5651')
+    @decorators.idempotent_id('63a2ff14-7869-40a2-962a-d65752de5651')
     def test_create_security_groups(self):
-        """
-        test method for create security group objects
-        """
+        """test method for create security group objects"""
         with self.rbac_utils.override_role(self):
             self._create_security_groups()
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="update_security_group")
-    @idempotent_id('cf9aafe2-fffb-4028-8fd7-4d6634e144e7')
+    @decorators.idempotent_id('cf9aafe2-fffb-4028-8fd7-4d6634e144e7')
     def test_update_security_group(self):
-        """
-        test method for update security group objects
-        """
+        """test method for update security group objects"""
         grp = self._create_security_groups()
         grp_id = grp['uuid']
         display_name = data_utils.rand_name('securitygroupnew')

@@ -17,26 +17,20 @@
 Tempest test-case to test namespace objects using RBAC roles
 """
 
-
 from oslo_log import log as logging
-
-from tungsten_tempest_plugin.tests.api.contrail import rbac_base
-
 from patrole_tempest_plugin import rbac_rule_validation
-
 from tempest import config
 from tempest.lib.common.utils import data_utils
-from tempest.lib.decorators import idempotent_id
+from tempest.lib import decorators
+
+from tungsten_tempest_plugin.tests.api.contrail import rbac_base
 
 CONF = config.CONF
 LOG = logging.getLogger(__name__)
 
 
 class NamespaceContrailTest(rbac_base.BaseContrailTest):
-
-    """
-    Test class to test namespace objects using RBAC roles
-    """
+    """Test class to test namespace objects using RBAC roles"""
 
     def _create_namespace(self):
         fq_name = data_utils.rand_name('namespace')
@@ -59,54 +53,43 @@ class NamespaceContrailTest(rbac_base.BaseContrailTest):
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="list_namespaces")
-    @idempotent_id('e436390d-d669-4047-9838-421ea93e94be')
+    @decorators.idempotent_id('e436390d-d669-4047-9838-421ea93e94be')
     def test_list_namespaces(self):
-        """
-        test method for list namespace objects
-        """
+        """test method for list namespace objects"""
         with self.rbac_utils.override_role(self):
             self.namespace_client.list_namespaces()
 
-
     @rbac_rule_validation.action(service="Contrail",
                                  rules="create_namespaces")
-    @idempotent_id('503ae445-7e67-4db6-989a-af0b7f9a7e95')
+    @decorators.idempotent_id('503ae445-7e67-4db6-989a-af0b7f9a7e95')
     def test_create_namespaces(self):
-        """
-        test method for create namespace objects
-        """
+        """test method for create namespace objects"""
         with self.rbac_utils.override_role(self):
             self._create_namespace()
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="show_namespace")
-    @idempotent_id('f916971a-7c07-4386-b887-8b78d8a1e528')
+    @decorators.idempotent_id('f916971a-7c07-4386-b887-8b78d8a1e528')
     def test_show_namespace(self):
-        """
-        test method for show namespace objects
-        """
+        """test method for show namespace objects"""
         namespace_uuid = self._create_namespace()
         with self.rbac_utils.override_role(self):
             self.namespace_client.show_namespace(namespace_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="update_namespace")
-    @idempotent_id('3649f65a-922a-4b8a-9b8b-520c333e192e')
+    @decorators.idempotent_id('3649f65a-922a-4b8a-9b8b-520c333e192e')
     def test_update_namespace(self):
-        """
-        test method for update namespace objects
-        """
+        """test method for update namespace objects"""
         namespace_uuid = self._create_namespace()
         with self.rbac_utils.override_role(self):
             self._update_namespace(namespace_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules="delete_namespace")
-    @idempotent_id('80e736bf-fc7d-4274-8173-a50c883776a9')
+    @decorators.idempotent_id('80e736bf-fc7d-4274-8173-a50c883776a9')
     def test_delete_namespace(self):
-        """
-        test method for delete namespace objects
-        """
+        """test method for delete namespace objects"""
         namespace_uuid = self._create_namespace()
         with self.rbac_utils.override_role(self):
             self.namespace_client.delete_namespace(namespace_uuid)

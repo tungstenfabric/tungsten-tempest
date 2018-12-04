@@ -18,6 +18,10 @@ Base class for contrail testing against RBAC rules
 """
 
 from oslo_log import log as logging
+from patrole_tempest_plugin import rbac_utils
+from tempest import config
+from tempest.lib import exceptions
+from tempest import test
 
 from tungsten_tempest_plugin.services.contrail.json.access_control_client \
     import AccessControlClient
@@ -89,13 +93,6 @@ from tungsten_tempest_plugin.services.contrail.json.\
     virtual_network_client import VirtualNetworkClient
 from tungsten_tempest_plugin.services.contrail.json.vm_contrail_client import \
     VmContrailClient
-
-from patrole_tempest_plugin import rbac_utils
-
-from tempest import config
-from tempest import test
-
-from tempest.lib import exceptions
 
 CONF = config.CONF
 LOG = logging.getLogger(__name__)
