@@ -37,7 +37,11 @@ class QosQueueContrailTest(rbac_base.BaseContrailTest):
 
     def _create_qos_queues(self):
         name = data_utils.rand_name('test-rbac-qos-queue')
-        fq_name = [name]
+        if float(CONF.sdn.contrail_version) < 5:
+            fq_name = [name]
+        else:
+            fq_name = ['default-global-system-config',
+                       "default-global-qos-config", name]
         qos_queue = self.qos_client.create_qos_queues(
             fq_name=fq_name)['qos-queue']
         self.addCleanup(self._try_delete_resource,

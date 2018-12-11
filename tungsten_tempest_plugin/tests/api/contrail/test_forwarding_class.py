@@ -32,25 +32,10 @@ LOG = logging.getLogger(__name__)
 class ContrailForwardingClassTest(rbac_base.BaseContrailTest):
     """Test class to test Forwarding class objects using RBAC roles"""
 
-    def _create_global_system_config(self):
-        config_name = data_utils.rand_name('test-config')
-        parent_type = 'config-root'
-        config_fq_name = [config_name]
-        new_config = \
-            self.config_client.create_global_system_configs(
-                parent_type=parent_type,
-                display_name=config_name,
-                fq_name=config_fq_name)['global-system-config']
-        self.addCleanup(self._try_delete_resource,
-                        (self.config_client.
-                         delete_global_system_config),
-                        new_config['uuid'])
-        return new_config
-
-    def _create_qos_global_configs(self, global_system_config):
+    def _create_qos_global_configs(self):
         name = data_utils.rand_name('test-rbac-qos-global-config')
         parent_type = 'global-system-config'
-        fq_name = [global_system_config, name]
+        fq_name = ['default-global-system-config', name]
         qos_global_config = self.qos_client.create_global_qos_configs(
             fq_name=fq_name,
             parent_type=parent_type)['global-qos-config']
@@ -61,11 +46,10 @@ class ContrailForwardingClassTest(rbac_base.BaseContrailTest):
         return qos_global_config
 
     def _create_forwarding_class(self,
-                                 global_system_config,
                                  global_qos_config):
         display_name = data_utils.rand_name('forwarding-class')
         parent_type = 'global-qos-config'
-        fq_name = [global_system_config, global_qos_config, "1"]
+        fq_name = ['default-global-system-config', global_qos_config, "1"]
         forwarding_class_id = data_utils.rand_int_id(1, 200)
         post_data = {
             'fq_name': fq_name,
@@ -93,13 +77,10 @@ class ContrailForwardingClassTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('8ef21f71-72a4-4de9-af93-6e759aa463c0')
     def test_show_forwarding_class(self):
         """test method for show forwarding classes objects"""
-        # Create global system config
-        global_system_config = self._create_global_system_config()['name']
         # Create a global qos config
-        global_qos_config = \
-            self._create_qos_global_configs(global_system_config)['name']
-        new_fclass = self._create_forwarding_class(global_system_config,
-                                                   global_qos_config)
+        self.global_qos_config = \
+            self._create_qos_global_configs()['name']
+        new_fclass = self._create_forwarding_class(self.global_qos_config)
         with self.rbac_utils.override_role(self):
             self.forwarding_class_client.show_forwarding_class(
                 new_fclass['uuid'])
@@ -107,29 +88,23 @@ class ContrailForwardingClassTest(rbac_base.BaseContrailTest):
     @rbac_rule_validation.action(service="Contrail",
                                  rules=["create_forwarding_classs"])
     @decorators.idempotent_id('d098859c-ad36-4385-8fb0-c00934a99b6f')
-    def test_create_forwarding_classs(self):
+    def test_create_forwarding_class(self):
         """test method for create forwarding classes objects"""
-        # Create global system config
-        global_system_config = self._create_global_system_config()['name']
         # Create a global qos config
-        global_qos_config = \
-            self._create_qos_global_configs(global_system_config)['name']
+        self.global_qos_config = \
+            self._create_qos_global_configs()['name']
         with self.rbac_utils.override_role(self):
-            self._create_forwarding_class(global_system_config,
-                                          global_qos_config)
+            self._create_forwarding_class(self.global_qos_config)
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules=["update_forwarding_class"])
     @decorators.idempotent_id('589dc03d-a25d-48be-9d9c-d3f92ff2cfc6')
     def test_update_forwarding_class(self):
         """test method for update forwarding classes objects"""
-        # Create global system config
-        global_system_config = self._create_global_system_config()['name']
         # Create a global qos config
-        global_qos_config = \
-            self._create_qos_global_configs(global_system_config)['name']
-        new_fclass = self._create_forwarding_class(global_system_config,
-                                                   global_qos_config)
+        self.global_qos_config = \
+            self._create_qos_global_configs()['name']
+        new_fclass = self._create_forwarding_class(self.global_qos_config)
         update_name = data_utils.rand_name('updated_fclass')
         with self.rbac_utils.override_role(self):
             self.forwarding_class_client.update_forwarding_class(
@@ -140,13 +115,10 @@ class ContrailForwardingClassTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('a0348ffc-68c5-4d94-ba03-d08483503ced')
     def test_delete_forwarding_class(self):
         """test method for delete forwarding classes objects"""
-        # Create global system config
-        global_system_config = self._create_global_system_config()['name']
         # Create a global qos config
-        global_qos_config = \
-            self._create_qos_global_configs(global_system_config)['name']
-        new_fclass = self._create_forwarding_class(global_system_config,
-                                                   global_qos_config)
+        self.global_qos_config = \
+            self._create_qos_global_configs()['name']
+        new_fclass = self._create_forwarding_class(self.global_qos_config)
         with self.rbac_utils.override_role(self):
             self.forwarding_class_client.delete_forwarding_class(
                 new_fclass['uuid'])

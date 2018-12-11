@@ -35,6 +35,9 @@ SDNGroup = [
     cfg.StrOpt('catalog_type',
                default='sdn-l-config',
                help="Catalog type of the SDN service"),
+    cfg.StrOpt('contrail_version',
+               default='5.0',
+               help="Version of SDN service"),
 ]
 
 tungsten_log_group = cfg.OptGroup(

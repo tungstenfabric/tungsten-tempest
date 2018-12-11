@@ -32,42 +32,29 @@ LOG = logging.getLogger(__name__)
 class AlarmContrailTest(rbac_base.BaseContrailTest):
     """Test class to test Alarm objects using RBAC roles"""
 
-    def _create_global_system_config(self):
-        config_name = data_utils.rand_name('test-config')
-        parent_type = 'config-root'
-        config_fq_name = [config_name]
-        new_config = \
-            self.config_client.create_global_system_configs(
-                parent_type=parent_type,
-                display_name=config_name,
-                fq_name=config_fq_name)['global-system-config']
-        self.addCleanup(self._try_delete_resource,
-                        (self.config_client.
-                         delete_global_system_config),
-                        new_config['uuid'])
-        return new_config
-
-    def _create_alarm(self, global_system_config):
+    def _create_alarm(self):
         post_body = {
-            'fq_name': [global_system_config,
+            'fq_name': ['default-domain',
+                        self.tenant_name,
                         data_utils.rand_name('alarm')],
             'alarm_severity': 1,
-            'parent_type': 'global-system-config',
+            'parent_type': 'project',
             'uve_keys': {
-                'uve_key': ['analytics_node']
+                'uve_key': ['virtual-network']
             },
             'alarm_rules': {
                 'or_list': [{
                     'and_list': [{
                         'operation': '!=',
-                        'operand1': 'NodeStatus.process_info.process_state',
+                        'operand1': data_utils.rand_name('tempest-alarm'),
                         'operand2': {
-                            'json_value': '"PROCESS_STATE_RUNNING"'
+                            'uve_attribute': 'name'
                         }
                     }]
                 }]
             }
         }
+
         resp_body = self.alarm_client.create_alarms(
             **post_body)
         alarm_uuid = resp_body['alarm']['uuid']
@@ -95,19 +82,15 @@ class AlarmContrailTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('7fe55d0c-e54a-4bb7-95a6-9c53f9e9c4bf')
     def test_create_alarms(self):
         """test method for create alarms"""
-        # Create global system config
-        global_system_config = self._create_global_system_config()['name']
         with self.rbac_utils.override_role(self):
-            self._create_alarm(global_system_config)
+            self._create_alarm()
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules=["show_alarm"])
     @decorators.idempotent_id('ab0ccbe4-7bfe-4176-890a-d438ee04290d')
     def test_show_alarm(self):
         """test method for show alarms"""
-        # Create global system config
-        global_system_config = self._create_global_system_config()['name']
-        alarm_uuid = self._create_alarm(global_system_config)
+        alarm_uuid = self._create_alarm()
         with self.rbac_utils.override_role(self):
             self.alarm_client.show_alarm(alarm_uuid)
 
@@ -116,9 +99,7 @@ class AlarmContrailTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('ab331cca-ee53-4106-9b30-7319bfb1bea7')
     def test_update_alarm(self):
         """test method for update alarms"""
-        # Create global system config
-        global_system_config = self._create_global_system_config()['name']
-        alarm_uuid = self._create_alarm(global_system_config)
+        alarm_uuid = self._create_alarm()
         with self.rbac_utils.override_role(self):
             self._update_alarm(alarm_uuid)
 
@@ -128,7 +109,6 @@ class AlarmContrailTest(rbac_base.BaseContrailTest):
     def test_delete_alarm(self):
         """test method for delete alarms"""
         # Create global system config
-        global_system_config = self._create_global_system_config()['name']
-        alarm_uuid = self._create_alarm(global_system_config)
+        alarm_uuid = self._create_alarm()
         with self.rbac_utils.override_role(self):
             self.alarm_client.delete_alarm(alarm_uuid)

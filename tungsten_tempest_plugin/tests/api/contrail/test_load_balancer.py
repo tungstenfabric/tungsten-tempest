@@ -22,6 +22,7 @@ from patrole_tempest_plugin import rbac_rule_validation
 from tempest import config
 from tempest.lib.common.utils import data_utils
 from tempest.lib import decorators
+from tempest import test
 
 from tungsten_tempest_plugin.tests.api.contrail import rbac_base
 
@@ -31,6 +32,13 @@ LOG = logging.getLogger(__name__)
 
 class BaseLoadBalancerTest(rbac_base.BaseContrailTest):
     """Base class to test load balancer objects using RBAC roles"""
+
+    @classmethod
+    def skip_checks(cls):
+        super(BaseLoadBalancerTest, cls).skip_checks()
+        if not test.is_extension_enabled('lbaas', 'network'):
+            raise cls.skipException(
+                '%s skipped - lbaas extension not enabled' % cls.__name__)
 
     def _create_load_balancer(self):
         fq_name = data_utils.rand_name('load-balancer')

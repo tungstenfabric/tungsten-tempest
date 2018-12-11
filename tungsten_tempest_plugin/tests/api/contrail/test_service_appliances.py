@@ -30,24 +30,9 @@ CONF = config.CONF
 class ServiceAppliancesTest(rbac_base.BaseContrailTest):
     """Test class to test service appliances objects using RBAC roles"""
 
-    def _create_global_system_config(self):
-        config_name = data_utils.rand_name('test-config')
-        parent_type = 'config-root'
-        config_fq_name = [config_name]
-        new_config = \
-            self.config_client.create_global_system_configs(
-                parent_type=parent_type,
-                display_name=config_name,
-                fq_name=config_fq_name)['global-system-config']
-        self.addCleanup(self._try_delete_resource,
-                        (self.config_client.
-                         delete_global_system_config),
-                        new_config['uuid'])
-        return new_config
-
-    def _create_service_appliance_sets(self, global_system_config):
+    def _create_service_appliance_sets(self):
         set_name = data_utils.rand_name('test-set')
-        set_fq_name = [global_system_config, set_name]
+        set_fq_name = ['default-global-system-config', set_name]
         new_set = self.service_appliances_client.create_service_appliance_sets(
             parent_type='global-system-config',
             fq_name=set_fq_name)['service-appliance-set']
@@ -84,10 +69,7 @@ class ServiceAppliancesTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('0563c0c8-b986-466e-8540-aa8ad7a10367')
     def test_create_service_appliances(self):
         """test method for create service appliance objects"""
-        # Create global system config
-        global_system_config = self._create_global_system_config()['name']
-        new_set = \
-            self._create_service_appliance_sets(global_system_config)
+        new_set = self._create_service_appliance_sets()
         with self.rbac_utils.override_role(self):
             self._create_service_appliances(new_set)
 
@@ -96,11 +78,7 @@ class ServiceAppliancesTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('ea30dcfe-8657-4a7d-9cf1-3176d334bf27')
     def test_show_service_appliance(self):
         """test method for show service appliance objects"""
-        # Create global system config
-        global_system_config = \
-            self._create_global_system_config()['name']
-        new_set = \
-            self._create_service_appliance_sets(global_system_config)
+        new_set = self._create_service_appliance_sets()
         new_appliance = self._create_service_appliances(new_set)
         with self.rbac_utils.override_role(self):
             self.service_appliances_client.show_service_appliance(
@@ -111,10 +89,7 @@ class ServiceAppliancesTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('a54ca33a-8590-4844-96d7-b96882b59e86')
     def test_update_service_appliance(self):
         """test method for update service appliance objects"""
-        # Create global system config
-        global_system_config = self._create_global_system_config()['name']
-        new_set = \
-            self._create_service_appliance_sets(global_system_config)
+        new_set = self._create_service_appliance_sets()
         new_appliance = self._create_service_appliances(new_set)
         update_name = data_utils.rand_name('test')
         with self.rbac_utils.override_role(self):
@@ -127,10 +102,7 @@ class ServiceAppliancesTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('362deff5-7b72-4929-ba81-972cfcfa1309')
     def test_delete_service_appliance(self):
         """test method for delete service appliance objects"""
-        # Create global system config
-        global_system_config = self._create_global_system_config()['name']
-        new_set = \
-            self._create_service_appliance_sets(global_system_config)
+        new_set = self._create_service_appliance_sets()
         new_appliance = self._create_service_appliances(new_set)
         with self.rbac_utils.override_role(self):
             self.service_appliances_client.delete_service_appliance(
@@ -149,20 +121,15 @@ class ServiceAppliancesTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('eb00d6cf-590f-41bf-8ee4-5be625d9cb93')
     def test_create_service_appl_sets(self):
         """test method for create service appliance sets objects"""
-        # Create global system config
-        global_system_config = self._create_global_system_config()['name']
         with self.rbac_utils.override_role(self):
-            self._create_service_appliance_sets(global_system_config)
+            self._create_service_appliance_sets()
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules=["show_service_appliance_set"])
     @decorators.idempotent_id('dd35dd04-e7d9-46bb-8f36-26835f122572')
     def test_show_service_appl_set(self):
         """test method for show service appliance sets objects"""
-        # Create global system config
-        global_system_config = self._create_global_system_config()['name']
-        new_set = self._create_service_appliance_sets(
-            global_system_config)
+        new_set = self._create_service_appliance_sets()
         with self.rbac_utils.override_role(self):
             self.service_appliances_client.show_service_appliance_set(
                 new_set['uuid'])
@@ -172,10 +139,7 @@ class ServiceAppliancesTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('952f063b-bc71-4f62-83b1-719bce5ad4ed')
     def test_update_service_appl_set(self):
         """test method for update service appliance sets objects"""
-        # Create global system config
-        global_system_config = self._create_global_system_config()['name']
-        new_set = self._create_service_appliance_sets(
-            global_system_config)
+        new_set = self._create_service_appliance_sets()
         update_name = data_utils.rand_name('test')
         with self.rbac_utils.override_role(self):
             self.service_appliances_client.update_service_appliance_set(
@@ -187,10 +151,7 @@ class ServiceAppliancesTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('7b56ce24-da1d-4565-bd22-c58dc57d7045')
     def test_delete_service_appl_set(self):
         """test method for delete service appliance sets objects"""
-        # Create global system config
-        global_system_config = self._create_global_system_config()['name']
-        new_set = self._create_service_appliance_sets(
-            global_system_config)
+        new_set = self._create_service_appliance_sets()
         with self.rbac_utils.override_role(self):
             self.service_appliances_client.delete_service_appliance_set(
                 new_set['uuid'])

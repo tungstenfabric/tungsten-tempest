@@ -36,26 +36,10 @@ class InterfacesTest(rbac_base.BaseContrailTest):
     physical_if_name = data_utils.rand_name('rbac-physical-interface')
     logical_if_name = data_utils.rand_name('rbac-logical-interface')
 
-    def _create_global_system_config(self):
-        config_name = data_utils.rand_name('test-config')
-        parent_type = 'config-root'
-        config_fq_name = [config_name]
-        new_config = \
-            self.config_client.create_global_system_configs(
-                parent_type=parent_type,
-                display_name=config_name,
-                fq_name=config_fq_name)['global-system-config']
-        self.addCleanup(self._try_delete_resource,
-                        (self.config_client.
-                         delete_global_system_config),
-                        new_config['uuid'])
-        return new_config
-
     def _create_physical_router(self):
-        self.global_system_config = self._create_global_system_config()['name']
-
-        fq_name = [self.global_system_config, self.router_name]
-        post_body = {'parent_type': 'global-system-config', 'fq_name': fq_name}
+        fq_name = ['default-global-system-config', self.router_name]
+        post_body = {'parent_type': 'global-system-config'}
+        post_body['fq_name'] = fq_name
 
         router = self.router_client.create_physical_routers(
             **post_body)['physical-router']
@@ -65,9 +49,10 @@ class InterfacesTest(rbac_base.BaseContrailTest):
         return router
 
     def _create_physical_interface(self):
-        fq_name = [self.global_system_config, self.router_name,
+        fq_name = ['default-global-system-config', self.router_name,
                    self.physical_if_name]
-        post_body = {'parent_type': 'physical-router', 'fq_name': fq_name}
+        post_body = {'parent_type': 'physical-router'}
+        post_body['fq_name'] = fq_name
 
         physical_if = self.interface_client.create_physical_interfaces(
             **post_body)['physical-interface']
@@ -77,9 +62,10 @@ class InterfacesTest(rbac_base.BaseContrailTest):
         return physical_if
 
     def _create_logical_interface(self):
-        fq_name = [self.global_system_config, self.router_name,
+        fq_name = ['default-global-system-config', self.router_name,
                    self.physical_if_name, self.logical_if_name]
-        post_body = {'parent_type': 'physical-interface', 'fq_name': fq_name}
+        post_body = {'parent_type': 'physical-interface'}
+        post_body['fq_name'] = fq_name
 
         logical_if = self.interface_client.create_logical_interfaces(
             **post_body)['logical-interface']
@@ -101,7 +87,6 @@ class InterfacesTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('066f53d8-3d2a-4ad6-983f-243de7c12962')
     def test_create_physical_interfaces(self):
         """test method for create physical interfaces objects"""
-
         self._create_physical_router()
         with self.rbac_utils.override_role(self):
             self._create_physical_interface()
@@ -131,7 +116,6 @@ class InterfacesTest(rbac_base.BaseContrailTest):
         """test method for delete physical interfaces objects"""
         self._create_physical_router()
         uuid = self._create_physical_interface()['uuid']
-
         with self.rbac_utils.override_role(self):
             self.interface_client.delete_physical_interface(uuid)
 

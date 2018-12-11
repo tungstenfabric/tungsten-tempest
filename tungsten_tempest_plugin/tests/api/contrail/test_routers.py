@@ -47,26 +47,11 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
                                  cls.network['uuid'])
         super(BaseRouterTest, cls).resource_cleanup()
 
-    def _create_global_system_config(self):
-        config_name = data_utils.rand_name('test-config')
-        parent_type = 'config-root'
-        config_fq_name = [config_name]
-        new_config = \
-            self.config_client.create_global_system_configs(
-                parent_type=parent_type,
-                display_name=config_name,
-                fq_name=config_fq_name)['global-system-config']
-        self.addCleanup(self._try_delete_resource,
-                        (self.config_client.
-                         delete_global_system_config),
-                        new_config['uuid'])
-        return new_config
-
-    def _create_physical_router(self, global_system_config):
+    def _create_physical_router(self):
         fq_name = data_utils.rand_name('physical-router-template')
         post_body = {
             'parent_type': 'global-system-config',
-            'fq_name': [global_system_config, fq_name]}
+            'fq_name': ['default-global-system-config', fq_name]}
         router = self.router_client.create_physical_routers(
             **post_body)['physical-router']
         self.addCleanup(self._try_delete_resource,
@@ -100,11 +85,11 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
                         router['uuid'])
         return router
 
-    def _create_global_vrouter_config(self, global_system_config):
+    def _create_global_vrouter_config(self):
         fq_name = data_utils.rand_name('global-vrouter-config-template')
         post_body = {
             'parent_type': 'global-system-config',
-            'fq_name': [global_system_config, fq_name]}
+            'fq_name': ['default-global-system-config', fq_name]}
         router = self.router_client.create_global_vrouter_configs(
             **post_body)['global-vrouter-config']
         self.addCleanup(self._try_delete_resource,
@@ -124,11 +109,11 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
                         router['uuid'])
         return router
 
-    def _create_virtual_router(self, global_system_config):
+    def _create_virtual_router(self):
         fq_name = data_utils.rand_name('virtual-router-template')
         post_body = {
             'parent_type': 'global-system-config',
-            'fq_name': [global_system_config, fq_name]}
+            'fq_name': ['default-global-system-config', fq_name]}
         router = self.router_client.create_virtual_routers(
             **post_body)['virtual-router']
         self.addCleanup(self._try_delete_resource,
@@ -149,20 +134,15 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('d0b7449e-9037-4f9f-8c7e-9f364c95f18a')
     def test_create_physical_routers(self):
         """test method for create physical router objects"""
-        # Create global system config
-        global_system_config = self._create_global_system_config()['name']
         with self.rbac_utils.override_role(self):
-            self._create_physical_router(global_system_config)
+            self._create_physical_router()
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules=["show_physical_router"])
     @decorators.idempotent_id('6dfc53f4-a884-46d5-b303-22ba59c116f4')
     def test_show_physical_router(self):
         """test method for show physical router objects"""
-        # Create global system config
-        global_system_config = self._create_global_system_config()['name']
-        physical_router_uuid = self._create_physical_router(
-            global_system_config)['uuid']
+        physical_router_uuid = self._create_physical_router()['uuid']
         with self.rbac_utils.override_role(self):
             self.router_client.show_physical_router(physical_router_uuid)
 
@@ -171,11 +151,8 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('c270f369-8cd7-4ee3-8ab1-4580c3138a5c')
     def test_update_physical_router(self):
         """test method for update physical router objects"""
-        # Create global system config
-        global_system_config = self._create_global_system_config()['name']
         updated_fq_name = data_utils.rand_name('rbac-physical-router-new-name')
-        physical_router_uuid = self._create_physical_router(
-            global_system_config)['uuid']
+        physical_router_uuid = self._create_physical_router()['uuid']
         with self.rbac_utils.override_role(self):
             self.router_client.update_physical_router(
                 physical_router_uuid,
@@ -186,10 +163,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('eeded742-6a8d-4e88-bfa8-fe32db463c53')
     def test_delete_physical_router(self):
         """test method for delete physical router objects"""
-        # Create global system config
-        global_system_config = self._create_global_system_config()['name']
-        physical_router_uuid = self._create_physical_router(
-            global_system_config)['uuid']
+        physical_router_uuid = self._create_physical_router()['uuid']
         with self.rbac_utils.override_role(self):
             self.router_client.delete_physical_router(physical_router_uuid)
 
@@ -250,59 +224,84 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
     @rbac_rule_validation.action(service="Contrail",
                                  rules=["list_global_vrouter_configs"])
     @decorators.idempotent_id('4af768d1-3cbe-4aff-bcbc-0e045cac3277')
-    def test_list_global_vrouter(self):
+    def test_list_global_vrouter_configs(self):
         """test method for list global vrouter config objects"""
         with self.rbac_utils.override_role(self):
             self.router_client.list_global_vrouter_configs()
 
+    @decorators.skip_because(bug="1792446")
     @rbac_rule_validation.action(service="Contrail",
                                  rules=["create_global_vrouter_configs"])
     @decorators.idempotent_id('e13d800f-9304-4a06-9bf1-ad08345a13a8')
-    def test_create_global_vrouter(self):
+    def test_create_global_vrouter_configs(self):
         """test method for create global vrouter config objects"""
-        # Create global system config
-        global_system_config = self._create_global_system_config()['name']
+        # This test may make your environment unstable
+        # Juniper JTAC 2018-0912-0503
+        #
+        # Creating a global-vrouter-config object with parent as
+        # default-gloabl-system-config in a deployed environment makes vrouter
+        # linklocal metadata to go missing.
+        # vrouter-agent will stuck in Init state with "No configuration for
+        # self" error.
         with self.rbac_utils.override_role(self):
-            self._create_global_vrouter_config(global_system_config)
+            self._create_global_vrouter_config()
 
+    @decorators.skip_because(bug="1792446")
     @rbac_rule_validation.action(service="Contrail",
                                  rules=["show_global_vrouter_config"])
     @decorators.idempotent_id('3bb6f4e1-fd3f-4338-8392-f7f80974a80e')
     def test_show_global_vrouter_config(self):
         """test method for show global vrouter config objects"""
-        # Create global system config
-        global_system_config = self._create_global_system_config()['name']
-        global_vrouter_config_uuid = self._create_global_vrouter_config(
-            global_system_config)['uuid']
+        # This test may make your environment unstable
+        # Juniper JTAC 2018-0912-0503
+        #
+        # Creating a global-vrouter-config object with parent as
+        # default-gloabl-system-config in a deployed environment makes vrouter
+        # linklocal metadata to go missing.
+        # vrouter-agent will stuck in Init state with "No configuration for
+        # self" error.
+        global_vrouter_config_uuid = \
+            self._create_global_vrouter_config()['uuid']
         with self.rbac_utils.override_role(self):
             self.router_client.show_global_vrouter_config(
                 global_vrouter_config_uuid)
 
+    @decorators.skip_because(bug="1792446")
     @rbac_rule_validation.action(service="Contrail",
                                  rules=["update_global_vrouter_config"])
     @decorators.idempotent_id('36fcdd51-c42b-4e67-8c26-73d4cde47507')
-    def test_update_global_vrouter(self):
+    def test_update_global_vrouter_config(self):
         """test method for update global vrouter config objects"""
-        # Create global system config
-        global_system_config = self._create_global_system_config()['name']
+        # This test may make your environment unstable
+        # Juniper JTAC 2018-0912-0503
+        #
+        # Creating a global-vrouter-config object with parent as
+        # default-gloabl-system-config in a deployed environment makes vrouter
+        # linklocal metadata to go missing.
+        # vrouter-agent will stuck in Init state with "No configuration for
+        # self" error.
         updated_fq_name = data_utils.rand_name(
             'rbac-global-vrouter-config-new-name')
-        global_vrouter_config_uuid = self._create_global_vrouter_config(
-            global_system_config)['uuid']
+        global_vrouter_config_uuid = \
+            self._create_global_vrouter_config()['uuid']
         with self.rbac_utils.override_role(self):
             self.router_client.update_global_vrouter_config(
                 global_vrouter_config_uuid,
                 display_name=updated_fq_name)
 
+    @decorators.skip_because(bug="1792446")
     @rbac_rule_validation.action(service="Contrail",
                                  rules=["delete_global_vrouter_config"])
     @decorators.idempotent_id('4f3d59e8-3dac-4346-9d13-5ebe5ad8f6cf')
-    def test_delete_global_vrouter(self):
+    def test_delete_global_vrouter_config(self):
         """test method for delete global vrouter config objects"""
-        # Create global system config
-        global_system_config = self._create_global_system_config()['name']
-        global_vrouter_config_uuid = self._create_global_vrouter_config(
-            global_system_config)['uuid']
+        if CONF.sdn.test_vrouter_global_config:
+            raise self.skipException('Vrouter global config tests are '
+                                     'disabled. Enabling may make your '
+                                     'environment unstable.')
+
+        global_vrouter_config_uuid = \
+            self._create_global_vrouter_config()['uuid']
         with self.rbac_utils.override_role(self):
             self.router_client.delete_global_vrouter_config(
                 global_vrouter_config_uuid)
@@ -366,20 +365,15 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('114beb14-45c0-4714-a407-d160bb102022')
     def test_create_virtual_routers(self):
         """test method for create virtual router objects"""
-        # Create global system config
-        global_system_config = self._create_global_system_config()['name']
         with self.rbac_utils.override_role(self):
-            self._create_virtual_router(global_system_config)
+            self._create_virtual_router()
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules=["show_virtual_router"])
     @decorators.idempotent_id('258fe4e0-3e39-460f-aafa-e3b53c96e534')
     def test_show_virtual_router(self):
         """test method for show virtual router objects"""
-        # Create global system config
-        global_system_config = self._create_global_system_config()['name']
-        virtual_router_uuid = self._create_virtual_router(
-            global_system_config)['uuid']
+        virtual_router_uuid = self._create_virtual_router()['uuid']
         with self.rbac_utils.override_role(self):
             self.router_client.show_virtual_router(virtual_router_uuid)
 
@@ -388,11 +382,8 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('d1c72191-2068-4552-a78f-038cdd4c9c1d')
     def test_update_virtual_router(self):
         """test method for update virtual router objects"""
-        # Create global system config
-        global_system_config = self._create_global_system_config()['name']
         updated_fq_name = data_utils.rand_name('rbac-virtual-router-new-name')
-        virtual_router_uuid = self._create_virtual_router(
-            global_system_config)['uuid']
+        virtual_router_uuid = self._create_virtual_router()['uuid']
         with self.rbac_utils.override_role(self):
             self.router_client.update_virtual_router(
                 virtual_router_uuid,
@@ -403,9 +394,6 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('efbe25d6-8763-42d4-baf6-9f342e710144')
     def test_delete_virtual_router(self):
         """test method for delete virtual router objects"""
-        # Create global system config
-        global_system_config = self._create_global_system_config()['name']
-        virtual_router_uuid = self._create_virtual_router(
-            global_system_config)['uuid']
+        virtual_router_uuid = self._create_virtual_router()['uuid']
         with self.rbac_utils.override_role(self):
             self.router_client.delete_virtual_router(virtual_router_uuid)

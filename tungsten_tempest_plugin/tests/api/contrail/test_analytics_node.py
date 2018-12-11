@@ -32,25 +32,10 @@ LOG = logging.getLogger(__name__)
 class ContrailAnalyticsNodeTest(rbac_base.BaseContrailTest):
     """Test class to test analytics node objects using RBAC roles"""
 
-    def _create_global_system_config(self):
-        config_name = data_utils.rand_name('test-config')
-        parent_type = 'config-root'
-        config_fq_name = [config_name]
-        new_config = \
-            self.config_client.create_global_system_configs(
-                parent_type=parent_type,
-                display_name=config_name,
-                fq_name=config_fq_name)['global-system-config']
-        self.addCleanup(self._try_delete_resource,
-                        (self.config_client.
-                         delete_global_system_config),
-                        new_config['uuid'])
-        return new_config
-
-    def _create_analytics_node(self, global_system_config):
+    def _create_analytics_node(self):
         node_name = data_utils.rand_name('analytics-node')
         post_data = {
-            'fq_name': [global_system_config, node_name],
+            'fq_name': ['default-global-system-config', node_name],
             'parent_type': 'global-system-config'
         }
         new_node = self.analytics_node_client.create_analytics_nodes(
@@ -73,9 +58,7 @@ class ContrailAnalyticsNodeTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('b51043fd-77ba-4312-b96f-569ed5153338')
     def test_show_analytics_node(self):
         """test method for show analytics nodes"""
-        # create global system config
-        global_system_config = self._create_global_system_config()['name']
-        new_node = self._create_analytics_node(global_system_config)
+        new_node = self._create_analytics_node()
         with self.rbac_utils.override_role(self):
             self.analytics_node_client.show_analytics_node(new_node['uuid'])
 
@@ -84,19 +67,15 @@ class ContrailAnalyticsNodeTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('c57482c9-fcb4-4f41-95b0-7f0ffeee3dc3')
     def test_create_analytics_nodes(self):
         """test method for create analytics nodes"""
-        # create global system config
-        global_system_config = self._create_global_system_config()['name']
         with self.rbac_utils.override_role(self):
-            self._create_analytics_node(global_system_config)
+            self._create_analytics_node()
 
     @rbac_rule_validation.action(service="Contrail",
                                  rules=["update_analytics_node"])
     @decorators.idempotent_id('ff50a2df-6283-409e-ab03-c13b63acc8a0')
     def test_update_analytics_node(self):
         """test method for update analytics nodes"""
-        # create global system config
-        global_system_config = self._create_global_system_config()['name']
-        new_node = self._create_analytics_node(global_system_config)
+        new_node = self._create_analytics_node()
         update_name = data_utils.rand_name('updated_node')
         with self.rbac_utils.override_role(self):
             self.analytics_node_client.update_analytics_node(
@@ -107,8 +86,6 @@ class ContrailAnalyticsNodeTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('972f997a-c89f-4227-8ae9-5a2335ec0b0a')
     def test_delete_analytics_node(self):
         """test method for delete analytics nodes"""
-        # create global system config
-        global_system_config = self._create_global_system_config()['name']
-        new_node = self._create_analytics_node(global_system_config)
+        new_node = self._create_analytics_node()
         with self.rbac_utils.override_role(self):
             self.analytics_node_client.delete_analytics_node(new_node['uuid'])

@@ -17,7 +17,9 @@
 Tempest test-case to test config objects using RBAC roles
 """
 
+import json
 import random
+import testtools
 
 from oslo_log import log as logging
 from patrole_tempest_plugin import rbac_rule_validation
@@ -43,7 +45,10 @@ class ConfigNodeTest(rbac_base.BaseContrailTest):
     def _create_config_node(self):
         config_node_ip_address = self._random_ip_generator()
         display_name = data_utils.rand_name('config_node')
-        fq_name = [display_name]
+        if float(CONF.sdn.contrail_version) < 5:
+            fq_name = [display_name]
+        else:
+            fq_name = ['default-global-system-config', display_name]
         config_node = self.config_client.create_config_nodes(
             config_node_ip_address=config_node_ip_address,
             display_name=display_name, fq_name=fq_name)
@@ -195,10 +200,12 @@ class GlobalSystemConfigTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self.config_client.list_global_system_configs()
 
+    @testtools.skipUnless(float(CONF.sdn.contrail_version) < 5,
+                          'Not supported in OpenContrail versions >= 5')
     @rbac_rule_validation.action(service="Contrail",
                                  rules=["create_global_system_configs"])
     @decorators.idempotent_id('e0ba6a20-3e28-47ac-bf95-9a848fcee49a')
-    def test_create_global_sys_configs(self):
+    def test_create_global_system_configs(self):
         """test method for create global system config service objects"""
         with self.rbac_utils.override_role(self):
             self._create_global_system_config()
@@ -207,16 +214,34 @@ class GlobalSystemConfigTest(rbac_base.BaseContrailTest):
                                  rules=["show_global_system_config"])
     @decorators.idempotent_id('4b9f9131-cb34-4b7d-9d06-c6aca85cce3a')
     def test_show_global_system_config(self):
-        """test method for show global system config service objects"""
-        new_config = self._create_global_system_config()
-        with self.rbac_utils.override_role(self):
-            self.config_client.show_global_system_config(
-                new_config['uuid'])
+        if float(CONF.sdn.contrail_version) < 5:
+            new_config = self._create_global_system_config()
+            with self.rbac_utils.override_role(self):
+                self.config_client.show_global_system_config(
+                    new_config['uuid'])
+        else:
+            resp, resp_body = self.config_client.list_global_system_configs()
+            # There must exist just one global system config in Contrail
+            # verion > 4.x. There may be more than one in other versions
+            # which is bug fixed in later releases.
+            body = json.loads(resp_body)['global-system-configs']
+            self.assertGreater(len(body), 0,
+                               msg="No global system config exists. "
+                                   "There must exists "
+                                   "default-global-sytem-config "
+                                   "at least by default")
+            for gsc in body:
+                if gsc['fq_name'][0] == 'default-global-system-config':
+                    with self.rbac_utils.override_role(self):
+                        self.config_client.show_global_system_config(
+                            gsc['uuid'])
 
+    @testtools.skipUnless(float(CONF.sdn.contrail_version) < 5,
+                          'Not supported in OpenContrail versions >= 5')
     @rbac_rule_validation.action(service="Contrail",
                                  rules=["update_global_system_config"])
     @decorators.idempotent_id('4f90dc83-da59-45a4-8ab6-b387bd6c2df4')
-    def test_update_global_sys_config(self):
+    def test_update_global_system_config(self):
         """test method for update global system config service objects"""
         new_config = self._create_global_system_config()
         update_name = data_utils.rand_name('test')
@@ -225,12 +250,13 @@ class GlobalSystemConfigTest(rbac_base.BaseContrailTest):
                 new_config['uuid'],
                 display_name=update_name)
 
+    @testtools.skipUnless(float(CONF.sdn.contrail_version) < 5,
+                          'Not supported in OpenContrail versions >= 5')
     @rbac_rule_validation.action(service="Contrail",
                                  rules=["delete_global_system_config"])
     @decorators.idempotent_id('fce1653c-e657-4a1e-8ced-7e02d297d6c9')
-    def test_delete_global_sys_config(self):
+    def test_delete_global_system_config(self):
         """test method for delete global system config service objects"""
         new_config = self._create_global_system_config()
         with self.rbac_utils.override_role(self):
-            self.config_client.delete_global_system_config(
-                new_config['uuid'])
+            self.config_client.delete_global_system_config(new_config['uuid'])
