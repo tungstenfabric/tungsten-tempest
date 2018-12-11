@@ -1,0 +1,12 @@
+language: python
+
+env:
+  - TOX_ENV=pep8
+  - TOX_ENV=py27
+  - TOX_ENV=py35
+
+install:
+  - pip install tox
+
+script:
+  - tox
