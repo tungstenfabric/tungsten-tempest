@@ -1,3 +1,5 @@
+[![Travis-CI](https://travis-ci.com/tungstenfabric/tungsten-tempest.svg?branch=master)](https://travis-ci.com/tungstenfabric/tungsten-tempest)
+
 Tempest Integration of Tungsten Fabric (Contrail)
 =================================================
 
