@@ -37,6 +37,8 @@ from tungsten_tempest_plugin.services.contrail.json.bgp_as_a_service_client \
     import BGPAsAServiceClient
 from tungsten_tempest_plugin.services.contrail.json.config_client import \
     ConfigClient
+from tungsten_tempest_plugin.services.contrail.json.contrail_client import \
+    ContrailClient
 from tungsten_tempest_plugin.services.contrail.json.database_client import \
     ContrailDatabaseClient
 from tungsten_tempest_plugin.services.contrail.json.\
@@ -122,6 +124,7 @@ class BaseContrailTest(rbac_utils.RbacUtilsMixin, test.BaseTestCase):
         dscv = CONF.identity.disable_ssl_certificate_validation
         ca_certs = CONF.identity.ca_certificates_file
         cls.setup_rbac_utils()
+
         cls.access_control_client = AccessControlClient(
             cls.auth_provider,
             CONF.sdn.catalog_type,
@@ -361,6 +364,13 @@ class BaseContrailTest(rbac_utils.RbacUtilsMixin, test.BaseTestCase):
             disable_ssl_certificate_validation=dscv,
             ca_certs=ca_certs)
         cls.alias_ip_client = AliasIPsClient(
+            cls.auth_provider,
+            CONF.sdn.catalog_type,
+            CONF.identity.region,
+            CONF.sdn.endpoint_type,
+            disable_ssl_certificate_validation=dscv,
+            ca_certs=ca_certs)
+        cls.contrail_client = ContrailClient(
             cls.auth_provider,
             CONF.sdn.catalog_type,
             CONF.identity.region,
