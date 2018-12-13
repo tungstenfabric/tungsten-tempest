@@ -1,15 +1,18 @@
 language: python
-python:
-  - "2.7"
-  - "3.5"
-
-env:
-  - TOX_ENV=pep8
-  - TOX_ENV=py27
-  - TOX_ENV=py35
 
 install:
   - pip install tox
 
 script:
   - tox
+
+jobs:
+  include:
+    - stage: style
+      python: "3.5"
+      env: TOXENV=pep8
+    - stage: unit tests
+      python: "2.7"
+      env: TOXENV=py27
+    - python: "3.5"
+      env: TOXENV=py35
