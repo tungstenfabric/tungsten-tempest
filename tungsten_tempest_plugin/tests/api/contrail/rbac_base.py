@@ -100,9 +100,21 @@ CONF = config.CONF
 LOG = logging.getLogger(__name__)
 
 
+def get_contail_version():
+    return float(CONF.sdn.contrail_version)
+
+
 class BaseContrailTest(rbac_utils.RbacUtilsMixin, test.BaseTestCase):
     """Base class for Contrail tests."""
     credentials = ['primary', 'admin']
+
+    required_contrail_version = None
+
+    @classmethod
+    def skip_if_contrail_version_less(cls, version):
+        if get_contail_version() < version:
+            msg = "The tests require Contrail >= %s" % version
+            raise cls.skipException(msg)
 
     @classmethod
     def skip_checks(cls):
@@ -115,6 +127,8 @@ class BaseContrailTest(rbac_utils.RbacUtilsMixin, test.BaseTestCase):
         if CONF.auth.tempest_roles != ['admin']:
             raise cls.skipException(
                 "%s skipped because tempest roles is not admin" % cls.__name__)
+        if cls.required_contrail_version:
+            cls.skip_if_contrail_version_less(cls.required_contrail_version)
 
     @classmethod
     def setup_clients(cls):
