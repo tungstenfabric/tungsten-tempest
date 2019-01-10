@@ -106,7 +106,7 @@ class PolicyManagementTest(rbac_base.BaseContrailTest):
                 delete_policy_management(obj_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
-                                 rules=["update_service_object"])
+                                 rules=["update_policy_management"])
     @decorators.idempotent_id('833de029-cd09-4929-a40e-ddf521381474')
     def test_update_policy_management(self):
         """Update policy_management.
