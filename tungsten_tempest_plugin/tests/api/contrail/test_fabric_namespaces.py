@@ -25,11 +25,7 @@ CONF = config.CONF
 
 class FabricNamespacesContrailTest(rbac_base.BaseContrailTest):
 
-    @classmethod
-    def skip_checks(cls):
-        super(FabricNamespacesContrailTest, cls).skip_checks()
-        if float(CONF.sdn.contrail_version) < 5:
-            raise cls.skipException("fabric-namespace requires Contrail >= 5")
+    required_contrail_version = 5
 
     @classmethod
     def resource_setup(cls):

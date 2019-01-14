@@ -45,7 +45,7 @@ class ConfigNodeTest(rbac_base.BaseContrailTest):
     def _create_config_node(self):
         config_node_ip_address = self._random_ip_generator()
         display_name = data_utils.rand_name('config_node')
-        if float(CONF.sdn.contrail_version) < 5:
+        if rbac_base.get_contail_version() < 5:
             fq_name = [display_name]
         else:
             fq_name = ['default-global-system-config', display_name]
@@ -200,7 +200,7 @@ class GlobalSystemConfigTest(rbac_base.BaseContrailTest):
         with self.rbac_utils.override_role(self):
             self.config_client.list_global_system_configs()
 
-    @testtools.skipUnless(float(CONF.sdn.contrail_version) < 5,
+    @testtools.skipUnless(rbac_base.get_contail_version() < 5,
                           'Not supported in OpenContrail versions >= 5')
     @rbac_rule_validation.action(service="Contrail",
                                  rules=["create_global_system_configs"])
@@ -214,7 +214,7 @@ class GlobalSystemConfigTest(rbac_base.BaseContrailTest):
                                  rules=["show_global_system_config"])
     @decorators.idempotent_id('4b9f9131-cb34-4b7d-9d06-c6aca85cce3a')
     def test_show_global_system_config(self):
-        if float(CONF.sdn.contrail_version) < 5:
+        if rbac_base.get_contail_version() < 5:
             new_config = self._create_global_system_config()
             with self.rbac_utils.override_role(self):
                 self.config_client.show_global_system_config(
@@ -236,7 +236,7 @@ class GlobalSystemConfigTest(rbac_base.BaseContrailTest):
                         self.config_client.show_global_system_config(
                             gsc['uuid'])
 
-    @testtools.skipUnless(float(CONF.sdn.contrail_version) < 5,
+    @testtools.skipUnless(rbac_base.get_contail_version() < 5,
                           'Not supported in OpenContrail versions >= 5')
     @rbac_rule_validation.action(service="Contrail",
                                  rules=["update_global_system_config"])
@@ -250,7 +250,7 @@ class GlobalSystemConfigTest(rbac_base.BaseContrailTest):
                 new_config['uuid'],
                 display_name=update_name)
 
-    @testtools.skipUnless(float(CONF.sdn.contrail_version) < 5,
+    @testtools.skipUnless(rbac_base.get_contail_version() < 5,
                           'Not supported in OpenContrail versions >= 5')
     @rbac_rule_validation.action(service="Contrail",
                                  rules=["delete_global_system_config"])

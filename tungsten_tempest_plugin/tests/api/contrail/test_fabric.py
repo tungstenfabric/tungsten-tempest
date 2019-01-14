@@ -25,11 +25,7 @@ CONF = config.CONF
 
 class FabricContrailTest(rbac_base.BaseContrailTest):
 
-    @classmethod
-    def skip_checks(cls):
-        super(FabricContrailTest, cls).skip_checks()
-        if float(CONF.sdn.contrail_version) < 5:
-            raise cls.skipException("fabric requires Contrail >= 5")
+    required_contrail_version = 5
 
     @classmethod
     def resource_setup(cls):
