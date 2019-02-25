@@ -73,7 +73,7 @@ class FabricNamespacesContrailTest(rbac_base.BaseContrailTest):
 
         RBAC test for the Contrail list_fabric_namespaces policy
         """
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.contrail_client.list_fabric_namespaces()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -84,7 +84,7 @@ class FabricNamespacesContrailTest(rbac_base.BaseContrailTest):
 
         RBAC test for the Contrail create_fabric_namespace policy
         """
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_fabric_namespace()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -95,7 +95,7 @@ class FabricNamespacesContrailTest(rbac_base.BaseContrailTest):
 
         RBAC test for the Contrail show_fabric_namespace policy
         """
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.contrail_client.show_fabric_namespace(
                 self.fabric_namespace_uuid)
 
@@ -108,7 +108,7 @@ class FabricNamespacesContrailTest(rbac_base.BaseContrailTest):
         RBAC test for the Contrail delete_fabric_namespace policy
         """
         ns_uuid = self._create_fabric_namespace()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.contrail_client.delete_fabric_namespace(ns_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -119,7 +119,7 @@ class FabricNamespacesContrailTest(rbac_base.BaseContrailTest):
 
         RBAC test for the Contrail update_fabric_namespace policy
         """
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             put_body = {'display_name': data_utils.rand_name('update_fns')}
             self.contrail_client.update_fabric_namespace(
                 self.fabric_namespace_uuid, **put_body)

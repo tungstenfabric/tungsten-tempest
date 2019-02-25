@@ -66,7 +66,7 @@ class PolicyManagementTest(rbac_base.BaseContrailTest):
 
         RBAC test for the Contrail create_policy_management policy
         """
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_policy_management()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -77,7 +77,7 @@ class PolicyManagementTest(rbac_base.BaseContrailTest):
 
         RBAC test for the Contrail list_policy_managements policy
         """
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.contrail_client.list_policy_managements()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -88,7 +88,7 @@ class PolicyManagementTest(rbac_base.BaseContrailTest):
 
         RBAC test for the Contrail show_policy_management policy
         """
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.contrail_client.\
                 show_policy_management(self.policy_management_uuid)
 
@@ -101,7 +101,7 @@ class PolicyManagementTest(rbac_base.BaseContrailTest):
         RBAC test for the Contrail delete_policy_management policy
         """
         obj_uuid = self._create_policy_management()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.contrail_client.\
                 delete_policy_management(obj_uuid)
 
@@ -116,6 +116,6 @@ class PolicyManagementTest(rbac_base.BaseContrailTest):
         put_body = {
             'display_name': data_utils.rand_name(
                 'update_policy_management')}
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.contrail_client.update_policy_management(
                 self.policy_management_uuid, **put_body)

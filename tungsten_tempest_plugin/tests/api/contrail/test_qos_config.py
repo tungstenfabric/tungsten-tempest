@@ -53,7 +53,7 @@ class QosConfigContrailTest(rbac_base.BaseContrailTest):
     def test_list_qos_configs(self):
         """test method for list QoS config objects"""
         self._create_qos_configs()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.qos_client.list_qos_configs()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -61,7 +61,7 @@ class QosConfigContrailTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('031b4a27-22cd-4d93-938d-ba6d0f3163ba')
     def test_create_qos_configs(self):
         """test method for create QoS config objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_qos_configs()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -70,7 +70,7 @@ class QosConfigContrailTest(rbac_base.BaseContrailTest):
     def test_show_qos_config(self):
         """test method for show QoS config objects"""
         qos_config = self._create_qos_configs()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.qos_client.show_qos_config(qos_config['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
@@ -79,7 +79,7 @@ class QosConfigContrailTest(rbac_base.BaseContrailTest):
     def test_delete_qos_config(self):
         """test method for delete QoS config objects"""
         qos_config = self._create_qos_configs()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.qos_client.delete_qos_config(qos_config['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
@@ -89,7 +89,7 @@ class QosConfigContrailTest(rbac_base.BaseContrailTest):
         """test method for update QoS config objects"""
         qos_config = self._create_qos_configs()
         display_name = data_utils.rand_name('qos_config')
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.qos_client.update_qos_config(
                 qos_config_id=qos_config['uuid'],
                 display_name=display_name)

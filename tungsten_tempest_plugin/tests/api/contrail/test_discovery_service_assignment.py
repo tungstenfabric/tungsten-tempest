@@ -47,7 +47,7 @@ class DiscoveryServiceAssignmentTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('9ac1e4ca-8983-403f-b644-7758935f2f36')
     def test_list_discovery_service(self):
         """test method for list discovery service assignment objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.dsa_client.list_ds_assignments()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -56,7 +56,7 @@ class DiscoveryServiceAssignmentTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('40ad1208-a039-4809-8516-41b4dfcbd00c')
     def test_create_discovery_service(self):
         """test method for create discovery service assignment objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_discovery_service_assignments()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -65,7 +65,7 @@ class DiscoveryServiceAssignmentTest(rbac_base.BaseContrailTest):
     def test_show_discovery_service(self):
         """test method for show discovery service assignment objects"""
         new_dsa = self._create_discovery_service_assignments()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.dsa_client.show_ds_assignment(new_dsa['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
@@ -75,7 +75,7 @@ class DiscoveryServiceAssignmentTest(rbac_base.BaseContrailTest):
         """test method for update discovery service assignment objects"""
         new_dsa = self._create_discovery_service_assignments()
         update_name = data_utils.rand_name('test')
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.dsa_client.update_ds_assignment(
                 new_dsa['uuid'],
                 fq_name=new_dsa['fq_name'],
@@ -87,6 +87,6 @@ class DiscoveryServiceAssignmentTest(rbac_base.BaseContrailTest):
     def test_delete_discovery_service(self):
         """test method for delete discovery service assignment objects"""
         new_dsa = self._create_discovery_service_assignments()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.dsa_client.delete_ds_assignment(
                 new_dsa['uuid'])

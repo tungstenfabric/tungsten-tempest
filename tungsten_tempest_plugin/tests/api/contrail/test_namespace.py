@@ -56,7 +56,7 @@ class NamespaceContrailTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('e436390d-d669-4047-9838-421ea93e94be')
     def test_list_namespaces(self):
         """test method for list namespace objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.namespace_client.list_namespaces()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -64,7 +64,7 @@ class NamespaceContrailTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('503ae445-7e67-4db6-989a-af0b7f9a7e95')
     def test_create_namespaces(self):
         """test method for create namespace objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_namespace()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -73,7 +73,7 @@ class NamespaceContrailTest(rbac_base.BaseContrailTest):
     def test_show_namespace(self):
         """test method for show namespace objects"""
         namespace_uuid = self._create_namespace()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.namespace_client.show_namespace(namespace_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -82,7 +82,7 @@ class NamespaceContrailTest(rbac_base.BaseContrailTest):
     def test_update_namespace(self):
         """test method for update namespace objects"""
         namespace_uuid = self._create_namespace()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._update_namespace(namespace_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -91,5 +91,5 @@ class NamespaceContrailTest(rbac_base.BaseContrailTest):
     def test_delete_namespace(self):
         """test method for delete namespace objects"""
         namespace_uuid = self._create_namespace()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.namespace_client.delete_namespace(namespace_uuid)

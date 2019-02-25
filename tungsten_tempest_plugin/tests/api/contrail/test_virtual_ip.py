@@ -56,7 +56,7 @@ class VirtualIPTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('92303eee-bd96-48bc-a02c-39950bd19a21')
     def test_list_virtual_ips(self):
         """test method for list virtual ip objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.virtual_ip_client.list_virtual_ips()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -64,7 +64,7 @@ class VirtualIPTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('e0070888-995d-46ab-91fc-db1412eba2f7')
     def test_create_virtual_ips(self):
         """test method for create virtual ip objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_virtual_ip()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -73,7 +73,7 @@ class VirtualIPTest(rbac_base.BaseContrailTest):
     def test_show_virtual_ip(self):
         """test method for show virtual ip objects"""
         virtual_ip_uuid = self._create_virtual_ip()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.virtual_ip_client.show_virtual_ip(virtual_ip_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -82,7 +82,7 @@ class VirtualIPTest(rbac_base.BaseContrailTest):
     def test_update_virtual_ip(self):
         """test method for update virtual ip objects"""
         virtual_ip_uuid = self._create_virtual_ip()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._update_virtual_ip(virtual_ip_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -91,5 +91,5 @@ class VirtualIPTest(rbac_base.BaseContrailTest):
     def test_delete_virtual_ip(self):
         """test method for delete virtual ip objects"""
         virtual_ip_uuid = self._create_virtual_ip()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.virtual_ip_client.delete_virtual_ip(virtual_ip_uuid)

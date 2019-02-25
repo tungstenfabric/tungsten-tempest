@@ -57,7 +57,7 @@ class ContrailDatabaseTest(rbac_base.BaseContrailTest):
     def test_list_database_nodes(self):
         """test method for list database objects"""
         self._create_database_node()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.db_client.list_database_nodes()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -66,7 +66,7 @@ class ContrailDatabaseTest(rbac_base.BaseContrailTest):
     def test_show_database_node(self):
         """test method for show database objects"""
         db_node = self._create_database_node()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.db_client.show_database_node(db_node['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
@@ -74,7 +74,7 @@ class ContrailDatabaseTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('b9aa9c6b-9381-44f0-94fb-e4523bf2a87e')
     def test_create_database_nodes(self):
         """test method for update database objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_database_node()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -85,7 +85,7 @@ class ContrailDatabaseTest(rbac_base.BaseContrailTest):
         db_node = self._create_database_node()
         db_node_id = db_node['uuid']
         display_name = data_utils.rand_name('DatabaseNew')
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.db_client.update_database_node(
                 db_node_id=db_node_id,
                 display_name=display_name)
@@ -97,5 +97,5 @@ class ContrailDatabaseTest(rbac_base.BaseContrailTest):
         """test method for delete database objects"""
         db_node = self._create_database_node()
         db_node_id = db_node['uuid']
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._delete_database_node(db_node_id)

@@ -55,7 +55,7 @@ class ContrailRouteTableTest(rbac_base.BaseContrailTest):
     def test_list_route_tables(self):
         """test method for list route table objects"""
         self._create_route_tables()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.route_client.list_route_tables()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -64,7 +64,7 @@ class ContrailRouteTableTest(rbac_base.BaseContrailTest):
     def test_show_route_table(self):
         """test method for show route table objects"""
         route_table = self._create_route_tables()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.route_client.show_route_table(route_table['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
@@ -72,7 +72,7 @@ class ContrailRouteTableTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('3fab8105-c0be-4c9e-be5f-d2dce4deb921')
     def test_create_route_tables(self):
         """test method for create route table objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_route_tables()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -82,7 +82,7 @@ class ContrailRouteTableTest(rbac_base.BaseContrailTest):
         """test method for update route table objects"""
         route_table = self._create_route_tables()
         display_name = data_utils.rand_name('RouteNew')
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.route_client.update_route_table(
                 route_id=route_table['uuid'],
                 display_name=display_name)
@@ -93,7 +93,7 @@ class ContrailRouteTableTest(rbac_base.BaseContrailTest):
     def test_delete_route_table(self):
         """test method for delete route table objects"""
         route_table = self._create_route_tables()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._delete_route_table(route_table['uuid'])
 
 
@@ -123,7 +123,7 @@ class ContrailInterfaceRouteTableTest(rbac_base.BaseContrailTest):
     def test_list_interface_route(self):
         """test method for list route interface table objects"""
         self._create_interface_route_tables()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.route_client.list_interface_route_tables()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -132,7 +132,7 @@ class ContrailInterfaceRouteTableTest(rbac_base.BaseContrailTest):
     def test_show_interface_route(self):
         """test method for show route interface table objects"""
         interface_rte_table = self._create_interface_route_tables()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.route_client.show_interface_route_table(
                 interface_rte_table['uuid'])
 
@@ -141,7 +141,7 @@ class ContrailInterfaceRouteTableTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('b89ef437-4759-4c04-948b-d2ff9675ab07')
     def test_create_interface_route(self):
         """test method for create route interface table objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_interface_route_tables()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -151,7 +151,7 @@ class ContrailInterfaceRouteTableTest(rbac_base.BaseContrailTest):
         """test method for update route interface table objects"""
         interface_rte_table = self._create_interface_route_tables()
         display_name = data_utils.rand_name('InterfaceRouteNew')
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.route_client.update_interface_route_table(
                 interface_route_id=interface_rte_table['uuid'],
                 display_name=display_name)
@@ -162,7 +162,7 @@ class ContrailInterfaceRouteTableTest(rbac_base.BaseContrailTest):
     def test_delete_interface_route(self):
         """test method for delete route interface table objects"""
         interface_rte_table = self._create_interface_route_tables()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._delete_interface_route_table(
                 interface_rte_table['uuid'])
 
@@ -193,7 +193,7 @@ class ContrailRouteTargetsTest(rbac_base.BaseContrailTest):
     def test_list_route_targets(self):
         """test method for list route target objects"""
         self._create_route_targets()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.route_client.list_route_targets()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -202,7 +202,7 @@ class ContrailRouteTargetsTest(rbac_base.BaseContrailTest):
     def test_show_route_target(self):
         """test method for show route target objects"""
         target = self._create_route_targets()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.route_client.show_route_target(target['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
@@ -210,7 +210,7 @@ class ContrailRouteTargetsTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('fcdb4ebc-b92d-49f2-88e9-68c93aec94be')
     def test_create_route_targets(self):
         """test method for create route target objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_route_targets()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -220,7 +220,7 @@ class ContrailRouteTargetsTest(rbac_base.BaseContrailTest):
         """test method for update route target objects"""
         target = self._create_route_targets()
         display_name = data_utils.rand_name('RouteTargetNew')
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.route_client.update_route_target(
                 route_target_id=target['uuid'],
                 display_name=display_name)
@@ -231,7 +231,7 @@ class ContrailRouteTargetsTest(rbac_base.BaseContrailTest):
     def test_delete_route_target(self):
         """test method for delete route target objects"""
         target = self._create_route_targets()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._delete_route_target(target['uuid'])
 
 
@@ -260,7 +260,7 @@ class ContrailRouteAggregateTest(rbac_base.BaseContrailTest):
     def test_list_route_aggregates(self):
         """test method for list route aggregate objects"""
         self._create_route_aggregates()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.route_client.list_route_aggregates()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -269,7 +269,7 @@ class ContrailRouteAggregateTest(rbac_base.BaseContrailTest):
     def test_show_route_aggregate(self):
         """test method for show route aggregate objects"""
         route_aggr = self._create_route_aggregates()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.route_client.show_route_aggregate(
                 route_aggr['uuid'])
 
@@ -278,7 +278,7 @@ class ContrailRouteAggregateTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('7553a54f-e41c-4555-b745-a858c5a70690')
     def test_create_route_aggregates(self):
         """test method for create route aggregate objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_route_aggregates()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -288,7 +288,7 @@ class ContrailRouteAggregateTest(rbac_base.BaseContrailTest):
         """test method for update route aggregate objects"""
         route_aggr = self._create_route_aggregates()
         display_name = data_utils.rand_name('RouteAggregateNew')
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.route_client.update_route_aggregate(
                 route_aggr_id=route_aggr['uuid'],
                 display_name=display_name)
@@ -300,5 +300,5 @@ class ContrailRouteAggregateTest(rbac_base.BaseContrailTest):
         """test method for delete route aggregate objects"""
         # Create aggregate
         route_aggr = self._create_route_aggregates()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._delete_route_aggregate(route_aggr['uuid'])

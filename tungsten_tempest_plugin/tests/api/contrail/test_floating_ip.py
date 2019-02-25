@@ -110,7 +110,7 @@ class FloatingIpPoolTest(BaseFloatingIpTest):
     @decorators.idempotent_id('a83ca5e8-be4b-4161-869c-f981a724cf82')
     def test_create_floating_ip_pools(self):
         """test method for create floating IP pool objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_floating_ip_pool()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -119,7 +119,7 @@ class FloatingIpPoolTest(BaseFloatingIpTest):
     def test_list_floating_ip_pools(self):
         """test method for list floating IP pool objects"""
         self._create_floating_ip_pool()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.fip_client.list_floating_ip_pools()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -128,7 +128,7 @@ class FloatingIpPoolTest(BaseFloatingIpTest):
     def test_show_floating_ip_pool(self):
         """test method for show floating IP pool objects"""
         uuid = self._create_floating_ip_pool()['uuid']
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.fip_client.show_floating_ip_pool(uuid)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -137,7 +137,7 @@ class FloatingIpPoolTest(BaseFloatingIpTest):
     def test_update_floating_ip_pool(self):
         """test method for update floating IP pool objects"""
         uuid = self._create_floating_ip_pool()['uuid']
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.fip_client.update_floating_ip_pool(
                 uuid,
                 display_name='rbac-fip-pool-new-name')
@@ -148,7 +148,7 @@ class FloatingIpPoolTest(BaseFloatingIpTest):
     def test_delete_floating_ip_pool(self):
         """test method for delete floating IP pool objects"""
         uuid = self._create_floating_ip_pool()['uuid']
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.fip_client.delete_floating_ip_pool(uuid)
 
 
@@ -193,7 +193,7 @@ class FloatingIpTest(BaseFloatingIpTest):
     @decorators.idempotent_id('ff05f70f-9db9-43cb-a5ce-38cbbef2c430')
     def test_create_floating_ips(self):
         """test method for create floating IP objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_floating_ip()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -202,7 +202,7 @@ class FloatingIpTest(BaseFloatingIpTest):
     def test_list_floating_ips(self):
         """test method for list floating IP objects"""
         self._create_floating_ip()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.fip_client.list_floating_ips()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -211,7 +211,7 @@ class FloatingIpTest(BaseFloatingIpTest):
     def test_show_floating_ip(self):
         """test method for show floating IP objects"""
         uuid = self._create_floating_ip()['uuid']
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.fip_client.show_floating_ip(uuid)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -220,7 +220,7 @@ class FloatingIpTest(BaseFloatingIpTest):
     def test_update_floating_ip(self):
         """test method for update floating IP objects"""
         uuid = self._create_floating_ip()['uuid']
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.fip_client.update_floating_ip(
                 uuid,
                 display_name='rbac-fip-new-name')
@@ -231,5 +231,5 @@ class FloatingIpTest(BaseFloatingIpTest):
     def test_delete_floating_ip(self):
         """test method for delete floating IP objects"""
         uuid = self._create_floating_ip()['uuid']
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.fip_client.delete_floating_ip(uuid)

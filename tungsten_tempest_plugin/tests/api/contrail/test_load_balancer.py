@@ -177,7 +177,7 @@ class LoadBalancerContrailTest(BaseLoadBalancerTest):
     @decorators.idempotent_id('5d840b6b-3974-4945-916f-dd53ba27e42f')
     def test_list_load_balancers(self):
         """test method for list load balancer objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.load_balancer_client.list_load_balancers()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -185,7 +185,7 @@ class LoadBalancerContrailTest(BaseLoadBalancerTest):
     @decorators.idempotent_id('6a18d506-0794-4eb9-a945-165bf146005d')
     def test_create_load_balancers(self):
         """test method for create load balancer objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_load_balancer()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -194,7 +194,7 @@ class LoadBalancerContrailTest(BaseLoadBalancerTest):
     def test_show_load_balancer(self):
         """test method for show load balancer objects"""
         lb_uuid = self._create_load_balancer()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.load_balancer_client.show_load_balancer(lb_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -203,7 +203,7 @@ class LoadBalancerContrailTest(BaseLoadBalancerTest):
     def test_update_load_balancer(self):
         """test method for update load balancer objects"""
         lb_uuid = self._create_load_balancer()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._update_load_balancer(lb_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -212,7 +212,7 @@ class LoadBalancerContrailTest(BaseLoadBalancerTest):
     def test_delete_load_balancer(self):
         """test method for delete load balancer objects"""
         lb_uuid = self._create_load_balancer()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.load_balancer_client.delete_load_balancer(lb_uuid)
 
 
@@ -226,7 +226,7 @@ class LoadBalancerHealthMonitorContrailTest(BaseLoadBalancerTest):
     @decorators.idempotent_id('3e3d8bdc-3621-4c5e-8130-1187f445a4e6')
     def test_list_lb_health_monitors(self):
         """test method for list load balancer health monitor objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.load_balancer_client.list_lb_healthmonitors()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -235,7 +235,7 @@ class LoadBalancerHealthMonitorContrailTest(BaseLoadBalancerTest):
     @decorators.idempotent_id('bddb93ad-d331-4bbc-bac6-2763cae4eb2c')
     def test_create_lb_health_monitors(self):
         """test method for create load balancer health monitor objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_load_balancer_health_monitor()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -244,7 +244,7 @@ class LoadBalancerHealthMonitorContrailTest(BaseLoadBalancerTest):
     def test_show_lb_health_monitor(self):
         """test method for show load balancer health monitor objects"""
         lb_hm_uuid = self._create_load_balancer_health_monitor()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.load_balancer_client.show_lb_healthmonitor(
                 lb_hm_uuid)
 
@@ -254,7 +254,7 @@ class LoadBalancerHealthMonitorContrailTest(BaseLoadBalancerTest):
     def test_update_lb_health_monitor(self):
         """test method for update load balancer health monitor objects"""
         lb_hm_uuid = self._create_load_balancer_health_monitor()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._update_load_balancer_health_monitor(lb_hm_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -263,7 +263,7 @@ class LoadBalancerHealthMonitorContrailTest(BaseLoadBalancerTest):
     def test_delete_lb_health_monitor(self):
         """test method for delete load balancer health monitor objects"""
         lb_hm_uuid = self._create_load_balancer_health_monitor()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.load_balancer_client.delete_lb_healthmonitor(
                 lb_hm_uuid)
 
@@ -276,7 +276,7 @@ class LoadBalancerListenerContrailTest(BaseLoadBalancerTest):
     @decorators.idempotent_id('7e02882f-0eab-41c2-b48a-bf71e083b912')
     def test_list_lb_listeners(self):
         """test method for list load balancer listener objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.load_balancer_client.list_load_balancer_listeners()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -284,7 +284,7 @@ class LoadBalancerListenerContrailTest(BaseLoadBalancerTest):
     @decorators.idempotent_id('0551de87-fa4c-463f-8968-ec6f2a6098d0')
     def test_create_lb_listeners(self):
         """test method for create load balancer listener objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_load_balancer_listener()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -293,7 +293,7 @@ class LoadBalancerListenerContrailTest(BaseLoadBalancerTest):
     def test_show_lb_listener(self):
         """test method for show load balancer listener objects"""
         lb_listener_uuid = self._create_load_balancer_listener()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.load_balancer_client.show_load_balancer_listener(
                 lb_listener_uuid)
 
@@ -303,7 +303,7 @@ class LoadBalancerListenerContrailTest(BaseLoadBalancerTest):
     def test_update_lb_listener(self):
         """test method for update load balancer listener objects"""
         lb_listener_uuid = self._create_load_balancer_listener()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._update_load_balancer_listener(lb_listener_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -312,7 +312,7 @@ class LoadBalancerListenerContrailTest(BaseLoadBalancerTest):
     def test_delete_lb_listener(self):
         """test method for delete load balancer listener objects"""
         lb_listener_uuid = self._create_load_balancer_listener()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.load_balancer_client.delete_load_balancer_listener(
                 lb_listener_uuid)
 
@@ -325,7 +325,7 @@ class LoadBalancerPoolContrailTest(BaseLoadBalancerTest):
     @decorators.idempotent_id('3d177a9e-7067-4e9e-b4e8-0acc5887dff0')
     def test_list_load_balancer_pools(self):
         """test method for list load balancer pool objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.load_balancer_client.list_load_balancer_pools()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -333,7 +333,7 @@ class LoadBalancerPoolContrailTest(BaseLoadBalancerTest):
     @decorators.idempotent_id('a52c6ec7-a996-4191-9a70-7879a211a711')
     def test_create_load_balancer_pools(self):
         """test method for create load balancer pool objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_load_balancer_pool()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -342,7 +342,7 @@ class LoadBalancerPoolContrailTest(BaseLoadBalancerTest):
     def test_show_load_balancer_pool(self):
         """test method for show load balancer pool objects"""
         lb_pool_uuid = self._create_load_balancer_pool()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.load_balancer_client.show_load_balancer_pool(lb_pool_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -351,7 +351,7 @@ class LoadBalancerPoolContrailTest(BaseLoadBalancerTest):
     def test_update_load_balancer_pool(self):
         """test method for update load balancer pool objects"""
         lb_pool_uuid = self._create_load_balancer_pool()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._update_load_balancer_pool(lb_pool_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -360,7 +360,7 @@ class LoadBalancerPoolContrailTest(BaseLoadBalancerTest):
     def test_delete_load_balancer_pool(self):
         """test method for delete load balancer pool objects"""
         lb_pool_uuid = self._create_load_balancer_pool()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.load_balancer_client.delete_load_balancer_pool(lb_pool_uuid)
 
 
@@ -372,7 +372,7 @@ class LoadBalancerMemberContrailTest(BaseLoadBalancerTest):
     @decorators.idempotent_id('b3c51463-8166-486a-a26e-0f7aeaa41e0f')
     def test_list_load_balancer_members(self):
         """test method for list load balancer member objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.load_balancer_client.list_load_balancer_members()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -380,7 +380,7 @@ class LoadBalancerMemberContrailTest(BaseLoadBalancerTest):
     @decorators.idempotent_id('ad60688f-7a20-4dd5-8229-4076d85b9d55')
     def test_create_lb_members(self):
         """test method for create load balancer member objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_load_balancer_member()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -389,7 +389,7 @@ class LoadBalancerMemberContrailTest(BaseLoadBalancerTest):
     def test_show_load_balancer_member(self):
         """test method for show load balancer member objects"""
         lb_member_uuid = self._create_load_balancer_member()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.load_balancer_client.show_load_balancer_member(lb_member_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -398,7 +398,7 @@ class LoadBalancerMemberContrailTest(BaseLoadBalancerTest):
     def test_update_lb_member(self):
         """test method for update load balancer member objects"""
         lb_member_uuid = self._create_load_balancer_member()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._update_load_balancer_member(lb_member_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -407,6 +407,6 @@ class LoadBalancerMemberContrailTest(BaseLoadBalancerTest):
     def test_delete_lb_member(self):
         """test method for delete load balancer member objects"""
         lb_member_uuid = self._create_load_balancer_member()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.load_balancer_client.delete_load_balancer_member(
                 lb_member_uuid)

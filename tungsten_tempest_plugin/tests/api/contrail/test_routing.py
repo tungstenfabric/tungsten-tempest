@@ -62,7 +62,7 @@ class RoutingTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('054c56ba-76b2-4161-a702-40301d8de085')
     def test_list_routing_instances(self):
         """test method for list routing instance objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.routing_client.list_routing_instances()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -70,7 +70,7 @@ class RoutingTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('3d44a46b-5436-43a8-b2f7-8581f0f04dbc')
     def test_create_routing_instances(self):
         """test method for create routing instance objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_routing_instances()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -79,7 +79,7 @@ class RoutingTest(rbac_base.BaseContrailTest):
     def test_show_routing_instance(self):
         """test method for show routing instance objects"""
         new_instance = self._create_routing_instances()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.routing_client.show_routing_instance(new_instance['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
@@ -88,7 +88,7 @@ class RoutingTest(rbac_base.BaseContrailTest):
     def test_delete_routing_instance(self):
         """test method for delete routing instance objects"""
         new_instance = self._create_routing_instances()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.routing_client.delete_routing_instance(new_instance['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
@@ -97,7 +97,7 @@ class RoutingTest(rbac_base.BaseContrailTest):
     def test_update_routing_instance(self):
         """test method for update routing instance objects"""
         new_instance = self._create_routing_instances()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.routing_client.update_routing_instance(
                 new_instance['uuid'],
                 display_name=data_utils.rand_name('test-instance'))

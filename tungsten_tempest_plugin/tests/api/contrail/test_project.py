@@ -57,7 +57,7 @@ class ProjectContrailTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('7db819fd-ceee-4a6b-9ad7-2e837c055bdd')
     def test_list_projects(self):
         """test method for list project objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.project_client.list_projects()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -65,7 +65,7 @@ class ProjectContrailTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('38b9b7a8-1568-417d-b0a3-e7adee88e4b9')
     def test_create_projects(self):
         """test method for create project objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_project()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -74,7 +74,7 @@ class ProjectContrailTest(rbac_base.BaseContrailTest):
     def test_show_project(self):
         """test method for show project objects"""
         project_uuid = self._create_project()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.project_client.show_project(project_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -83,7 +83,7 @@ class ProjectContrailTest(rbac_base.BaseContrailTest):
     def test_update_project(self):
         """test method for update project objects"""
         project_uuid = self._create_project()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._update_project(project_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -92,5 +92,5 @@ class ProjectContrailTest(rbac_base.BaseContrailTest):
     def test_delete_project(self):
         """test method for delete project objects"""
         project_uuid = self._create_project()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.project_client.delete_project(project_uuid)

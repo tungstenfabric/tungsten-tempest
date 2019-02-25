@@ -74,7 +74,7 @@ class AlarmContrailTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('dc7d19dd-dd5e-4ec8-bf0c-c6d9d83a60a8')
     def test_list_alarms(self):
         """test method for list alarms"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.alarm_client.list_alarms()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -82,7 +82,7 @@ class AlarmContrailTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('7fe55d0c-e54a-4bb7-95a6-9c53f9e9c4bf')
     def test_create_alarms(self):
         """test method for create alarms"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_alarm()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -91,7 +91,7 @@ class AlarmContrailTest(rbac_base.BaseContrailTest):
     def test_show_alarm(self):
         """test method for show alarms"""
         alarm_uuid = self._create_alarm()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.alarm_client.show_alarm(alarm_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -100,7 +100,7 @@ class AlarmContrailTest(rbac_base.BaseContrailTest):
     def test_update_alarm(self):
         """test method for update alarms"""
         alarm_uuid = self._create_alarm()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._update_alarm(alarm_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -110,5 +110,5 @@ class AlarmContrailTest(rbac_base.BaseContrailTest):
         """test method for delete alarms"""
         # Create global system config
         alarm_uuid = self._create_alarm()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.alarm_client.delete_alarm(alarm_uuid)

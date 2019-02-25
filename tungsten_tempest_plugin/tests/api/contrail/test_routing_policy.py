@@ -58,7 +58,7 @@ class RoutingPolicyTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('fe25a306-bc4f-42b3-91ca-38df01e35345')
     def test_list_routing_policys(self):
         """test method for list routing policy objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.routing_policy_client.list_routing_policys()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -66,7 +66,7 @@ class RoutingPolicyTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('f8ca5e30-8bb3-410f-8618-8fdca70bda06')
     def test_create_routing_policys(self):
         """test method for create routing policy objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_routing_policy()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -75,7 +75,7 @@ class RoutingPolicyTest(rbac_base.BaseContrailTest):
     def test_show_routing_policy(self):
         """test method for show routing policy objects"""
         policy_uuid = self._create_routing_policy()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.routing_policy_client.show_routing_policy(policy_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -84,7 +84,7 @@ class RoutingPolicyTest(rbac_base.BaseContrailTest):
     def test_update_routing_policy(self):
         """test method for update routing policy objects"""
         policy_uuid = self._create_routing_policy()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._update_routing_policy(policy_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -93,5 +93,5 @@ class RoutingPolicyTest(rbac_base.BaseContrailTest):
     def test_delete_routing_policy(self):
         """test method for delete routing policy objects"""
         policy_uuid = self._create_routing_policy()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.routing_policy_client.delete_routing_policy(policy_uuid)

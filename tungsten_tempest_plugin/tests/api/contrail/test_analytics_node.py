@@ -50,7 +50,7 @@ class ContrailAnalyticsNodeTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('d3002e37-4b42-446d-b144-1b53f0dadfd3')
     def test_list_analytics_nodes(self):
         """test method for list analytics nodes"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.analytics_node_client.list_analytics_nodes()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -59,7 +59,7 @@ class ContrailAnalyticsNodeTest(rbac_base.BaseContrailTest):
     def test_show_analytics_node(self):
         """test method for show analytics nodes"""
         new_node = self._create_analytics_node()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.analytics_node_client.show_analytics_node(new_node['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
@@ -67,7 +67,7 @@ class ContrailAnalyticsNodeTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('c57482c9-fcb4-4f41-95b0-7f0ffeee3dc3')
     def test_create_analytics_nodes(self):
         """test method for create analytics nodes"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_analytics_node()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -77,7 +77,7 @@ class ContrailAnalyticsNodeTest(rbac_base.BaseContrailTest):
         """test method for update analytics nodes"""
         new_node = self._create_analytics_node()
         update_name = data_utils.rand_name('updated_node')
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.analytics_node_client.update_analytics_node(
                 new_node['uuid'], display_name=update_name)
 
@@ -87,5 +87,5 @@ class ContrailAnalyticsNodeTest(rbac_base.BaseContrailTest):
     def test_delete_analytics_node(self):
         """test method for delete analytics nodes"""
         new_node = self._create_analytics_node()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.analytics_node_client.delete_analytics_node(new_node['uuid'])

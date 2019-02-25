@@ -46,7 +46,7 @@ class NetworkIpamsTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('9ee2c4d8-3209-4ef8-86e1-0ecea2d4c5f2')
     def test_list_network_ipams(self):
         """test method for list n/w ipam objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.network_ipams_client.list_network_ipams()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -54,7 +54,7 @@ class NetworkIpamsTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('ef2415ea-0810-413a-85a0-4508c9d7af91')
     def test_create_network_ipams(self):
         """test method for create n/w ipam objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_network_ipams()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -63,7 +63,7 @@ class NetworkIpamsTest(rbac_base.BaseContrailTest):
     def test_show_network_ipam(self):
         """test method for show n/w ipam objects"""
         new_ipam = self._create_network_ipams()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.network_ipams_client.show_network_ipam(new_ipam['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
@@ -72,7 +72,7 @@ class NetworkIpamsTest(rbac_base.BaseContrailTest):
     def test_delete_network_ipam(self):
         """test method for delete n/w ipam objects"""
         new_ipam = self._create_network_ipams()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.network_ipams_client.delete_network_ipam(new_ipam['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
@@ -81,7 +81,7 @@ class NetworkIpamsTest(rbac_base.BaseContrailTest):
     def test_update_network_ipam(self):
         """test method for update n/w ipam objects"""
         new_ipam = self._create_network_ipams()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.network_ipams_client.update_network_ipam(
                 new_ipam['uuid'],
                 display_name=data_utils.rand_name('test-ipam'))

@@ -58,7 +58,7 @@ class NetworkPolicyTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('fa2a28f3-a8bb-4908-95b9-1e11cf58b16f')
     def test_list_policys(self):
         """test method for list n/w policy objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.network_policy_client.list_network_policys()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -66,7 +66,7 @@ class NetworkPolicyTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('a30be228-afba-40c9-8678-ae020db68d79')
     def test_create_network_policys(self):
         """test method for create n/w policy objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_policy()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -75,7 +75,7 @@ class NetworkPolicyTest(rbac_base.BaseContrailTest):
     def test_show_network_policy(self):
         """test method for show n/w policy objects"""
         policy_uuid = self._create_policy()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.network_policy_client.show_network_policy(policy_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -84,7 +84,7 @@ class NetworkPolicyTest(rbac_base.BaseContrailTest):
     def test_update_network_policy(self):
         """test method for update n/w policy objects"""
         policy_uuid = self._create_policy()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._update_policy(policy_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -93,5 +93,5 @@ class NetworkPolicyTest(rbac_base.BaseContrailTest):
     def test_delete_network_policy(self):
         """test method for delete n/w policy objects"""
         policy_uuid = self._create_policy()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.network_policy_client.delete_network_policy(policy_uuid)

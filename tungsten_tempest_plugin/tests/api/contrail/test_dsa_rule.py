@@ -60,7 +60,7 @@ class ContrailDSARuleTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('3227673b-96fc-4d26-ab0b-109347e9e9c2')
     def test_list_dsa_rules(self):
         """test method for list dsa rules objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.dsa_rule_client.list_dsa_rules()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -72,7 +72,7 @@ class ContrailDSARuleTest(rbac_base.BaseContrailTest):
         discovery_service_assignment = \
             self._create_discovery_service_assignments()['name']
         new_rule = self._create_dsa_rules(discovery_service_assignment)
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.dsa_rule_client.show_dsa_rule(new_rule['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
@@ -83,7 +83,7 @@ class ContrailDSARuleTest(rbac_base.BaseContrailTest):
         # create discover service assignment
         discovery_service_assignment = \
             self._create_discovery_service_assignments()['name']
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_dsa_rules(discovery_service_assignment)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -96,7 +96,7 @@ class ContrailDSARuleTest(rbac_base.BaseContrailTest):
             self._create_discovery_service_assignments()['name']
         new_rule = self._create_dsa_rules(discovery_service_assignment)
         update_name = data_utils.rand_name('updated_rule')
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.dsa_rule_client.update_dsa_rule(
                 new_rule['uuid'], display_name=update_name)
 
@@ -109,5 +109,5 @@ class ContrailDSARuleTest(rbac_base.BaseContrailTest):
         discovery_service_assignment = \
             self._create_discovery_service_assignments()['name']
         new_rule = self._create_dsa_rules(discovery_service_assignment)
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.dsa_rule_client.delete_dsa_rule(new_rule['uuid'])

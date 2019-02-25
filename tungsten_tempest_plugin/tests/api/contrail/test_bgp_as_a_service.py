@@ -46,7 +46,7 @@ class BGPAsAServicesTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('d3153cd0-379e-4e62-9780-ef237e567fc5')
     def test_list_bgp_as_a_services(self):
         """test method for list bgp as a service objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.bgp_as_a_service_client.list_bgp_as_a_services()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -54,7 +54,7 @@ class BGPAsAServicesTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('a039f0c4-b53a-492b-a5c5-fbdf046afcf4')
     def test_create_bgp_as_a_services(self):
         """test method for create bgp as a service objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_bgp_as_a_services()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -63,7 +63,7 @@ class BGPAsAServicesTest(rbac_base.BaseContrailTest):
     def test_show_bgp_as_a_service(self):
         """test method for show bgp as a service objects"""
         new_bgp = self._create_bgp_as_a_services()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.bgp_as_a_service_client.show_bgp_as_a_service(
                 new_bgp['uuid'])
 
@@ -73,7 +73,7 @@ class BGPAsAServicesTest(rbac_base.BaseContrailTest):
     def test_delete_bgp_as_a_service(self):
         """test method for delete bgp as a service objects"""
         new_bgp = self._create_bgp_as_a_services()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.bgp_as_a_service_client.delete_bgp_as_a_service(
                 new_bgp['uuid'])
 
@@ -83,7 +83,7 @@ class BGPAsAServicesTest(rbac_base.BaseContrailTest):
     def test_update_bgp_as_a_service(self):
         """test method for update bgp as a service objects"""
         new_bgp = self._create_bgp_as_a_services()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.bgp_as_a_service_client.update_bgp_as_a_service(
                 new_bgp['uuid'],
                 display_name=data_utils.rand_name('test-bgp'))

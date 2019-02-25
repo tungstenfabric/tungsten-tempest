@@ -61,7 +61,7 @@ class AttachmentsClientTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('961dbf54-ae4f-42e8-9d27-69fa7df39013')
     def test_list_provider_attachments(self):
         """test method for list provider attachment objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.attachments_client.list_provider_attachments()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -69,7 +69,7 @@ class AttachmentsClientTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('73ad032e-3e81-4dcc-be55-1987484207cd')
     def test_create_providerattach(self):
         """test method for create provider attachment objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_provider_attachments()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -78,7 +78,7 @@ class AttachmentsClientTest(rbac_base.BaseContrailTest):
     def test_show_provider_attachment(self):
         """test method for delete provider attachment objects"""
         new_provider = self._create_provider_attachments()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.attachments_client.show_provider_attachment(
                 new_provider['uuid'])
 
@@ -89,7 +89,7 @@ class AttachmentsClientTest(rbac_base.BaseContrailTest):
         """test method for update provider attachment objects"""
         new_provider = self._create_provider_attachments()
         update_name = data_utils.rand_name('test')
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.attachments_client.update_provider_attachment(
                 new_provider['uuid'],
                 display_name=update_name)
@@ -100,7 +100,7 @@ class AttachmentsClientTest(rbac_base.BaseContrailTest):
     def test_delete_provider_attachment(self):
         """test method for delete provider attachment objects"""
         new_provider = self._create_provider_attachments()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.attachments_client.delete_provider_attachment(
                 new_provider['uuid'])
 
@@ -109,7 +109,7 @@ class AttachmentsClientTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('3eca8fd8-ec3c-4a0e-8f62-b15d28796b7f')
     def test_list_customer_attachments(self):
         """test method for list customer attachment objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.attachments_client.list_customer_attachments()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -117,7 +117,7 @@ class AttachmentsClientTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('53f93053-554c-4202-b763-0230d9a0553a')
     def test_create_customerattachments(self):
         """test method for create customer attachment objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_customer_attachments()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -126,7 +126,7 @@ class AttachmentsClientTest(rbac_base.BaseContrailTest):
     def test_show_customer_attachment(self):
         """test method for show customer attachment objects"""
         new_customer = self._create_customer_attachments()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.attachments_client.show_customer_attachment(
                 new_customer['uuid'])
 
@@ -137,7 +137,7 @@ class AttachmentsClientTest(rbac_base.BaseContrailTest):
         """test method for update customer attachment objects"""
         new_customer = self._create_customer_attachments()
         update_name = data_utils.rand_name('test')
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.attachments_client.update_customer_attachment(
                 new_customer['uuid'],
                 display_name=update_name)
@@ -148,6 +148,6 @@ class AttachmentsClientTest(rbac_base.BaseContrailTest):
     def test_delete_customer_attachment(self):
         """test method for delete customer attachment objects"""
         new_customer = self._create_customer_attachments()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.attachments_client.delete_customer_attachment(
                 new_customer['uuid'])
