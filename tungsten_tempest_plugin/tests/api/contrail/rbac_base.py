@@ -137,7 +137,6 @@ class BaseContrailTest(rbac_utils.RbacUtilsMixin, test.BaseTestCase):
         cls.admin_client = cls.os_admin.networks_client
         dscv = CONF.identity.disable_ssl_certificate_validation
         ca_certs = CONF.identity.ca_certificates_file
-        cls.setup_rbac_utils()
 
         cls.access_control_client = AccessControlClient(
             cls.auth_provider,

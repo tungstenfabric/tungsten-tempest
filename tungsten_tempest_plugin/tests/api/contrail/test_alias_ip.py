@@ -116,7 +116,7 @@ class AliasIPsTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('899d6824-0755-41ef-adef-03eb1858bcb0')
     def test_list_alias_ips(self):
         """test method for list alias IP"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.alias_ip_client.list_alias_ips()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -125,7 +125,7 @@ class AliasIPsTest(rbac_base.BaseContrailTest):
     def test_create_alias_ips(self):
         """test method for create alias IP"""
         new_alias_ip_pool = self._create_alias_ip_pools()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_alias_ips(new_alias_ip_pool, '2.2.3.1')
 
     @rbac_rule_validation.action(service="Contrail",
@@ -135,7 +135,7 @@ class AliasIPsTest(rbac_base.BaseContrailTest):
         """test method for show alias IP"""
         new_alias_ip_pool = self._create_alias_ip_pools()
         new_alias_ip = self._create_alias_ips(new_alias_ip_pool, '2.2.3.2')
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.alias_ip_client.show_alias_ip(
                 new_alias_ip['uuid'])
 
@@ -147,7 +147,7 @@ class AliasIPsTest(rbac_base.BaseContrailTest):
         new_alias_ip_pool = self._create_alias_ip_pools()
         new_alias_ip = self._create_alias_ips(new_alias_ip_pool, '2.2.3.3')
         update_name = data_utils.rand_name('test')
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.alias_ip_client.update_alias_ip(
                 new_alias_ip['uuid'],
                 display_name=update_name)
@@ -159,7 +159,7 @@ class AliasIPsTest(rbac_base.BaseContrailTest):
         """test method for delete alias IP"""
         new_alias_ip_pool = self._create_alias_ip_pools()
         new_alias_ip = self._create_alias_ips(new_alias_ip_pool, '2.2.3.4')
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.alias_ip_client.delete_alias_ip(
                 new_alias_ip['uuid'])
 
@@ -168,7 +168,7 @@ class AliasIPsTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('ffe85f35-589a-4b90-a1d3-6aed92a85954')
     def test_list_alias_ip_pools(self):
         """est method for list alias IP pools"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.alias_ip_client.list_alias_ip_pools()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -176,7 +176,7 @@ class AliasIPsTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('83abd2c0-d46a-4337-87d0-31cdb86e4226')
     def test_create_alias_ip_pools(self):
         """test method for create alias IP pool"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_alias_ip_pools()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -185,7 +185,7 @@ class AliasIPsTest(rbac_base.BaseContrailTest):
     def test_show_alias_ip_pool(self):
         """test method for show alias IP pool"""
         new_alias_ip_pool = self._create_alias_ip_pools()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.alias_ip_client.show_alias_ip_pool(
                 new_alias_ip_pool['uuid'])
 
@@ -196,7 +196,7 @@ class AliasIPsTest(rbac_base.BaseContrailTest):
         """test method for update alias IP pool"""
         new_alias_ip_pool = self._create_alias_ip_pools()
         update_name = data_utils.rand_name('test')
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.alias_ip_client.update_alias_ip_pool(
                 new_alias_ip_pool['uuid'],
                 display_name=update_name)
@@ -207,6 +207,6 @@ class AliasIPsTest(rbac_base.BaseContrailTest):
     def test_delete_alias_ip_pool(self):
         """test method for delete alias IP pool"""
         new_alias_ip_pool = self._create_alias_ip_pools()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.alias_ip_client.delete_alias_ip_pool(
                 new_alias_ip_pool['uuid'])

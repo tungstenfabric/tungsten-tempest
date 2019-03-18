@@ -69,7 +69,7 @@ class ContrailForwardingClassTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('807a66fd-d4a4-472c-a13d-7ba590509e6e')
     def test_list_forwarding_classs(self):
         """test method for list forwarding classes objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.forwarding_class_client.list_forwarding_classs()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -81,7 +81,7 @@ class ContrailForwardingClassTest(rbac_base.BaseContrailTest):
         self.global_qos_config = \
             self._create_qos_global_configs()['name']
         new_fclass = self._create_forwarding_class(self.global_qos_config)
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.forwarding_class_client.show_forwarding_class(
                 new_fclass['uuid'])
 
@@ -93,7 +93,7 @@ class ContrailForwardingClassTest(rbac_base.BaseContrailTest):
         # Create a global qos config
         self.global_qos_config = \
             self._create_qos_global_configs()['name']
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_forwarding_class(self.global_qos_config)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -106,7 +106,7 @@ class ContrailForwardingClassTest(rbac_base.BaseContrailTest):
             self._create_qos_global_configs()['name']
         new_fclass = self._create_forwarding_class(self.global_qos_config)
         update_name = data_utils.rand_name('updated_fclass')
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.forwarding_class_client.update_forwarding_class(
                 new_fclass['uuid'], display_name=update_name)
 
@@ -119,6 +119,6 @@ class ContrailForwardingClassTest(rbac_base.BaseContrailTest):
         self.global_qos_config = \
             self._create_qos_global_configs()['name']
         new_fclass = self._create_forwarding_class(self.global_qos_config)
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.forwarding_class_client.delete_forwarding_class(
                 new_fclass['uuid'])

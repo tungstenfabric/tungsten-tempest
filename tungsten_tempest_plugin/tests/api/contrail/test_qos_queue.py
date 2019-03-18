@@ -55,7 +55,7 @@ class QosQueueContrailTest(rbac_base.BaseContrailTest):
     def test_list_qos_queues(self):
         """test method for listing QoS queues"""
         self._create_qos_queues()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.qos_client.list_qos_queues()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -63,7 +63,7 @@ class QosQueueContrailTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('d89c45f4-c83c-47b3-8720-7feffab4519c')
     def test_create_qos_queues(self):
         """test method for creating QoS queues"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_qos_queues()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -72,7 +72,7 @@ class QosQueueContrailTest(rbac_base.BaseContrailTest):
     def test_show_qos_queue(self):
         """test method for showing QoS queues"""
         qos_queue = self._create_qos_queues()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.qos_client.show_qos_queue(qos_queue['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
@@ -81,7 +81,7 @@ class QosQueueContrailTest(rbac_base.BaseContrailTest):
     def test_delete_qos_queue(self):
         """test method for deleting QoS queues"""
         qos_queue = self._create_qos_queues()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.qos_client.delete_qos_queue(qos_queue['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
@@ -91,7 +91,7 @@ class QosQueueContrailTest(rbac_base.BaseContrailTest):
         """test method for deleting QoS queues"""
         qos_queue = self._create_qos_queues()
         display_name = data_utils.rand_name('qos_queue')
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.qos_client.update_qos_queue(
                 qos_queue_id=qos_queue['uuid'],
                 display_name=display_name)

@@ -58,7 +58,7 @@ class QosContrailTest(rbac_base.BaseContrailTest):
     def test_list_global_qos_configs(self):
         """test method for list global QoS objects"""
         self._create_qos_global_configs()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.qos_client.list_global_qos_configs()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -66,7 +66,7 @@ class QosContrailTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('d7da1ca0-7bf7-4d1b-982c-820cd37fe9fa')
     def test_create_global_qos_configs(self):
         """test method for create global QoS objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_qos_global_configs()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -75,7 +75,7 @@ class QosContrailTest(rbac_base.BaseContrailTest):
     def test_show_global_qos_config(self):
         """test method for show global QoS objects"""
         test = self._create_qos_global_configs()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.qos_client.show_global_qos_config(instance_id=test['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
@@ -85,7 +85,7 @@ class QosContrailTest(rbac_base.BaseContrailTest):
         """test method for update global QoS objects"""
         qos = self._create_qos_global_configs()
         display_name = data_utils.rand_name('qos_globale_config')
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.qos_client.update_global_qos_config(
                 instance_id=qos['uuid'],
                 display_name=display_name)
@@ -96,5 +96,5 @@ class QosContrailTest(rbac_base.BaseContrailTest):
     def test_delete_global_qos_config(self):
         """test method for delete global QoS objects"""
         qos_global_config = self._create_qos_global_configs()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.qos_client.delete_global_qos_config(qos_global_config['uuid'])

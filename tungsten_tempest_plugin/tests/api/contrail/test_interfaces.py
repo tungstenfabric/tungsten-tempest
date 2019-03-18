@@ -79,7 +79,7 @@ class InterfacesTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('c496a2b4-51b2-4674-a60e-483a315baccb')
     def test_list_physical_interfaces(self):
         """test method for list physical interfaces objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.interface_client.list_physical_interfaces()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -88,7 +88,7 @@ class InterfacesTest(rbac_base.BaseContrailTest):
     def test_create_physical_interfaces(self):
         """test method for create physical interfaces objects"""
         self._create_physical_router()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_physical_interface()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -102,7 +102,7 @@ class InterfacesTest(rbac_base.BaseContrailTest):
         response = self.interface_client.show_physical_interface(uuid)
         body = response['physical-interface']
         owner = body['perms2']['owner']
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             change_access = {"owner": owner, "owner_access": 6, "share": [],
                              "global_access": 0}
             body = {"perms2": change_access}
@@ -116,7 +116,7 @@ class InterfacesTest(rbac_base.BaseContrailTest):
         """test method for delete physical interfaces objects"""
         self._create_physical_router()
         uuid = self._create_physical_interface()['uuid']
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.interface_client.delete_physical_interface(uuid)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -126,7 +126,7 @@ class InterfacesTest(rbac_base.BaseContrailTest):
         """test method for show physical interfaces objects"""
         self._create_physical_router()
         uuid = self._create_physical_interface()['uuid']
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.interface_client.show_physical_interface(uuid)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -134,7 +134,7 @@ class InterfacesTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('43ac3727-4a43-42d7-b52f-df75018915b9')
     def test_list_logical_interfaces(self):
         """test method for list physical interfaces objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.interface_client.list_logical_interfaces()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -144,7 +144,7 @@ class InterfacesTest(rbac_base.BaseContrailTest):
         """test method for create logical interfaces objects"""
         self._create_physical_router()
         self._create_physical_interface()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_logical_interface()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -159,7 +159,7 @@ class InterfacesTest(rbac_base.BaseContrailTest):
         response = self.interface_client.show_logical_interface(uuid)
         body = response['logical-interface']
         owner = body['perms2']['owner']
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             change_access = {"owner": owner, "owner_access": 6, "share": [],
                              "global_access": 0}
             body = {"perms2": change_access}
@@ -174,7 +174,7 @@ class InterfacesTest(rbac_base.BaseContrailTest):
         self._create_physical_router()
         self._create_physical_interface()
         uuid = self._create_logical_interface()['uuid']
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.interface_client.delete_logical_interface(uuid)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -185,5 +185,5 @@ class InterfacesTest(rbac_base.BaseContrailTest):
         self._create_physical_router()
         self._create_physical_interface()
         uuid = self._create_logical_interface()['uuid']
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.interface_client.show_logical_interface(uuid)

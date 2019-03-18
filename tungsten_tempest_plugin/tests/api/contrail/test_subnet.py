@@ -55,7 +55,7 @@ class SubnetContrailTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('ddd1d9ae-cf2f-4a74-98ba-b0f481f27977')
     def test_list_subnets(self):
         """test method for list subnet objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.subnet_client.list_subnets()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -63,7 +63,7 @@ class SubnetContrailTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('ee0cb904-d162-44a4-b7b0-a7451f667ed5')
     def test_create_subnets(self):
         """test method for create subnet objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_subnet()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -72,7 +72,7 @@ class SubnetContrailTest(rbac_base.BaseContrailTest):
     def test_show_subnet(self):
         """test method for show subnet objects"""
         subnet_uuid = self._create_subnet()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.subnet_client.show_subnet(subnet_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -81,7 +81,7 @@ class SubnetContrailTest(rbac_base.BaseContrailTest):
     def test_update_subnet(self):
         """test method for update subnet objects"""
         subnet_uuid = self._create_subnet()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._update_subnet(subnet_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -90,5 +90,5 @@ class SubnetContrailTest(rbac_base.BaseContrailTest):
     def test_delete_subnet(self):
         """test method for delete subnet objects"""
         subnet_uuid = self._create_subnet()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.subnet_client.delete_subnet(subnet_uuid)

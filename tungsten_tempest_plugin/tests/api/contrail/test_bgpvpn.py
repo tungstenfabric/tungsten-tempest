@@ -60,7 +60,7 @@ class BgpvpnTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('65afb5d5-52cb-484c-9e8e-42509be7dd77')
     def test_list_bgpvpns(self):
         """Test whether current role can list of bgpvpns."""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.contrail_client.list_bgpvpns()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -68,7 +68,7 @@ class BgpvpnTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('c3a7510c-c8d6-4736-9962-5c1aa032bf79')
     def test_create_bgpvpns(self):
         """Test whether current role can create bgpvpn."""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_bgpvpn()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -76,7 +76,7 @@ class BgpvpnTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('2fd05ca2-97d8-477c-aead-a881a2ba5e7e')
     def test_show_bgpvpn(self):
         """Test whether current role can get bgpvpn details."""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.contrail_client.show_bgpvpn(
                 self.bgpvpn_uuid)
 
@@ -86,7 +86,7 @@ class BgpvpnTest(rbac_base.BaseContrailTest):
     def test_delete_bgpvpn(self):
         """Test whether current role can delete bgpvpn details."""
         new_bgpvpn_uuid = self._create_bgpvpn()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.contrail_client.delete_bgpvpn(
                 new_bgpvpn_uuid)
 
@@ -95,7 +95,7 @@ class BgpvpnTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('ae734791-eaeb-4ca9-908a-59d0eac1a3c0')
     def test_update_bgpvpn(self):
         """Test whether current role can update bgpvpn."""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.contrail_client.update_bgpvpn(
                 self.bgpvpn_uuid,
                 display_name=data_utils.rand_name('test-bgpvpn'))

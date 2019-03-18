@@ -56,7 +56,7 @@ class DomainContrailTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('fa02e27b-f661-4186-a522-69e8fcb6abf9')
     def test_list_domains(self):
         """test method for list domain objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.domain_client.list_domains()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -64,7 +64,7 @@ class DomainContrailTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('3f18be91-c37b-4e17-bf5e-b704d993f738')
     def test_create_domains(self):
         """test method for create domain objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_domains()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -73,7 +73,7 @@ class DomainContrailTest(rbac_base.BaseContrailTest):
     def test_show_domain(self):
         """test method for show domain objects"""
         domain_uuid = self._create_domains()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.domain_client.show_domain(domain_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -82,7 +82,7 @@ class DomainContrailTest(rbac_base.BaseContrailTest):
     def test_update_domain(self):
         """test method for update domain objects"""
         domain_uuid = self._create_domains()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._update_domain(domain_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -91,5 +91,5 @@ class DomainContrailTest(rbac_base.BaseContrailTest):
     def test_delete_domain(self):
         """test method for delete domain objects"""
         domain_uuid = self._create_domains()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.domain_client.delete_domain(domain_uuid)

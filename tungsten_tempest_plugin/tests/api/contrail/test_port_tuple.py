@@ -74,7 +74,7 @@ class ContrailPortTupleTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('3789eef8-0e80-4057-b7b0-926655144beb')
     def test_list_port_tuples(self):
         """test method for list port tuple objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.port_tuple_client.list_port_tuples()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -83,7 +83,7 @@ class ContrailPortTupleTest(rbac_base.BaseContrailTest):
     def test_show_port_tuple(self):
         """test method for show port tuple objects"""
         new_tuple = self._create_port_tuple()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.port_tuple_client.show_port_tuple(new_tuple['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
@@ -91,7 +91,7 @@ class ContrailPortTupleTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('0e2283da-fe25-4204-b5b3-fef3c200d0c8')
     def test_create_port_tuples(self):
         """test method for create port tuple objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_port_tuple()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -101,7 +101,7 @@ class ContrailPortTupleTest(rbac_base.BaseContrailTest):
         """test method for update port tuple objects"""
         new_tuple = self._create_port_tuple()
         update_name = data_utils.rand_name('updated_tuple')
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.port_tuple_client.update_port_tuple(
                 new_tuple['uuid'], display_name=update_name)
 
@@ -111,5 +111,5 @@ class ContrailPortTupleTest(rbac_base.BaseContrailTest):
     def test_delete_port_tuple(self):
         """test method for delete port tuple objects"""
         new_tuple = self._create_port_tuple()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.port_tuple_client.delete_port_tuple(new_tuple['uuid'])

@@ -55,7 +55,7 @@ class ContrailSecurityGroupTest(rbac_base.BaseContrailTest):
     def test_list_security_groups(self):
         """test method for list security group objects"""
         self._create_security_groups()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.security_group_client.list_security_groups()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -65,7 +65,7 @@ class ContrailSecurityGroupTest(rbac_base.BaseContrailTest):
         """test method for show security group objects"""
         grp = self._create_security_groups()
         grp_id = grp['uuid']
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.security_group_client.show_security_group(grp_id)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -75,7 +75,7 @@ class ContrailSecurityGroupTest(rbac_base.BaseContrailTest):
         """test method for delete security group objects"""
         grp = self._create_security_groups()
         grp_id = grp['uuid']
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._delete_security_group(grp_id)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -83,7 +83,7 @@ class ContrailSecurityGroupTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('63a2ff14-7869-40a2-962a-d65752de5651')
     def test_create_security_groups(self):
         """test method for create security group objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_security_groups()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -94,7 +94,7 @@ class ContrailSecurityGroupTest(rbac_base.BaseContrailTest):
         grp = self._create_security_groups()
         grp_id = grp['uuid']
         display_name = data_utils.rand_name('securitygroupnew')
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.security_group_client.update_security_group(
                 sec_group_id=grp_id,
                 display_name=display_name)

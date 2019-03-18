@@ -87,7 +87,7 @@ class ServiceClientsTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('841b1d32-4308-4fb6-852a-41bdd8c56c37')
     def test_list_service_templates(self):
         """test method for list service template objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.service_client.list_service_templates()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -95,7 +95,7 @@ class ServiceClientsTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('3f02d14a-31e2-4476-821f-87d0cc42d9fb')
     def test_create_service_templates(self):
         """test method for create service template objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_service_template()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -104,7 +104,7 @@ class ServiceClientsTest(rbac_base.BaseContrailTest):
     def test_show_service_template(self):
         """test method for show service template objects"""
         new_template = self._create_service_template()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.service_client.show_service_template(
                 new_template['uuid'])
 
@@ -115,7 +115,7 @@ class ServiceClientsTest(rbac_base.BaseContrailTest):
         """test method for update service template objects"""
         new_template = self._create_service_template()
         update_name = data_utils.rand_name('test')
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.service_client.update_service_template(
                 new_template['uuid'],
                 display_name=update_name)
@@ -126,7 +126,7 @@ class ServiceClientsTest(rbac_base.BaseContrailTest):
     def test_delete_service_template(self):
         """test method for delete service template objects"""
         new_template = self._create_service_template()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.service_client.delete_service_template(
                 new_template['uuid'])
 
@@ -135,7 +135,7 @@ class ServiceClientsTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('5210d6ca-9a38-4b6b-b5b7-f836c3846079')
     def test_list_service_health_checks(self):
         """test method for list service health check objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.service_client.list_service_health_checks()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -143,7 +143,7 @@ class ServiceClientsTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('77716feb-0d05-4cfd-8a17-79cf0b19ed3c')
     def test_create_service_health(self):
         """test method for create service health check objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_service_health_check()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -152,7 +152,7 @@ class ServiceClientsTest(rbac_base.BaseContrailTest):
     def test_show_service_health(self):
         """test method for show service health check objects"""
         new_health_check = self._create_service_health_check()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.service_client.show_service_health_check(
                 new_health_check['uuid'])
 
@@ -163,7 +163,7 @@ class ServiceClientsTest(rbac_base.BaseContrailTest):
         """test method for update service health check objects"""
         new_health_check = self._create_service_health_check()
         update_name = data_utils.rand_name('test')
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.service_client.update_service_health_check(
                 new_health_check['uuid'],
                 display_name=update_name)
@@ -174,7 +174,7 @@ class ServiceClientsTest(rbac_base.BaseContrailTest):
     def test_delete_service_health(self):
         """test method for delete service health check objects"""
         new_health_check = self._create_service_health_check()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.service_client.delete_service_health_check(
                 new_health_check['uuid'])
 
@@ -183,7 +183,7 @@ class ServiceClientsTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('1469c71e-f6f5-419f-9672-c3c67f879704')
     def test_create_service_instances(self):
         """test method for create service client objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_service_instance()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -192,7 +192,7 @@ class ServiceClientsTest(rbac_base.BaseContrailTest):
     def test_show_service_instance(self):
         """test method for show service client objects"""
         new_instance = self._create_service_instance()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.service_client.show_service_instance(
                 new_instance['uuid'])
 
@@ -202,7 +202,7 @@ class ServiceClientsTest(rbac_base.BaseContrailTest):
     def test_delete_service_instance(self):
         """test method for delete service client objects"""
         new_instance = self._create_service_instance()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.service_client.delete_service_instance(
                 new_instance['uuid'])
 
@@ -211,7 +211,7 @@ class ServiceClientsTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('da6016a3-a2a8-42a8-b064-c124c22fef6f')
     def test_list_service_instances(self):
         """test method for list service client objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.service_client.list_service_instances()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -221,7 +221,7 @@ class ServiceClientsTest(rbac_base.BaseContrailTest):
         """test method for update service client objects"""
         new_instance = self._create_service_instance()
         update_name = data_utils.rand_name('test')
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.service_client.update_service_instance(
                 new_instance['uuid'],
                 display_name=update_name)

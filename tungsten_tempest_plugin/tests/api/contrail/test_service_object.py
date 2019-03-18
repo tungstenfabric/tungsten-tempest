@@ -63,7 +63,7 @@ class ServiceObjectContrailTest(rbac_base.BaseContrailTest):
 
         RBAC test for the Contrail list_service_objects policy
         """
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.contrail_client.list_service_objects()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -74,7 +74,7 @@ class ServiceObjectContrailTest(rbac_base.BaseContrailTest):
 
         RBAC test for the Contrail create_service_object policy
         """
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_service_object()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -85,7 +85,7 @@ class ServiceObjectContrailTest(rbac_base.BaseContrailTest):
 
         RBAC test for the Contrail show_service_object policy
         """
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.contrail_client.show_service_object(self.service_object_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -97,7 +97,7 @@ class ServiceObjectContrailTest(rbac_base.BaseContrailTest):
         RBAC test for the Contrail delete_service_object policy
         """
         obj_uuid = self._create_service_object()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.contrail_client.delete_service_object(obj_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -111,6 +111,6 @@ class ServiceObjectContrailTest(rbac_base.BaseContrailTest):
         put_body = {
             'display_name': data_utils.rand_name(
                 'update_service_object')}
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.contrail_client.update_service_object(
                 self.service_object_uuid, **put_body)

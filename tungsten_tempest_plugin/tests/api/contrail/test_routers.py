@@ -126,7 +126,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('349ac042-b922-4727-9e1b-8f363ee343f3')
     def test_list_physical_routers(self):
         """test method for list physical router objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.router_client.list_physical_routers()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -134,7 +134,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('d0b7449e-9037-4f9f-8c7e-9f364c95f18a')
     def test_create_physical_routers(self):
         """test method for create physical router objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_physical_router()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -143,7 +143,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
     def test_show_physical_router(self):
         """test method for show physical router objects"""
         physical_router_uuid = self._create_physical_router()['uuid']
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.router_client.show_physical_router(physical_router_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -153,7 +153,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
         """test method for update physical router objects"""
         updated_fq_name = data_utils.rand_name('rbac-physical-router-new-name')
         physical_router_uuid = self._create_physical_router()['uuid']
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.router_client.update_physical_router(
                 physical_router_uuid,
                 display_name=updated_fq_name)
@@ -164,7 +164,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
     def test_delete_physical_router(self):
         """test method for delete physical router objects"""
         physical_router_uuid = self._create_physical_router()['uuid']
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.router_client.delete_physical_router(physical_router_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -172,7 +172,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('49bfb461-f99e-4585-b051-e20a3c937589')
     def test_list_bgp_routers(self):
         """test method for list bgp router objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.router_client.list_bgp_routers()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -182,7 +182,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
         """test method for create bgp router objects"""
         # Create Routing Instance
         routing_instance = self._create_routing_instances()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_bgp_router(routing_instance)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -193,7 +193,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
         # Create Routing Instance
         routing_instance = self._create_routing_instances()
         bgp_router_uuid = self._create_bgp_router(routing_instance)['uuid']
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.router_client.show_bgp_router(bgp_router_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -205,7 +205,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
         routing_instance = self._create_routing_instances()
         updated_fq_name = data_utils.rand_name('rbac-bgp-router-new-name')
         bgp_router_uuid = self._create_bgp_router(routing_instance)['uuid']
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.router_client.update_bgp_router(
                 bgp_router_uuid,
                 display_name=updated_fq_name)
@@ -218,7 +218,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
         # Create Routing Instance
         routing_instance = self._create_routing_instances()
         bgp_router_uuid = self._create_bgp_router(routing_instance)['uuid']
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.router_client.delete_bgp_router(bgp_router_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -226,7 +226,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('4af768d1-3cbe-4aff-bcbc-0e045cac3277')
     def test_list_global_vrouter_configs(self):
         """test method for list global vrouter config objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.router_client.list_global_vrouter_configs()
 
     @decorators.skip_because(bug="1792446")
@@ -243,7 +243,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
         # linklocal metadata to go missing.
         # vrouter-agent will stuck in Init state with "No configuration for
         # self" error.
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_global_vrouter_config()
 
     @decorators.skip_because(bug="1792446")
@@ -262,7 +262,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
         # self" error.
         global_vrouter_config_uuid = \
             self._create_global_vrouter_config()['uuid']
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.router_client.show_global_vrouter_config(
                 global_vrouter_config_uuid)
 
@@ -284,7 +284,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
             'rbac-global-vrouter-config-new-name')
         global_vrouter_config_uuid = \
             self._create_global_vrouter_config()['uuid']
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.router_client.update_global_vrouter_config(
                 global_vrouter_config_uuid,
                 display_name=updated_fq_name)
@@ -302,7 +302,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
 
         global_vrouter_config_uuid = \
             self._create_global_vrouter_config()['uuid']
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.router_client.delete_global_vrouter_config(
                 global_vrouter_config_uuid)
 
@@ -311,7 +311,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('674bf3de-a9e5-45c2-921b-b89db73a2abe')
     def test_list_logical_routers(self):
         """test method for list logical router objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.router_client.list_logical_routers()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -319,7 +319,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('610f051b-8eba-4d3a-ba43-91386bfc0e52')
     def test_create_logical_routers(self):
         """test method for create logical router objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_logical_router()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -328,7 +328,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
     def test_show_logical_router(self):
         """test method for show logical router objects"""
         logical_router_uuid = self._create_logical_router()['uuid']
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.router_client.show_logical_router(logical_router_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -338,7 +338,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
         """test method for update logical router objects"""
         updated_fq_name = data_utils.rand_name('rbac-logical-router-new-name')
         logical_router_uuid = self._create_logical_router()['uuid']
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.router_client.update_logical_router(
                 logical_router_uuid,
                 display_name=updated_fq_name)
@@ -349,7 +349,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
     def test_delete_logical_router(self):
         """test method for delete logical router objects"""
         logical_router_uuid = self._create_logical_router()['uuid']
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.router_client.delete_logical_router(logical_router_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -357,7 +357,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('604dc476-732e-4890-8665-a497360f5475')
     def test_list_virtual_routers(self):
         """test method for list virtual router objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.router_client.list_virtual_routers()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -365,7 +365,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('114beb14-45c0-4714-a407-d160bb102022')
     def test_create_virtual_routers(self):
         """test method for create virtual router objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_virtual_router()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -374,7 +374,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
     def test_show_virtual_router(self):
         """test method for show virtual router objects"""
         virtual_router_uuid = self._create_virtual_router()['uuid']
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.router_client.show_virtual_router(virtual_router_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -384,7 +384,7 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
         """test method for update virtual router objects"""
         updated_fq_name = data_utils.rand_name('rbac-virtual-router-new-name')
         virtual_router_uuid = self._create_virtual_router()['uuid']
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.router_client.update_virtual_router(
                 virtual_router_uuid,
                 display_name=updated_fq_name)
@@ -395,5 +395,5 @@ class BaseRouterTest(rbac_base.BaseContrailTest):
     def test_delete_virtual_router(self):
         """test method for delete virtual router objects"""
         virtual_router_uuid = self._create_virtual_router()['uuid']
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.router_client.delete_virtual_router(virtual_router_uuid)

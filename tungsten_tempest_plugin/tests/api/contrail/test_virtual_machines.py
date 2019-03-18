@@ -104,7 +104,7 @@ class VMContrailTest(rbac_base.BaseContrailTest):
     def test_list_vm_interfaces(self):
         """test method for list vm interfaces objects"""
         self._create_virual_machine_interface()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.vm_client.list_virtual_machine_interfaces()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -112,7 +112,7 @@ class VMContrailTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('d8a3a524-d61b-4bcb-8146-c5d4f308df8e')
     def test_add_vm_interfaces(self):
         """test method for add vm interfaces objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_virual_machine_interface()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -121,7 +121,7 @@ class VMContrailTest(rbac_base.BaseContrailTest):
     def test_show_vm_interface(self):
         """test method for show vm interfaces objects"""
         test = self._create_virual_machine_interface()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.vm_client.show_virtual_machine_interface(test['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
@@ -130,7 +130,7 @@ class VMContrailTest(rbac_base.BaseContrailTest):
     def test_delete_vm_interface(self):
         """test method for delete vm interfaces objects"""
         body = self._create_virual_machine_interface()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.vm_client.delete_vm_interface(body['uuid'])
 
     @rbac_rule_validation.action(service="Contrail",
@@ -140,7 +140,7 @@ class VMContrailTest(rbac_base.BaseContrailTest):
         """test method for update vm interfaces objects"""
         virtual_machine = self._create_virual_machine_interface()
         display_name = data_utils.rand_name('new-vitual-machine-inf-name')
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.vm_client.update_vm_interface(
                 instance_id=virtual_machine['uuid'],
                 display_name=display_name)

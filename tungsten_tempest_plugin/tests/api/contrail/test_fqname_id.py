@@ -54,7 +54,7 @@ class FqnameIdTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('1fc1350b-3146-49bc-9af5-a61a98b55541')
     def test_fqname_to_id(self):
         """test method for fqname to id rules objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.fq_client.fqname_to_id(fq_name=self.network['fq_name'],
                                         type=self.type)
 
@@ -63,5 +63,5 @@ class FqnameIdTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('ecdd77d7-8508-4639-86cd-b97907b363ff')
     def test_id_to_fqname(self):
         """test method for id to fqname rules objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.fq_client.id_to_fqname(uuid=self.network['uuid'])

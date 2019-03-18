@@ -61,7 +61,7 @@ class ServiceAppliancesTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('6b5fc17c-34e6-4d21-a53e-a0dfe69afd31')
     def test_list_service_appliances(self):
         """test method for list service appliance objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.service_appliances_client.list_service_appliances()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -70,7 +70,7 @@ class ServiceAppliancesTest(rbac_base.BaseContrailTest):
     def test_create_service_appliances(self):
         """test method for create service appliance objects"""
         new_set = self._create_service_appliance_sets()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_service_appliances(new_set)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -80,7 +80,7 @@ class ServiceAppliancesTest(rbac_base.BaseContrailTest):
         """test method for show service appliance objects"""
         new_set = self._create_service_appliance_sets()
         new_appliance = self._create_service_appliances(new_set)
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.service_appliances_client.show_service_appliance(
                 new_appliance['uuid'])
 
@@ -92,7 +92,7 @@ class ServiceAppliancesTest(rbac_base.BaseContrailTest):
         new_set = self._create_service_appliance_sets()
         new_appliance = self._create_service_appliances(new_set)
         update_name = data_utils.rand_name('test')
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.service_appliances_client.update_service_appliance(
                 new_appliance['uuid'],
                 display_name=update_name)
@@ -104,7 +104,7 @@ class ServiceAppliancesTest(rbac_base.BaseContrailTest):
         """test method for delete service appliance objects"""
         new_set = self._create_service_appliance_sets()
         new_appliance = self._create_service_appliances(new_set)
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.service_appliances_client.delete_service_appliance(
                 new_appliance['uuid'])
 
@@ -113,7 +113,7 @@ class ServiceAppliancesTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('c1e74da9-00b6-4c88-adda-2ce49094e570')
     def test_list_service_appl_sets(self):
         """test method for list service appliance sets objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.service_appliances_client.list_service_appliance_sets()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -121,7 +121,7 @@ class ServiceAppliancesTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('eb00d6cf-590f-41bf-8ee4-5be625d9cb93')
     def test_create_service_appl_sets(self):
         """test method for create service appliance sets objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_service_appliance_sets()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -130,7 +130,7 @@ class ServiceAppliancesTest(rbac_base.BaseContrailTest):
     def test_show_service_appl_set(self):
         """test method for show service appliance sets objects"""
         new_set = self._create_service_appliance_sets()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.service_appliances_client.show_service_appliance_set(
                 new_set['uuid'])
 
@@ -141,7 +141,7 @@ class ServiceAppliancesTest(rbac_base.BaseContrailTest):
         """test method for update service appliance sets objects"""
         new_set = self._create_service_appliance_sets()
         update_name = data_utils.rand_name('test')
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.service_appliances_client.update_service_appliance_set(
                 new_set['uuid'],
                 display_name=update_name)
@@ -152,6 +152,6 @@ class ServiceAppliancesTest(rbac_base.BaseContrailTest):
     def test_delete_service_appl_set(self):
         """test method for delete service appliance sets objects"""
         new_set = self._create_service_appliance_sets()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.service_appliances_client.delete_service_appliance_set(
                 new_set['uuid'])

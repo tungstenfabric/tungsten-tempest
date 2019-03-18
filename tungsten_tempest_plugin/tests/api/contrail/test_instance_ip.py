@@ -106,7 +106,7 @@ class InstanceIPTest(rbac_base.BaseContrailTest):
     def test_list_instance_ips(self):
         """test method for list instance IP objects"""
         self._create_instance_ip()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.iip_client.list_instance_ips()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -114,7 +114,7 @@ class InstanceIPTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('78f5cd4d-345d-4d87-8b8b-4d5d3fec4a12')
     def test_create_instance_ips(self):
         """test method for create instance IP objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_instance_ip()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -123,7 +123,7 @@ class InstanceIPTest(rbac_base.BaseContrailTest):
     def test_show_instance_ip(self):
         """test method for update instance IP objects"""
         uuid = self._create_instance_ip()['uuid']
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.iip_client.show_instance_ip(uuid)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -132,7 +132,7 @@ class InstanceIPTest(rbac_base.BaseContrailTest):
     def test_update_instance_ip(self):
         """test method for update instance IP objects"""
         uuid = self._create_instance_ip()['uuid']
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.iip_client.update_instance_ip(
                 uuid,
                 display_name='rbac-iip-new-name')
@@ -143,5 +143,5 @@ class InstanceIPTest(rbac_base.BaseContrailTest):
     def test_delete_instance_ip(self):
         """test method for delete instance IP objects"""
         uuid = self._create_instance_ip()['uuid']
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.iip_client.delete_instance_ip(uuid)

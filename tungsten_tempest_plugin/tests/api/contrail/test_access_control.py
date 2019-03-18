@@ -78,7 +78,7 @@ class AccessControlTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('2bfde8fd-36fe-4e69-ba59-6f2db8941e7d')
     def test_list_api_access_lists(self):
         """test method for list api access list"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.access_control_client.list_api_access_lists()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -86,7 +86,7 @@ class AccessControlTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('b2b5f50c-07d8-4d79-b9a4-78187ad97353')
     def test_create_api_access_lists(self):
         """test method for create api access list"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_api_access_lists()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -95,7 +95,7 @@ class AccessControlTest(rbac_base.BaseContrailTest):
     def test_show_api_access_list(self):
         """test method for show api access list"""
         new_api_list = self._create_api_access_lists()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.access_control_client.show_api_access_list(
                 new_api_list['uuid'])
 
@@ -106,7 +106,7 @@ class AccessControlTest(rbac_base.BaseContrailTest):
         """test method for update api access list"""
         new_api_list = self._create_api_access_lists()
         update_name = data_utils.rand_name('test')
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.access_control_client.update_api_access_list(
                 new_api_list['uuid'],
                 display_name=update_name)
@@ -117,7 +117,7 @@ class AccessControlTest(rbac_base.BaseContrailTest):
     def test_delete_api_access_list(self):
         """test method for delete api access list"""
         new_api_list = self._create_api_access_lists()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.access_control_client.delete_api_access_list(
                 new_api_list['uuid'])
 
@@ -126,7 +126,7 @@ class AccessControlTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('c56a1338-a9d1-4286-8aeb-3a0d60d93037')
     def test_list_access_control_lists(self):
         """test method for list access control list"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.access_control_client.list_access_control_lists()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -136,7 +136,7 @@ class AccessControlTest(rbac_base.BaseContrailTest):
         """test method for create access control list"""
         # Create Security Group
         sec_group = self._create_security_groups()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_access_control_lists(sec_group['name'])
 
     @rbac_rule_validation.action(service="Contrail",
@@ -148,7 +148,7 @@ class AccessControlTest(rbac_base.BaseContrailTest):
         sec_group = self._create_security_groups()
         new_ctrl_list = self._create_access_control_lists(
             sec_group['name'])
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.access_control_client.show_access_control_list(
                 new_ctrl_list['uuid'])
 
@@ -161,7 +161,7 @@ class AccessControlTest(rbac_base.BaseContrailTest):
         new_ctrl_list = self._create_access_control_lists(
             sec_group['name'])
         update_name = data_utils.rand_name('test')
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.access_control_client.update_access_control_list(
                 new_ctrl_list['uuid'],
                 display_name=update_name)
@@ -175,6 +175,6 @@ class AccessControlTest(rbac_base.BaseContrailTest):
         sec_group = self._create_security_groups()
         new_ctrl_list = self._create_access_control_lists(
             sec_group['name'])
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.access_control_client.delete_access_control_list(
                 new_ctrl_list['uuid'])

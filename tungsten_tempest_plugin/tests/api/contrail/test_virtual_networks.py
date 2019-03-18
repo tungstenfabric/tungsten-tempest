@@ -70,7 +70,7 @@ class NetworksTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('375ebc8d-dc52-4d9c-877b-85aba35b1539')
     def test_list_virtual_networks(self):
         """test method for list vm network objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.vn_client.list_virtual_networks()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -78,7 +78,7 @@ class NetworksTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('375ebc8d-dc52-4d9c-877b-96aba35b2530')
     def test_create_virtual_networks(self):
         """test method for create vm network objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_virtual_network()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -88,7 +88,7 @@ class NetworksTest(rbac_base.BaseContrailTest):
         """test method for update vm network objects"""
         # Create virtual network
         uuid = self._create_virtual_network()['uuid']
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.vn_client.update_virtual_network(
                 uuid, router_external=False)
 
@@ -98,7 +98,7 @@ class NetworksTest(rbac_base.BaseContrailTest):
     def test_delete_virtual_network(self):
         """test method for delete vm network objects"""
         uuid = self._create_virtual_network()['uuid']
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.vn_client.delete_virtual_network(uuid)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -107,5 +107,5 @@ class NetworksTest(rbac_base.BaseContrailTest):
     def test_show_virtual_network(self):
         """test method for show vm network objects"""
         uuid = self._create_virtual_network()['uuid']
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.vn_client.show_virtual_network(uuid)

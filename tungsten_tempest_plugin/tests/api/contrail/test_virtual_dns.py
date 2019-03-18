@@ -76,7 +76,7 @@ class VirtualDNSTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('8401d690-afdf-4b6e-ad60-b9363a8cfb1d')
     def test_list_virtual_dns(self):
         """test method for list virtual dns objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.virtual_dns_client.list_virtual_dns()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -84,7 +84,7 @@ class VirtualDNSTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('a7dd2c9e-e1eb-4dc4-ac70-4d48a291a3bf')
     def test_create_virtual_dns(self):
         """test method for create virtual dns objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_virtual_dns()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -93,7 +93,7 @@ class VirtualDNSTest(rbac_base.BaseContrailTest):
     def test_show_virtual_dns(self):
         """test method for show virtual dns objects"""
         dns = self._create_virtual_dns()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.virtual_dns_client.show_virtual_dns(
                 dns['virtual-DNS']['uuid'])
 
@@ -103,7 +103,7 @@ class VirtualDNSTest(rbac_base.BaseContrailTest):
     def test_delete_virtual_dns(self):
         """test method for delete virtual dns objects"""
         dns = self._create_virtual_dns()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.virtual_dns_client.delete_virtual_dns(
                 dns['virtual-DNS']['uuid'])
 
@@ -117,7 +117,7 @@ class VirtualDNSTest(rbac_base.BaseContrailTest):
                             "default_ttl_seconds": 0,
                             "record_order": "fixed"}
         display_name = data_utils.rand_name('virtual-dns-updated')
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.virtual_dns_client.update_virtual_dns(
                 dns_id=dns['virtual-DNS']['uuid'],
                 virtual_DNS_data=virtual_dns_data,
@@ -128,7 +128,7 @@ class VirtualDNSTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('e9103999-2f02-4f04-a8a0-906ca4fb394d')
     def test_list_virtual_dns_records(self):
         """test method for list virtual dns record objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.virtual_dns_client.list_virtual_dns_records()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -138,7 +138,7 @@ class VirtualDNSTest(rbac_base.BaseContrailTest):
         """test method for create virtual dns record objects"""
         # A virtual DNS is needed to create a record
         dns = self._create_virtual_dns()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_virtual_dns_record(dns)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -149,7 +149,7 @@ class VirtualDNSTest(rbac_base.BaseContrailTest):
         # A virtual DNS is needed to create a record
         dns = self._create_virtual_dns()
         dns_record = self._create_virtual_dns_record(dns)
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.virtual_dns_client.show_virtual_dns_record(
                 dns_record['virtual-DNS-record']['uuid'])
 
@@ -161,7 +161,7 @@ class VirtualDNSTest(rbac_base.BaseContrailTest):
         # A virtual DNS is needed to create a record
         dns = self._create_virtual_dns()
         dns_record = self._create_virtual_dns_record(dns)
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.virtual_dns_client.delete_virtual_dns_record(
                 dns_record['virtual-DNS-record']['uuid'])
 
@@ -179,7 +179,7 @@ class VirtualDNSTest(rbac_base.BaseContrailTest):
                                    "record_name": record_name,
                                    "record_class": "IN",
                                    "record_data": "1.1.1.1"}
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.virtual_dns_client.update_virtual_dns_record(
                 dns_record_id=dns_record['virtual-DNS-record']['uuid'],
                 virtual_DNS_record_data=virtual_dns_record_data)

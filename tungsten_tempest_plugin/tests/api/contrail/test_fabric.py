@@ -51,7 +51,7 @@ class FabricContrailTest(rbac_base.BaseContrailTest):
 
         RBAC test for the Contrail list_fabrics policy
         """
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.contrail_client.list_fabrics()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -62,7 +62,7 @@ class FabricContrailTest(rbac_base.BaseContrailTest):
 
         RBAC test for the Contrail create_fabric policy
         """
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_fabric()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -73,7 +73,7 @@ class FabricContrailTest(rbac_base.BaseContrailTest):
 
         RBAC test for the Contrail show_fabric policy
         """
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.contrail_client.show_fabric(self.fabric_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -85,7 +85,7 @@ class FabricContrailTest(rbac_base.BaseContrailTest):
         RBAC test for the Contrail delete_fabric policy
         """
         fab_uuid = self._create_fabric()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.contrail_client.delete_fabric(fab_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -96,6 +96,6 @@ class FabricContrailTest(rbac_base.BaseContrailTest):
 
         RBAC test for the Contrail update_fabric policy
         """
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             put_body = {'display_name': data_utils.rand_name('update_fab')}
             self.contrail_client.update_fabric(self.fabric_uuid, **put_body)

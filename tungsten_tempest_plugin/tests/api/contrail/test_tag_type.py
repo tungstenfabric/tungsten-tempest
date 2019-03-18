@@ -64,7 +64,7 @@ class ContrailTagTypeTest(rbac_base.BaseContrailTest):
 
         RBAC test for contrail list tag_type policy
         """
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.contrail_client.list_tag_types()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -75,7 +75,7 @@ class ContrailTagTypeTest(rbac_base.BaseContrailTest):
 
         RBAC test for contrail show tag_type policy
         """
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.contrail_client.show_tag_type(self.tag_type_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -86,7 +86,7 @@ class ContrailTagTypeTest(rbac_base.BaseContrailTest):
 
         RBAC test for contrail create tag_type policy
         """
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_tag_type()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -98,7 +98,7 @@ class ContrailTagTypeTest(rbac_base.BaseContrailTest):
         RBAC test for contrail update tag_type policy
         """
         update_name = data_utils.rand_name('new_name')
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.contrail_client.update_tag_type(
                 self.tag_type_uuid, name=update_name)
 
@@ -111,5 +111,5 @@ class ContrailTagTypeTest(rbac_base.BaseContrailTest):
         RBAC test for contrail delete tag_type policy
         """
         new_tag_type_uuid = self._create_tag_type()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.contrail_client.delete_tag_type(new_tag_type_uuid)

@@ -64,7 +64,7 @@ class ConfigNodeTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('b560e060-e4f0-45b0-93e2-55f0cb201e06')
     def test_list_config_nodes(self):
         """test method for list config node objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.config_client.list_config_nodes()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -72,7 +72,7 @@ class ConfigNodeTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('a8d20d0d-dc5a-4cae-87c5-7f6914c3701e')
     def test_create_config_nodes(self):
         """test method for create config node objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_config_node()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -82,7 +82,7 @@ class ConfigNodeTest(rbac_base.BaseContrailTest):
         """test method for delete config node objects"""
         config_node = self._create_config_node()
         config_node_uuid = config_node['config-node']['uuid']
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.config_client.delete_config_node(
                 config_node_uuid)
 
@@ -93,7 +93,7 @@ class ConfigNodeTest(rbac_base.BaseContrailTest):
         """test method for show config node objects"""
         config_node = self._create_config_node()
         config_node_uuid = config_node['config-node']['uuid']
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.config_client.show_config_node(config_node_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -104,7 +104,7 @@ class ConfigNodeTest(rbac_base.BaseContrailTest):
         config_node = self._create_config_node()
         config_node_uuid = config_node['config-node']['uuid']
         updated_name = data_utils.rand_name('new_config_node')
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.config_client.update_config_node(
                 config_node_uuid, display_name=updated_name)
 
@@ -129,7 +129,7 @@ class ConfigRootTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('291b28ea-d0d8-47cd-ac76-1f980047cb76')
     def test_create_config_roots(self):
         """test method for create config root service objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_config_root()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -139,7 +139,7 @@ class ConfigRootTest(rbac_base.BaseContrailTest):
         """test method for delete config root service objects"""
         config_root = self._create_config_root()
         config_root_uuid = config_root['config-root']['uuid']
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.config_client.delete_config_root(
                 config_root_uuid)
 
@@ -150,7 +150,7 @@ class ConfigRootTest(rbac_base.BaseContrailTest):
         """test method for show config root service objects"""
         config_root = self._create_config_root()
         config_root_uuid = config_root['config-root']['uuid']
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.config_client.show_config_root(config_root_uuid)
 
     @rbac_rule_validation.action(service="Contrail",
@@ -161,7 +161,7 @@ class ConfigRootTest(rbac_base.BaseContrailTest):
         config_root = self._create_config_root()
         config_root_uuid = config_root['config-root']['uuid']
         updated_name = data_utils.rand_name('new_config_root')
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.config_client.update_config_root(
                 config_root_uuid, display_name=updated_name)
 
@@ -170,7 +170,7 @@ class ConfigRootTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('316e7425-8fb0-41b4-9080-a76697abbafa')
     def test_list_config_roots(self):
         """test method for list config root service objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.config_client.list_config_roots()
 
 
@@ -197,7 +197,7 @@ class GlobalSystemConfigTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('d1d189a7-14c1-49c5-b180-cd42ed2ca123')
     def test_list_global_system_configs(self):
         """test method for list global system config service objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.config_client.list_global_system_configs()
 
     @testtools.skipUnless(rbac_base.get_contail_version() < 5,
@@ -207,7 +207,7 @@ class GlobalSystemConfigTest(rbac_base.BaseContrailTest):
     @decorators.idempotent_id('e0ba6a20-3e28-47ac-bf95-9a848fcee49a')
     def test_create_global_system_configs(self):
         """test method for create global system config service objects"""
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self._create_global_system_config()
 
     @rbac_rule_validation.action(service="Contrail",
@@ -216,7 +216,7 @@ class GlobalSystemConfigTest(rbac_base.BaseContrailTest):
     def test_show_global_system_config(self):
         if rbac_base.get_contail_version() < 5:
             new_config = self._create_global_system_config()
-            with self.rbac_utils.override_role(self):
+            with self.override_role():
                 self.config_client.show_global_system_config(
                     new_config['uuid'])
         else:
@@ -232,7 +232,7 @@ class GlobalSystemConfigTest(rbac_base.BaseContrailTest):
                                    "at least by default")
             for gsc in body:
                 if gsc['fq_name'][0] == 'default-global-system-config':
-                    with self.rbac_utils.override_role(self):
+                    with self.override_role():
                         self.config_client.show_global_system_config(
                             gsc['uuid'])
 
@@ -245,7 +245,7 @@ class GlobalSystemConfigTest(rbac_base.BaseContrailTest):
         """test method for update global system config service objects"""
         new_config = self._create_global_system_config()
         update_name = data_utils.rand_name('test')
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.config_client.update_global_system_config(
                 new_config['uuid'],
                 display_name=update_name)
@@ -258,5 +258,5 @@ class GlobalSystemConfigTest(rbac_base.BaseContrailTest):
     def test_delete_global_system_config(self):
         """test method for delete global system config service objects"""
         new_config = self._create_global_system_config()
-        with self.rbac_utils.override_role(self):
+        with self.override_role():
             self.config_client.delete_global_system_config(new_config['uuid'])
