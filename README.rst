@@ -79,8 +79,6 @@ Next you must properly configure tungsten-fabric, which is relatively straightfo
 
 After comfiguring tempmest.conf as per tempest and Patrole requirements, please make below changes too in the patrole section of tempest.conf:
 
-    enable_rbac must be true.
-
     test_custom_requirements must be true if you want to run tests against a `custom_requirements_file` which defines RBAC requirements.
 
     custom_requirements_file must be absolute path of file path of the YAML file that defines your RBAC requirements.
