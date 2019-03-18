@@ -392,6 +392,9 @@ class BaseContrailTest(rbac_utils.RbacUtilsMixin, test.BaseTestCase):
     @classmethod
     def resource_setup(cls):
         cls.tenant_name = cls.os_primary.credentials.tenant_name
+        cls.tenant_id = cls.fq_client.fqname_to_id(fq_name=['default-domain',
+                                                            cls.tenant_name],
+                                                   type='project')['uuid']
 
     @classmethod
     def _try_delete_resource(cls, delete_callable, *args, **kwargs):
