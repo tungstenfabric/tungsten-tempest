@@ -121,9 +121,6 @@ class BaseContrailTest(rbac_utils.RbacUtilsMixin, test.BaseTestCase):
         super(BaseContrailTest, cls).skip_checks()
         if not CONF.service_available.contrail:
             raise cls.skipException("Contrail support is required")
-        if not CONF.patrole.enable_rbac:
-            raise cls.skipException(
-                "%s skipped as RBAC Flag not enabled" % cls.__name__)
         if CONF.auth.tempest_roles != ['admin']:
             raise cls.skipException(
                 "%s skipped because tempest roles is not admin" % cls.__name__)
@@ -394,6 +391,9 @@ class BaseContrailTest(rbac_utils.RbacUtilsMixin, test.BaseTestCase):
     @classmethod
     def resource_setup(cls):
         cls.tenant_name = cls.os_primary.credentials.tenant_name
+        cls.tenant_id = cls.fq_client.fqname_to_id(fq_name=['default-domain',
+                                                            cls.tenant_name],
+                                                   type='project')['uuid']
 
     @classmethod
     def _try_delete_resource(cls, delete_callable, *args, **kwargs):
